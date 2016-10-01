@@ -1,4 +1,4 @@
-from .views import HallsViewSet, ContentHallViewSet
+from halls.views import HallsViewSet, ContentHallViewSet
 from rest_framework import routers
 
 router = routers.SimpleRouter()

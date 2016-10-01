@@ -1,4 +1,4 @@
-from .views import ProductsViewSet, ProductsHallsViewSet
+from products.views import ProductsViewSet, ProductsHallsViewSet
 from rest_framework import routers
 
 router = routers.SimpleRouter()

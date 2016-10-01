@@ -1,7 +1,7 @@
 # coding=utf-8
 from rest_framework import viewsets, mixins
-from .models import Product, ProductHalls
-from .serializers import ProductSerializer
+from halls.models import ProductHalls, Product
+from products.serializers import ProductSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from halls.models import Hall
@@ -26,7 +26,7 @@ class ProductsHallsViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     serializer_class = ProductSerializer
 
     def retrieve(self, request, *args, **kwargs):
-        hall = get_object_or_404(Hall.objects.all(), id=kwargs.get('pk', ''))
+        hall = get_object_or_404(Hall.objects.all(), tag=kwargs.get('pk', ''))
         products = [p.product for p in ProductHalls.objects.filter(hall=hall)]
         serializer = self.serializer_class(products, many=True)
         return Response(serializer.data)
