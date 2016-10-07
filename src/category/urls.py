@@ -5,3 +5,4 @@ router = routers.SimpleRouter()
 router.register(r'details', CategoryViewSet)
 router.register(r'hall', CategoryHallsViewSet)
 
+

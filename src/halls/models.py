@@ -15,10 +15,11 @@ class ContentHall(models.Model):
     url = models.URLField(blank=False)
 
 
-class HallDistances(models.Model):
+class HallConnection(models.Model):
     hallA = models.ForeignKey('Hall', blank=False, related_name="hallA")
     hallB = models.ForeignKey('Hall', blank=False, related_name="hallB")
     distance = models.FloatField(blank=False)
+    connected = models.BooleanField(default=False)
 
 
 class Category(models.Model):

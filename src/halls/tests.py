@@ -1,14 +1,16 @@
+# coding=utf-8
 from django.test import TestCase
 from rest_framework.test import APIClient
-from halls.models import Hall, ContentHall, HallDistances
+from halls.models import Hall, ContentHall
 
 
 class ObjectsTestCase(TestCase):
     def setUp(self):
-        self.hall1 = Hall.objects.create(tag="1A253")
-        self.hall2 = Hall.objects.create(tag="1A254")
-        self.hall3 = Hall.objects.create(tag="1A255")
-        self.hall4 = Hall.objects.create(tag="1A256")
+        self.hall1 = Hall.objects.create(tag="1A253")  # top
+        self.hall2 = Hall.objects.create(tag="1A254")  # middle
+        self.hall3 = Hall.objects.create(tag="1A255")  # bottom
+        self.hall4 = Hall.objects.create(tag="1A256")  # left
+        self.hall5 = Hall.objects.create(tag="1A257")  # right
 
         self.content1_1 = ContentHall.objects.create(hall=self.hall1, url="https://www.continente.pt/stores/continente/PublishingImages/Images/PageView/assinatura/imagem-porco.jpg")
         self.content1_2 = ContentHall.objects.create(hall=self.hall1, url="https://campanha.continente.pt/images/971x389.jpg")
@@ -30,22 +32,13 @@ class ObjectsTestCase(TestCase):
         self.content4_3 = ContentHall.objects.create(hall=self.hall4, url="http://thumbs.web.sapo.io/?Q=70&H=1610&W=1899&epic=gYnYmiSzhM+iVZRYVwVtQnQPKL0AAGLF+KxkqhpDZg4IDsqJB769LSb3qQXJRd6cfVBLxeo5dLYIB573BOasaqYdEUkTy+qoF0kyYzNBMXnmXhQ=")
         self.content4_4 = ContentHall.objects.create(hall=self.hall4, url="https://www.youtube.com/watch?v=ctAQwBK_Vzw")
 
-        """
-        DISTANCES
-        """
-
-        self.distance1_1 = HallDistances.objects.create(hallA=self.hall1, hallB=self.hall1, distance=0.0)
-        self.distance1_2 = HallDistances.objects.create(hallA=self.hall1, hallB=self.hall2, distance=5.0)
-        self.distance1_3 = HallDistances.objects.create(hallA=self.hall1, hallB=self.hall3, distance=10.0)
-        self.distance1_4 = HallDistances.objects.create(hallA=self.hall1, hallB=self.hall4, distance=20.0)
-
     def test_objects(self):
         client = APIClient()
 
         url = "/api/v1/halls/details/"
         response = client.get(path=url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.data), 4)
+        self.assertEqual(len(response.data), 5)
 
         url = "/api/v1/halls/details/" + self.hall1.tag + "/"
         response = client.get(path=url)
