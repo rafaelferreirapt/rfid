@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The Android Open Source Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:weightSum="1"
+    android:id="@+id/nn"
+    android:layout_weight="1">
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp">
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_device_address"
+            android:textSize="0sp"/>
+        <Space android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <TextView android:id="@+id/device_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="0sp"/>
+    </LinearLayout>
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="0.65"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:weightSum="1"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/label_state"
+                android:layout_weight="0.19"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/connection_state"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:text="@string/disconnected"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:layout_weight="0.60"
+                android:textSize="18sp" />
+
+            <Space
+                android:layout_width="5dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:weightSum="1"
+            android:layout_weight="0.27"
+            android:layout_height="10dp">
+
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/label_stateBind"
+                android:layout_weight="0.19"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp"/>
+
+            <TextView android:id="@+id/deviceName"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:text="@string/deviceName"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:layout_weight="0.60"
+                android:textSize="18sp" />
+
+            <Space android:layout_width="5dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_data"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
+
+        <TextView android:id="@+id/data_value"
+            android:layout_width="307dp"
+            android:layout_height="77dp"
+            android:text="@string/no_data"
+            android:textSize="75sp"
+            android:textColor="#ff1ac903"
+            android:layout_weight="0.33" />
+
+    </LinearLayout>
+
+    <Button
+        android:text="new scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newScanButton"
+        style="@style/Widget.AppCompat.Button"
+        android:onClick="newScanButtonMethod" />
+
+    <Button
+        android:text="return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/returnButton"
+        android:onClick="returnButtonMethod" />
+
+</LinearLayout>

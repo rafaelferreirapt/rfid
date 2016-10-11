@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">RFID</string>
+    <string name="ble_not_supported">This hardware does not support ble</string>
+    <string name="label_data">Received Data:</string>
+    <string name="label_device_address">Voyage</string>
+    <string name="label_state">State:</string>
+    <string name="no_data"> </string>
+    <string name="connected">Connected sucessfully</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="title_devices">Scanning Devices...</string>
+    <string name="error_bluetooth_not_supported">This hardware does not supporte bluetooth.</string>
+
+    <string name="label_stateBind">Binded to:</string>
+    <string name="deviceName"></string>
+
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_characteristic">UnknownCharacteristic</string>
+    <string name="unknown_service">UnknownService</string>
+
+    <!-- Menu items -->
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+    <string name="title_activity_end">TRFduino</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>
