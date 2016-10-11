@@ -87,7 +87,7 @@ public class CategoryApi {
   
 
   // create path and map variables
-  String path = "/category/details/{category_id}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
+  String path = "/category/details/{category_id}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -157,7 +157,7 @@ public class CategoryApi {
     
 
     // create path and map variables
-    String path = "/category/details/{category_id}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
+    String path = "/category/details/{category_id}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -217,7 +217,7 @@ public class CategoryApi {
   
 
   // create path and map variables
-  String path = "/category/details".replaceAll("\\{format\\}","json");
+  String path = "/category/details/".replaceAll("\\{format\\}","json");
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -281,7 +281,7 @@ public class CategoryApi {
   
 
     // create path and map variables
-    String path = "/category/details".replaceAll("\\{format\\}","json");
+    String path = "/category/details/".replaceAll("\\{format\\}","json");
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -348,7 +348,7 @@ public class CategoryApi {
   
 
   // create path and map variables
-  String path = "/category/hall/{hall_tag}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
+  String path = "/category/hall/{hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -418,7 +418,7 @@ public class CategoryApi {
     
 
     // create path and map variables
-    String path = "/category/hall/{hall_tag}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
+    String path = "/category/hall/{hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -492,7 +492,7 @@ public class CategoryApi {
   
 
   // create path and map variables
-  String path = "/category/search/{hall_tag}/{category_id}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString())).replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
+  String path = "/category/search/{hall_tag}/{category_id}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString())).replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -568,7 +568,7 @@ public class CategoryApi {
     
 
     // create path and map variables
-    String path = "/category/search/{hall_tag}/{category_id}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString())).replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
+    String path = "/category/search/{hall_tag}/{category_id}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString())).replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();

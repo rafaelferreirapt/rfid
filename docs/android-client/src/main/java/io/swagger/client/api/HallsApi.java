@@ -86,7 +86,7 @@ public class HallsApi {
   
 
   // create path and map variables
-  String path = "/halls/contents/{hall_tag}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
+  String path = "/halls/contents/{hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -156,7 +156,7 @@ public class HallsApi {
     
 
     // create path and map variables
-    String path = "/halls/contents/{hall_tag}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
+    String path = "/halls/contents/{hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -216,7 +216,7 @@ public class HallsApi {
   
 
   // create path and map variables
-  String path = "/halls/details".replaceAll("\\{format\\}","json");
+  String path = "/halls/details/".replaceAll("\\{format\\}","json");
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -280,7 +280,7 @@ public class HallsApi {
   
 
     // create path and map variables
-    String path = "/halls/details".replaceAll("\\{format\\}","json");
+    String path = "/halls/details/".replaceAll("\\{format\\}","json");
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -347,7 +347,7 @@ public class HallsApi {
   
 
   // create path and map variables
-  String path = "/halls/details/{hall_tag}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
+  String path = "/halls/details/{hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -417,7 +417,7 @@ public class HallsApi {
     
 
     // create path and map variables
-    String path = "/halls/details/{hall_tag}".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
+    String path = "/halls/details/{hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();

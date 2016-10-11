@@ -4,9 +4,9 @@ All URIs are relative to *http://192.168.33.10:8000/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**hallsContentsHallTagGet**](HallsApi.md#hallsContentsHallTagGet) | **GET** /halls/contents/{hall_tag} | Get the contetns associated with a hall tag
-[**hallsDetailsGet**](HallsApi.md#hallsDetailsGet) | **GET** /halls/details | List all the halls in the system
-[**hallsDetailsHallTagGet**](HallsApi.md#hallsDetailsHallTagGet) | **GET** /halls/details/{hall_tag} | Details of a hall
+[**hallsContentsHallTagGet**](HallsApi.md#hallsContentsHallTagGet) | **GET** /halls/contents/{hall_tag}/ | Get the contetns associated with a hall tag
+[**hallsDetailsGet**](HallsApi.md#hallsDetailsGet) | **GET** /halls/details/ | List all the halls in the system
+[**hallsDetailsHallTagGet**](HallsApi.md#hallsDetailsHallTagGet) | **GET** /halls/details/{hall_tag}/ | Details of a hall
 
 
 <a name="hallsContentsHallTagGet"></a>

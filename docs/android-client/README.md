@@ -83,13 +83,13 @@ All URIs are relative to *http://192.168.33.10:8000/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CategoryApi* | [**categoryDetailsCategoryIdGet**](docs/CategoryApi.md#categoryDetailsCategoryIdGet) | **GET** /category/details/{category_id} | Details of a category
-*CategoryApi* | [**categoryDetailsGet**](docs/CategoryApi.md#categoryDetailsGet) | **GET** /category/details | List all the categories in the system
-*CategoryApi* | [**categoryHallHallTagGet**](docs/CategoryApi.md#categoryHallHallTagGet) | **GET** /category/hall/{hall_tag} | Get categories associated with a hall
-*CategoryApi* | [**categorySearchHallTagCategoryIdGet**](docs/CategoryApi.md#categorySearchHallTagCategoryIdGet) | **GET** /category/search/{hall_tag}/{category_id} | Get the path between the hall where the user is and the category that the user wants to go
-*HallsApi* | [**hallsContentsHallTagGet**](docs/HallsApi.md#hallsContentsHallTagGet) | **GET** /halls/contents/{hall_tag} | Get the contetns associated with a hall tag
-*HallsApi* | [**hallsDetailsGet**](docs/HallsApi.md#hallsDetailsGet) | **GET** /halls/details | List all the halls in the system
-*HallsApi* | [**hallsDetailsHallTagGet**](docs/HallsApi.md#hallsDetailsHallTagGet) | **GET** /halls/details/{hall_tag} | Details of a hall
+*CategoryApi* | [**categoryDetailsCategoryIdGet**](docs/CategoryApi.md#categoryDetailsCategoryIdGet) | **GET** /category/details/{category_id}/ | Details of a category
+*CategoryApi* | [**categoryDetailsGet**](docs/CategoryApi.md#categoryDetailsGet) | **GET** /category/details/ | List all the categories in the system
+*CategoryApi* | [**categoryHallHallTagGet**](docs/CategoryApi.md#categoryHallHallTagGet) | **GET** /category/hall/{hall_tag}/ | Get categories associated with a hall
+*CategoryApi* | [**categorySearchHallTagCategoryIdGet**](docs/CategoryApi.md#categorySearchHallTagCategoryIdGet) | **GET** /category/search/{hall_tag}/{category_id}/ | Get the path between the hall where the user is and the category that the user wants to go
+*HallsApi* | [**hallsContentsHallTagGet**](docs/HallsApi.md#hallsContentsHallTagGet) | **GET** /halls/contents/{hall_tag}/ | Get the contetns associated with a hall tag
+*HallsApi* | [**hallsDetailsGet**](docs/HallsApi.md#hallsDetailsGet) | **GET** /halls/details/ | List all the halls in the system
+*HallsApi* | [**hallsDetailsHallTagGet**](docs/HallsApi.md#hallsDetailsHallTagGet) | **GET** /halls/details/{hall_tag}/ | Details of a hall
 
 
 ## Documentation for Models

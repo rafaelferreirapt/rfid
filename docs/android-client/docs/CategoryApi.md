@@ -4,10 +4,10 @@ All URIs are relative to *http://192.168.33.10:8000/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**categoryDetailsCategoryIdGet**](CategoryApi.md#categoryDetailsCategoryIdGet) | **GET** /category/details/{category_id} | Details of a category
-[**categoryDetailsGet**](CategoryApi.md#categoryDetailsGet) | **GET** /category/details | List all the categories in the system
-[**categoryHallHallTagGet**](CategoryApi.md#categoryHallHallTagGet) | **GET** /category/hall/{hall_tag} | Get categories associated with a hall
-[**categorySearchHallTagCategoryIdGet**](CategoryApi.md#categorySearchHallTagCategoryIdGet) | **GET** /category/search/{hall_tag}/{category_id} | Get the path between the hall where the user is and the category that the user wants to go
+[**categoryDetailsCategoryIdGet**](CategoryApi.md#categoryDetailsCategoryIdGet) | **GET** /category/details/{category_id}/ | Details of a category
+[**categoryDetailsGet**](CategoryApi.md#categoryDetailsGet) | **GET** /category/details/ | List all the categories in the system
+[**categoryHallHallTagGet**](CategoryApi.md#categoryHallHallTagGet) | **GET** /category/hall/{hall_tag}/ | Get categories associated with a hall
+[**categorySearchHallTagCategoryIdGet**](CategoryApi.md#categorySearchHallTagCategoryIdGet) | **GET** /category/search/{hall_tag}/{category_id}/ | Get the path between the hall where the user is and the category that the user wants to go
 
 
 <a name="categoryDetailsCategoryIdGet"></a>
