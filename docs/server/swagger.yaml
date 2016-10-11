@@ -1,0 +1,226 @@
+swagger: '2.0'
+info:
+  title: RFID
+  description: Move into halls in the shopping
+  version: "1.0.0"
+# the domain of the service
+host: 192.168.33.10:8000
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /api/v1
+produces:
+  - application/json
+paths:
+  /category/details:
+    get:
+      summary: List all the categories in the system
+      description: |
+        This endpoint will display all the categories in the system. Is very
+        important to take care of the "id" because that id will be used to
+        request a path to that category.
+      tags:
+        - Category
+      responses:
+        200:
+          description: An array of categories
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /category/details/{category_id}:
+    get:
+      summary: Details of a category
+      description: |
+        The category details with a category identifier.
+      parameters:
+        - name: category_id
+          in: path
+          description: Category ID.
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Category
+      responses:
+        200:
+          description: An object of type Category
+          schema:
+            $ref: '#/definitions/Category'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /category/hall/{hall_tag}:
+    get:
+      summary: Get categories associated with a hall
+      description: |
+        Given a hall tag get the categories associated in that hall
+      parameters:
+        - name: hall_tag
+          in: path
+          description: Hall tag.
+          required: true
+          type: string
+      tags:
+        - Category
+      responses:
+        200:
+          description: An array of categories
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /category/search/{hall_tag}/{category_id}:
+    get:
+      summary: Get the path between the hall where the user is and the category that the user wants to go
+      description: |
+      parameters:
+        - name: hall_tag
+          in: path
+          description: Hall tag.
+          required: true
+          type: string
+        - name: category_id
+          in: path
+          description: Category ID.
+          required: true
+          type: string
+          format: uuid
+      tags:
+        - Category
+      responses:
+        200:
+          description: An array of halls
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Hall'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /halls/details:
+    get:
+      summary: List all the halls in the system
+      description: |
+        This endpoint will display all the halls in the system.
+      tags:
+        - Halls
+      responses:
+        200:
+          description: An array of halls
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Hall'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /halls/details/{hall_tag}:
+    get:
+      summary: Details of a hall
+      description: |
+        The hall details by a tag.
+      parameters:
+        - name: hall_tag
+          in: path
+          description: Hall tag.
+          required: true
+          type: string
+      tags:
+        - Halls
+      responses:
+        200:
+          description: An object of type Hall
+          schema:
+            $ref: '#/definitions/Hall'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /halls/contents/{hall_tag}:
+    get:
+      summary: Get the contetns associated with a hall tag
+      description: |
+        Given a hall tag get the contents associated in that hall
+      parameters:
+        - name: hall_tag
+          in: path
+          description: Hall tag.
+          required: true
+          type: string
+      tags:
+        - Halls
+      responses:
+        200:
+          description: An array of contents
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ContentHall'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Category:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier representing a specific category, identifier is generated with an uuid,
+      name:
+        type: string
+        description: Display name of category.
+      description:
+        type: string
+        description: Description of category.
+      created_at:
+        type: string
+        description: Time of creation of the category.
+      updated_at:
+        type: string
+        description: Time of update of the category.
+  Hall:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier representing a specific category, identifier is generated with an uuid,
+      tag:
+        type: string
+        description: Unique identifier associated with the tag of the hall.
+      created_at:
+        type: string
+        description: Time of creation of the category.
+      updated_at:
+        type: string
+        description: Time of update of the category.
+  ContentHall:
+    type: object
+    properties:
+      media:
+        type: string
+        description: Can be "image" or "video"
+      url:
+        type: string
+        description: The url of the image or the link of youtube video
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string

@@ -86,8 +86,9 @@ class ObjectsTestCase(TestCase):
         url = "/api/v1/category/search/" + self.hall1.tag + "/" + str(self.category3.id) + "/"
         response = client.get(path=url)
         self.assertEqual(response.status_code, 200)
+        print response
         self.assertEqual(len(response.data), 3)
-        self.assertEqual(response.data[0], self.hall1.tag)
-        self.assertEqual(response.data[1], self.hall6.tag)
-        self.assertEqual(response.data[2], self.hall3.tag)
+        self.assertEqual(response.data[0]["tag"], self.hall1.tag)
+        self.assertEqual(response.data[1]["tag"], self.hall6.tag)
+        self.assertEqual(response.data[2]["tag"], self.hall3.tag)
 
