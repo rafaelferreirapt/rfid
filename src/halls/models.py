@@ -12,6 +12,7 @@ class Hall(models.Model):
 
 class ContentHall(models.Model):
     hall = models.ForeignKey('Hall', blank=False)
+    media = models.CharField(max_length=256, blank=False)
     url = models.URLField(blank=False)
 
 

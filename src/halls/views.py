@@ -26,6 +26,15 @@ class ContentHallViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         hall = get_object_or_404(Hall.objects.all(), tag=kwargs.get('pk', ''))
-        urls = [str(p.url) for p in ContentHall.objects.filter(hall=hall)]
-        return Response(urls)
+
+        contents = []
+
+        for p in ContentHall.objects.filter(hall=hall):
+            entry = {
+                "media": str(p.media),
+                "url": str(p.url)
+            }
+            contents.append(entry)
+
+        return Response(contents)
 
