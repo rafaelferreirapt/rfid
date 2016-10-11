@@ -20,4 +20,4 @@ build/
 tests/report/
 
 .vagrant
-.gitignore
+db.sqlite3
