@@ -22,5 +22,4 @@ public class reader extends AppCompatActivity {
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
     }
-
 }
