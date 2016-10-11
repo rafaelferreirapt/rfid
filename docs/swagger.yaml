@@ -13,7 +13,7 @@ basePath: /api/v1
 produces:
   - application/json
 paths:
-  /category/details:
+  /category/details/:
     get:
       summary: List all the categories in the system
       description: |
@@ -33,7 +33,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /category/details/{category_id}:
+  /category/details/{category_id}/:
     get:
       summary: Details of a category
       description: |
@@ -56,7 +56,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /category/hall/{hall_tag}:
+  /category/hall/{hall_tag}/:
     get:
       summary: Get categories associated with a hall
       description: |
@@ -80,7 +80,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /category/search/{hall_tag}/{category_id}:
+  /category/search/{hall_tag}/{category_id}/:
     get:
       summary: Get the path between the hall where the user is and the category that the user wants to go
       description: |
@@ -109,7 +109,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /halls/details:
+  /halls/details/:
     get:
       summary: List all the halls in the system
       description: |
@@ -127,7 +127,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /halls/details/{hall_tag}:
+  /halls/details/{hall_tag}/:
     get:
       summary: Details of a hall
       description: |
@@ -149,7 +149,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /halls/contents/{hall_tag}:
+  /halls/contents/{hall_tag}/:
     get:
       summary: Get the contetns associated with a hall tag
       description: |
