@@ -34,7 +34,7 @@ public class reader extends AppCompatActivity {
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        String argument = "image";
+        String argument = "video";
         if(argument=="image") {
             String abc = "http://www.hipersuper.pt/wp-content/uploads/2014/12/image005.jpg";
             new DownloadImageTask((ImageView) findViewById(R.id.imageView2)).execute(abc);
@@ -42,7 +42,7 @@ public class reader extends AppCompatActivity {
         else if(argument=="video")
         {
 
-            String path ="https://drive.google.com/file/d/0Bw4asDjoYGzGLUhSVUFTcFZHekU/view?usp=sharing.mp4";
+            String path ="http://sendvid.com/ll5ka8tf.mp4";
             video = (VideoView) findViewById(R.id.videoView4);
             video.setVideoPath(path);
             ctlr = new MediaController(this);
