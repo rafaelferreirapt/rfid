@@ -6,12 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+
+import io.swagger.client.api.CategoryApi;
+import io.swagger.client.model.Category;
+import io.swagger.client.ApiException;
 
 public class NewActivity extends AppCompatActivity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME"; //name
@@ -27,6 +34,21 @@ public class NewActivity extends AppCompatActivity {
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
         setContentView(R.layout.activity_new);
+
+        CategoryApi apiInstance = new CategoryApi();
+        try {
+            List<Category> result = apiInstance.categoryDetailsGet();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CategoryApi#categoryDetailsGet");
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

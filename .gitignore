@@ -20,4 +20,3 @@ build/
 tests/report/
 
 .vagrant
-db.sqlite3
