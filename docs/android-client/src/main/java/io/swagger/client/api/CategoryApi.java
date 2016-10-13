@@ -51,7 +51,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 public class CategoryApi {
-  String basePath = "http://192.168.33.10:8000/api/v1";
+  String basePath = "http://rfid.rafaelferreira.pt/api/v1";
   ApiInvoker apiInvoker = ApiInvoker.getInstance();
 
   public void addHeader(String key, String value) {

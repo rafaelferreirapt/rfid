@@ -4,7 +4,7 @@ info:
   description: Move into halls in the shopping
   version: "1.0.0"
 # the domain of the service
-host: 192.168.33.10:8000
+host: rfid.rafaelferreira.pt
 # array of all schemes that your API supports
 schemes:
   - http

@@ -79,7 +79,7 @@ public class CategoryApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://192.168.33.10:8000/api/v1*
+All URIs are relative to *http://rfid.rafaelferreira.pt/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

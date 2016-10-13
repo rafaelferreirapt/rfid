@@ -1,6 +1,6 @@
 # CategoryApi
 
-All URIs are relative to *http://192.168.33.10:8000/api/v1*
+All URIs are relative to *http://rfid.rafaelferreira.pt/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

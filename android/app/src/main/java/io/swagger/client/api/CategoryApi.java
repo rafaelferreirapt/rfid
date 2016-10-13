@@ -24,21 +24,8 @@
 
 package io.swagger.client.api;
 
-import io.swagger.client.ApiInvoker;
-import io.swagger.client.ApiException;
-import io.swagger.client.Pair;
-
-import io.swagger.client.model.*;
-
-import java.util.*;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
-import io.swagger.client.model.Category;
-import io.swagger.client.model.Error;
-import java.util.UUID;
-import io.swagger.client.model.Hall;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -47,11 +34,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
+import io.swagger.client.ApiException;
+import io.swagger.client.ApiInvoker;
+import io.swagger.client.Pair;
+import io.swagger.client.model.Category;
+import io.swagger.client.model.Hall;
+
 public class CategoryApi {
-  String basePath = "http://192.168.33.10:8000/api/v1";
+  String basePath = "http://rfid.rafaelferreira.pt/api/v1";
   ApiInvoker apiInvoker = ApiInvoker.getInstance();
 
   public void addHeader(String key, String value) {

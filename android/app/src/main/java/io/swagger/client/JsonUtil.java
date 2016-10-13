@@ -30,6 +30,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 import io.swagger.client.model.*;
+import io.swagger.client.model.Error;
 
 public class JsonUtil {
   public static GsonBuilder gsonBuilder;
