@@ -46,7 +46,13 @@ import io.swagger.client.model.Hall;
 
 public class CategoryApi {
   String basePath = "http://rfid.rafaelferreira.pt/api/v1";
-  ApiInvoker apiInvoker = ApiInvoker.getInstance();
+
+    public CategoryApi(){
+        ApiInvoker.initializeInstance();
+        apiInvoker = ApiInvoker.getInstance();
+    }
+
+  ApiInvoker apiInvoker;
 
   public void addHeader(String key, String value) {
     getInvoker().addDefaultHeader(key, value);
