@@ -11,10 +11,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.VideoView;
+import android.widget.MediaController;
 import java.io.InputStream;
 
 
 public class reader extends AppCompatActivity {
+
+    private VideoView video;
+    private MediaController ctlr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +34,30 @@ public class reader extends AppCompatActivity {
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
+        String argument = "image";
+        if(argument=="image") {
+            String abc = "http://www.hipersuper.pt/wp-content/uploads/2014/12/image005.jpg";
+            new DownloadImageTask((ImageView) findViewById(R.id.imageView2)).execute(abc);
+        }
+        else if(argument=="video")
+        {
 
-
-        String abc = "http://www.hipersuper.pt/wp-content/uploads/2014/12/image005.jpg";
-        new DownloadImageTask((ImageView) findViewById(R.id.imageView2)).execute(abc);
+            String path ="https://drive.google.com/file/d/0Bw4asDjoYGzGLUhSVUFTcFZHekU/view?usp=sharing.mp4";
+            video = (VideoView) findViewById(R.id.videoView4);
+            video.setVideoPath(path);
+            ctlr = new MediaController(this);
+            ctlr.setMediaPlayer(video);
+            video.setVisibility(View.VISIBLE);
+            video.setMediaController(ctlr);
+            video.requestFocus();
+            video.start();
+        }
+        else{
+            // tratar erro
+        }
 
     }
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
     }
