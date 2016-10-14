@@ -35,20 +35,27 @@ public class NewActivity extends AppCompatActivity {
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
         setContentView(R.layout.activity_new);
 
-        CategoryApi apiInstance = new CategoryApi();
-        try {
-            List<Category> result = apiInstance.categoryDetailsGet();
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling CategoryApi#categoryDetailsGet");
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                CategoryApi apiInstance = new CategoryApi();
+                try {
+                    List<Category> result = apiInstance.categoryDetailsGet();
+                    System.out.println(result);
+                } catch (ApiException e) {
+                    System.err.println("Exception when calling CategoryApi#categoryDetailsGet");
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
+
     }
 
     @Override

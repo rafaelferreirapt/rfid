@@ -372,6 +372,7 @@ public class ApiInvoker {
      Request request = createRequest(host, path, method, queryParams, body, headerParams, formParams, contentType, authNames, future, future);
      if(request != null) {
         mRequestQueue.add(request);
+
         return future.get(connectionTimeout, TimeUnit.SECONDS);
      } else return "no data";
   }
