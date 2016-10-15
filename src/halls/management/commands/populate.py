@@ -29,7 +29,7 @@ class Command(BaseCommand):
         content3_1 = ContentHall.objects.create(hall=hall3, media="image", url="http://6.fotos.web.sapo.io/i/o8d148530/18278804_4Tn31.jpeg")
         content3_2 = ContentHall.objects.create(hall=hall3, media="image", url="http://5.fotos.web.sapo.io/i/G361150e3/17830920_L9zAc.jpeg")
         content3_3 = ContentHall.objects.create(hall=hall3, media="image", url="http://6.fotos.web.sapo.io/i/G2c11967d/17966185_hCtKw.jpeg")
-        content3_4 = ContentHall.objects.create(hall=hall3, media="video", url="h/static/video3.mp4")
+        content3_4 = ContentHall.objects.create(hall=hall3, media="video", url="/static/video3.mp4")
 
         content4_1 = ContentHall.objects.create(hall=hall6, media="image", url="http://www.promocoesedescontos.com/wp-content/uploads/2016/07/Captura-de-ecra%CC%83-2016-06-27-a%CC%80s-21.44.56.png")
         content4_2 = ContentHall.objects.create(hall=hall6, media="image", url="http://globodicas.com.br/wp-content/uploads/2011/11/promocoes.jpg")
