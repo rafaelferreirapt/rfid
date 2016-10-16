@@ -55,7 +55,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/spinner"
         android:layout_height="40dp"
-        android:onClick="setPathButton" />
+        android:onClick="setPathButton"
+        style="@style/Widget.AppCompat.Button" />
 
     <ImageView
         app:srcCompat="@color/RFID_grey"

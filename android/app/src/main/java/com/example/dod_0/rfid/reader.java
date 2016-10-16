@@ -29,6 +29,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
@@ -37,15 +38,18 @@ import io.swagger.client.api.HallsApi;
 import io.swagger.client.model.Category;
 import io.swagger.client.ApiException;
 import io.swagger.client.model.ContentHall;
+import io.swagger.client.model.Hall;
 
 
-public class reader extends  Activity implements OnItemSelectedListener{
+public class reader extends  AppCompatActivity implements OnItemSelectedListener{
 
     private final String DESCRIP = "Descrição: ";
     private VideoView video;
     private MediaController ctlr;
     private boolean flagState = false;
     private String[] hallArr = {"1A253","1A254","1A255","1A256", "1A257"};
+    private String[] realTags = {"3185769091","3858496131","3331214280","1754763934","1930754691"};
+    //{hall1,hall2,hall3,hall6,hall7}={vermelho,verde,azul,branco,amarelo}
 
     private CategoryApi categoryApi;
     private HallsApi hallsApi;
@@ -56,6 +60,7 @@ public class reader extends  Activity implements OnItemSelectedListener{
     private CheckBox nfcTag;
     private ArrayAdapter<String> adapter;
     private Spinner spinner;
+    private String stateTag = hallArr[0];   //defino que inicio do supermercado é o hall1
 
     //to receive BLE info
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME"; //name
@@ -159,31 +164,14 @@ public class reader extends  Activity implements OnItemSelectedListener{
         });
         t_cont.start();
 
-
-        /*String argument = "video";
-        if(argument=="image") {
-            String abc = "http://www.hipersuper.pt/wp-content/uploads/2014/12/image005.jpg";
-            new DownloadImageTask((ImageView) findViewById(R.id.imageView2)).execute(abc);
-        }
-        else if(argument=="video")
-        {
-
-            String path ="http://sendvid.com/ll5ka8tf.mp4";
-            video = (VideoView) findViewById(R.id.videoView4);
-            video.setVideoPath(path);
-            ctlr = new MediaController(this);
-            ctlr.setMediaPlayer(video);
-            video.setVisibility(View.VISIBLE);
-            video.setMediaController(ctlr);
-            video.requestFocus();
-            video.start();
-        }
-        else{
-            // tratar erro
-        }*/
-
+        findViewById(R.id.pathButton).setVisibility(View.GONE);
         nfcTag = (CheckBox)findViewById(R.id.checkBox);
         nfcTag.setChecked(false);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -224,6 +212,7 @@ public class reader extends  Activity implements OnItemSelectedListener{
                 ((ImageView) findViewById(R.id.imageView4)).setVisibility(View.GONE);
                 ((ImageView) findViewById(R.id.imageView5)).setVisibility(View.GONE);
                 ((ImageView) findViewById(R.id.imageView2)).setVisibility(View.GONE);
+                findViewById(R.id.pathButton).setVisibility(View.VISIBLE);
 
             } else {
                 //display images
@@ -234,6 +223,7 @@ public class reader extends  Activity implements OnItemSelectedListener{
                 ((ImageView) findViewById(R.id.imageView3)).setVisibility(View.GONE);
                 ((ImageView) findViewById(R.id.imageView4)).setVisibility(View.GONE);
                 ((ImageView) findViewById(R.id.imageView5)).setVisibility(View.GONE);
+                findViewById(R.id.pathButton).setVisibility(View.VISIBLE);
 
                 //display images
                 startAllImages(position);
@@ -250,6 +240,7 @@ public class reader extends  Activity implements OnItemSelectedListener{
             ((ImageView) findViewById(R.id.imageView4)).setVisibility(View.GONE);
             ((ImageView) findViewById(R.id.imageView5)).setVisibility(View.GONE);
             ((ImageView) findViewById(R.id.imageView2)).setVisibility(View.VISIBLE);
+            findViewById(R.id.pathButton).setVisibility(View.GONE);
             Log.d("POSITION: ", ""+position);
         }
     }
@@ -311,7 +302,7 @@ public class reader extends  Activity implements OnItemSelectedListener{
         ((VideoView) findViewById(R.id.videoView5)).setVisibility(View.VISIBLE);
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+    public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 
         public DownloadImageTask(ImageView bmImage) {
@@ -350,7 +341,6 @@ public class reader extends  Activity implements OnItemSelectedListener{
         registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-            Log.d("aa", "Connect request result=" + result);
         }
         else
             Log.e("a", "Connection error!!");
@@ -371,10 +361,6 @@ public class reader extends  Activity implements OnItemSelectedListener{
             }
             // Automatically connects to the device upon successful start-up initialization.
             mBluetoothLeService.connect(mDeviceAddress);
-            //Log.d(TAG, "Connected Successfully!!");
-
-            //[rodrigo]
-            //((TextView) findViewById(R.id.deviceName)).setText(mDeviceName);
         }
 
         /**
@@ -430,13 +416,24 @@ public class reader extends  Activity implements OnItemSelectedListener{
                 //nfcTag.setChecked(false);
                 Log.d("CHECKBOX","is activated");
                 Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
-                System.out.println(data);
-                if(data.equals("3530044544"))
-                    setCategoriesHall(1);   //set massas
 
+                int pos = isTagValid(data); //if tag is valid, return the tag position
+                if(pos != -1) {
+                    setCategoriesHall(pos+1);   //set massas
+                    stateTag = hallArr[pos];
+                }
             }
         }
 
+    }
+
+    //Do the conversion between real tag values and the values in the sever
+    private int isTagValid(String tag){
+        for(int i = 0; i < realTags.length; i++){
+            if(realTags[i].equals(tag))
+                return i;
+        }
+        return -1;
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {
@@ -450,10 +447,14 @@ public class reader extends  Activity implements OnItemSelectedListener{
 
 
     /*
-     * button
+     * buttons
      */
     public void setPathButton(View abc){
-        Intent intent = new Intent(this, drawPath.class );
+        final Intent intent = new Intent(this, drawPath.class );
+
+        Log.d("BUTTON","sourceTAG"+stateTag+" position:"+spinner.getSelectedItemPosition());
+        intent.putExtra("sourceTAG", stateTag);
+        intent.putExtra("destCat", categoriesResult.get(spinner.getSelectedItemPosition()-1).getId());
         startActivity(intent);
     }
 }

@@ -113,9 +113,8 @@
             android:layout_width="307dp"
             android:layout_height="77dp"
             android:text="@string/no_data"
-            android:textSize="75sp"
-            android:textColor="#ff1ac903"
-            android:layout_weight="0.33" />
+            android:layout_weight="0.33"
+            android:textSize="30sp" />
 
     </LinearLayout>
 

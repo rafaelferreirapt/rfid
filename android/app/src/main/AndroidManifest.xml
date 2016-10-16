@@ -41,8 +41,8 @@
         <service
             android:name=".BluetoothLeService"
             android:enabled="true" />
-
         <activity android:name=".reader"></activity>
+        <activity android:name=".drawPath"></activity>
     </application>
 
 </manifest>
