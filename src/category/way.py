@@ -1,5 +1,5 @@
 from tree_search import *
-from halls.models import Hall, HallConnection
+from halls.models import Hall, SubHallConnection
 
 
 class ParseModel:
@@ -12,7 +12,7 @@ class ParseModel:
         halls = Hall.objects.all()
 
         for hall in halls:
-            hall_connections = HallConnection.objects.filter(hallA=hall)
+            hall_connections = SubHallConnection.objects.filter(hallA=hall)
 
             for con in hall_connections:
                 if con.connected:

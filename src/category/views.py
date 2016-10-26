@@ -1,11 +1,11 @@
 # coding=utf-8
 from rest_framework import views, viewsets, mixins, status
-from halls.models import CategoryHalls, Category
+from halls.models import Category, SubHallTag
 from category.serializers import CategorySerializer
 from halls.serializers import HallSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from halls.models import Hall
+from halls.models import SubHall
 from way import Way
 
 
@@ -23,14 +23,13 @@ class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets
         return Response(serializer.data)
 
 
-class CategoryHallsViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class CategorySubHallsViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Category.objects.filter()
     serializer_class = CategorySerializer
 
     def retrieve(self, request, *args, **kwargs):
-        hall = get_object_or_404(Hall.objects.all(), tag=kwargs.get('pk', ''))
-        categories = [p.category for p in CategoryHalls.objects.filter(hall=hall)]
-        serializer = self.serializer_class(categories, many=True)
+        sub_hall = get_object_or_404(SubHallTag.objects.all(), tag=kwargs.get('pk', '')).parent_hall
+        serializer = self.serializer_class(Category.objects.filter(sub_hall=sub_hall), many=True)
         return Response(serializer.data)
 
 
@@ -39,13 +38,13 @@ class SearchCategoryDetails(views.APIView):
     @staticmethod
     def get(request, current_tag, category_id):
         category = get_object_or_404(Category.objects.all(), id=category_id)
-        hall_to = CategoryHalls.objects.get(category=category).hall
+        sub_hall_to = category.sub_hall
         w = Way()
-        response = w.search_path(from_point=current_tag, to=hall_to.tag)
+        response = w.search_path(from_point=current_tag, to=sub_hall_to)
         halls = []
 
         for row in response[0]:
-            halls += [Hall.objects.get(tag=row)]
+            halls += [SubHall.objects.get(id=row)]
 
         serializer = HallSerializer(halls, many=True)
         return Response(serializer.data)

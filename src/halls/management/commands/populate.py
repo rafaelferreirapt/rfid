@@ -10,6 +10,123 @@ class Command(BaseCommand):
         super(Command, self).__init__()
 
     def handle(self, *args, **options):
+        """
+        Assumimos então que:
+        O Hall 1 tem os seguintes sub-halls:
+        - 1 (Início)
+            tags:
+            -
+            -
+            -
+        - 2
+            tags:
+            -
+            -
+            -
+        - 3
+            tags:
+            -
+            -
+            -
+        - 4
+            tags:
+            -
+            -
+            -
+        O Hall 2 tem os seguintes sub-halls:
+        - 5
+            tags:
+            -
+            -
+            -
+        - 6
+            tags:
+            -
+            -
+            -
+        - 7
+            tags:
+            -
+            -
+            -
+        - 8
+            tags:
+            -
+            -
+            -
+        O Hall 3 tem os seguintes sub-halls:
+        - 9
+            tags:
+            -
+            -
+            -
+        - 10
+            tags:
+            -
+            -
+            -
+        - 11
+            tags:
+            -
+            -
+            -
+        - 12
+            tags:
+            -
+            -
+            -
+        O Hall 4 tem os seguintes sub-halls:
+        - 13
+            tags:
+            -
+            -
+            -
+        O Hall 5 tem os seguintes sub-halls:
+        - 14
+            tags:
+            -
+            -
+            -
+        O Hall 6 tem os seguintes sub-halls:
+        - 15
+            tags:
+            -
+            -
+            -
+        O Hall 7 tem os seguintes sub-halls:
+        - 16
+            tags:
+            -
+            -
+            -
+        O Hall 8 tem os seguintes sub-halls:
+        - 17
+            tags:
+            -
+            -
+            -
+        O Hall 9 tem os seguintes sub-halls:
+        - 18
+            tags:
+            -
+            -
+            -
+        O Hall 10 tem os seguintes sub-halls:
+        - 19
+            tags:
+            -
+            -
+            -
+        O Hall 11 tem os seguintes sub-halls:
+        - 20
+            tags:
+            -
+            -
+            -
+
+        """
+
+
         hall1 = Hall.objects.create(tag="1A253")  # top
         hall2 = Hall.objects.create(tag="1A254")  # middle
         hall3 = Hall.objects.create(tag="1A255")  # bottom

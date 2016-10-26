@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.views.generic.base import TemplateView
 
 from halls.urls import router as halls_urls
+from halls.urls import router_sub_halls as sub_halls_urls
 from category.urls import router as category_urls
 from category.views import SearchCategoryDetails
 
@@ -14,6 +15,7 @@ urlpatterns = [
                # pages
                url(r'^api/v1/category/', include(category_urls.urls)),
                url(r'^api/v1/halls/', include(halls_urls.urls)),
+               url(r'^api/v1/halls/sub_halls/', include(sub_halls_urls.urls)),
                url(r'^api/v1/category/search/(?P<current_tag>.+)/(?P<category_id>.+)/$',
                    SearchCategoryDetails.as_view(), name="Category search"),
 
