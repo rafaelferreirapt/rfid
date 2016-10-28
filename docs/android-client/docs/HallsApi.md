@@ -4,53 +4,10 @@ All URIs are relative to *http://rfid.rafaelferreira.pt/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**hallsContentsHallTagGet**](HallsApi.md#hallsContentsHallTagGet) | **GET** /halls/contents/{hall_tag}/ | Get the contetns associated with a hall tag
 [**hallsDetailsGet**](HallsApi.md#hallsDetailsGet) | **GET** /halls/details/ | List all the halls in the system
-[**hallsDetailsHallTagGet**](HallsApi.md#hallsDetailsHallTagGet) | **GET** /halls/details/{hall_tag}/ | Details of a hall
+[**hallsDetailsHallNameGet**](HallsApi.md#hallsDetailsHallNameGet) | **GET** /halls/details/{hall_name}/ | Details of a hall
+[**hallsSubHallsContentsSubHallTagGet**](HallsApi.md#hallsSubHallsContentsSubHallTagGet) | **GET** /halls/sub_halls/contents/{sub_hall_tag}/ | Get the contetns associated with a sub hall tag
 
-
-<a name="hallsContentsHallTagGet"></a>
-# **hallsContentsHallTagGet**
-> List&lt;ContentHall&gt; hallsContentsHallTagGet(hallTag)
-
-Get the contetns associated with a hall tag
-
-Given a hall tag get the contents associated in that hall 
-
-### Example
-```java
-// Import classes:
-//import io.swagger.client.api.HallsApi;
-
-HallsApi apiInstance = new HallsApi();
-String hallTag = "hallTag_example"; // String | Hall tag.
-try {
-    List<ContentHall> result = apiInstance.hallsContentsHallTagGet(hallTag);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling HallsApi#hallsContentsHallTagGet");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **hallTag** | **String**| Hall tag. |
-
-### Return type
-
-[**List&lt;ContentHall&gt;**](ContentHall.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
 
 <a name="hallsDetailsGet"></a>
 # **hallsDetailsGet**
@@ -58,7 +15,7 @@ No authorization required
 
 List all the halls in the system
 
-This endpoint will display all the halls in the system.  
+This endpoint will display all the halls in the system. 
 
 ### Example
 ```java
@@ -91,9 +48,9 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="hallsDetailsHallTagGet"></a>
-# **hallsDetailsHallTagGet**
-> Hall hallsDetailsHallTagGet(hallTag)
+<a name="hallsDetailsHallNameGet"></a>
+# **hallsDetailsHallNameGet**
+> Hall hallsDetailsHallNameGet(hallName)
 
 Details of a hall
 
@@ -105,12 +62,12 @@ The hall details by a tag.
 //import io.swagger.client.api.HallsApi;
 
 HallsApi apiInstance = new HallsApi();
-String hallTag = "hallTag_example"; // String | Hall tag.
+String hallName = "hallName_example"; // String | Hall name.
 try {
-    Hall result = apiInstance.hallsDetailsHallTagGet(hallTag);
+    Hall result = apiInstance.hallsDetailsHallNameGet(hallName);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling HallsApi#hallsDetailsHallTagGet");
+    System.err.println("Exception when calling HallsApi#hallsDetailsHallNameGet");
     e.printStackTrace();
 }
 ```
@@ -119,11 +76,54 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hallTag** | **String**| Hall tag. |
+ **hallName** | **String**| Hall name. |
 
 ### Return type
 
 [**Hall**](Hall.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="hallsSubHallsContentsSubHallTagGet"></a>
+# **hallsSubHallsContentsSubHallTagGet**
+> List&lt;ContentHall&gt; hallsSubHallsContentsSubHallTagGet(subHallTag)
+
+Get the contetns associated with a sub hall tag
+
+Given a hall tag get the contents associated in that sub hall 
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.api.HallsApi;
+
+HallsApi apiInstance = new HallsApi();
+String subHallTag = "subHallTag_example"; // String | Sub Hall tag.
+try {
+    List<ContentHall> result = apiInstance.hallsSubHallsContentsSubHallTagGet(subHallTag);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling HallsApi#hallsSubHallsContentsSubHallTagGet");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subHallTag** | **String**| Sub Hall tag. |
+
+### Return type
+
+[**List&lt;ContentHall&gt;**](ContentHall.md)
 
 ### Authorization
 

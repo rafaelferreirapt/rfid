@@ -39,8 +39,9 @@ class SearchCategoryDetails(views.APIView):
     def get(request, current_tag, category_id):
         category = get_object_or_404(Category.objects.all(), id=category_id)
         sub_hall_to = category.sub_hall
+        sub_hall = get_object_or_404(SubHallTag.objects.all(), tag=current_tag).parent_hall
         w = Way()
-        response = w.search_path(from_point=current_tag, to=sub_hall_to.name)
+        response = w.search_path(from_point=sub_hall.name, to=sub_hall_to.name)
         halls = []
 
         for row in response[0]:

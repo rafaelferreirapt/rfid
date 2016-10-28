@@ -85,11 +85,13 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *CategoryApi* | [**categoryDetailsCategoryIdGet**](docs/CategoryApi.md#categoryDetailsCategoryIdGet) | **GET** /category/details/{category_id}/ | Details of a category
 *CategoryApi* | [**categoryDetailsGet**](docs/CategoryApi.md#categoryDetailsGet) | **GET** /category/details/ | List all the categories in the system
-*CategoryApi* | [**categoryHallHallTagGet**](docs/CategoryApi.md#categoryHallHallTagGet) | **GET** /category/hall/{hall_tag}/ | Get categories associated with a hall
-*CategoryApi* | [**categorySearchHallTagCategoryIdGet**](docs/CategoryApi.md#categorySearchHallTagCategoryIdGet) | **GET** /category/search/{hall_tag}/{category_id}/ | Get the path between the hall where the user is and the category that the user wants to go
-*HallsApi* | [**hallsContentsHallTagGet**](docs/HallsApi.md#hallsContentsHallTagGet) | **GET** /halls/contents/{hall_tag}/ | Get the contetns associated with a hall tag
+*CategoryApi* | [**categoryHallSubHallTagGet**](docs/CategoryApi.md#categoryHallSubHallTagGet) | **GET** /category/hall/{sub_hall_tag}/ | Get categories associated with a hall
+*CategoryApi* | [**categorySearchSubHallTagCategoryIdGet**](docs/CategoryApi.md#categorySearchSubHallTagCategoryIdGet) | **GET** /category/search/{sub_hall_tag}/{category_id}/ | Get the path between the hall where the user is and the category that the user wants to go
 *HallsApi* | [**hallsDetailsGet**](docs/HallsApi.md#hallsDetailsGet) | **GET** /halls/details/ | List all the halls in the system
-*HallsApi* | [**hallsDetailsHallTagGet**](docs/HallsApi.md#hallsDetailsHallTagGet) | **GET** /halls/details/{hall_tag}/ | Details of a hall
+*HallsApi* | [**hallsDetailsHallNameGet**](docs/HallsApi.md#hallsDetailsHallNameGet) | **GET** /halls/details/{hall_name}/ | Details of a hall
+*HallsApi* | [**hallsSubHallsContentsSubHallTagGet**](docs/HallsApi.md#hallsSubHallsContentsSubHallTagGet) | **GET** /halls/sub_halls/contents/{sub_hall_tag}/ | Get the contetns associated with a sub hall tag
+*SubHallsApi* | [**hallsSubHallsDetailsGet**](docs/SubHallsApi.md#hallsSubHallsDetailsGet) | **GET** /halls/sub_halls/details/ | List all the sub halls in the system
+*SubHallsApi* | [**hallsSubHallsDetailsSubHallNameGet**](docs/SubHallsApi.md#hallsSubHallsDetailsSubHallNameGet) | **GET** /halls/sub_halls/details/{sub_hall_name}/ | Details of a sub hall
 
 
 ## Documentation for Models
@@ -98,6 +100,7 @@ Class | Method | HTTP request | Description
  - [ContentHall](docs/ContentHall.md)
  - [Error](docs/Error.md)
  - [Hall](docs/Hall.md)
+ - [SubHall](docs/SubHall.md)
 
 
 ## Documentation for Authorization

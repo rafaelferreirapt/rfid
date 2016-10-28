@@ -36,8 +36,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import io.swagger.client.model.Error;
-import io.swagger.client.model.Hall;
-import io.swagger.client.model.ContentHall;
+import io.swagger.client.model.SubHall;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -49,7 +48,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-public class HallsApi {
+public class SubHallsApi {
   String basePath = "http://rfid.rafaelferreira.pt/api/v1";
   ApiInvoker apiInvoker = ApiInvoker.getInstance();
 
@@ -70,16 +69,16 @@ public class HallsApi {
   }
 
   /**
-  * List all the halls in the system
-  * This endpoint will display all the halls in the system. 
-   * @return List<Hall>
+  * List all the sub halls in the system
+  * This endpoint will display all the sub halls in the system. 
+   * @return List<SubHall>
   */
-  public List<Hall> hallsDetailsGet () throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+  public List<SubHall> hallsSubHallsDetailsGet () throws TimeoutException, ExecutionException, InterruptedException, ApiException {
      Object postBody = null;
   
 
   // create path and map variables
-  String path = "/halls/details/".replaceAll("\\{format\\}","json");
+  String path = "/halls/sub_halls/details/".replaceAll("\\{format\\}","json");
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -111,7 +110,7 @@ public class HallsApi {
       try {
         String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
         if(localVarResponse != null){
-           return (List<Hall>) ApiInvoker.deserialize(localVarResponse, "array", Hall.class);
+           return (List<SubHall>) ApiInvoker.deserialize(localVarResponse, "array", SubHall.class);
         } else {
            return null;
         }
@@ -133,17 +132,17 @@ public class HallsApi {
   }
 
       /**
-   * List all the halls in the system
-   * This endpoint will display all the halls in the system. 
+   * List all the sub halls in the system
+   * This endpoint will display all the sub halls in the system. 
 
   */
-  public void hallsDetailsGet (final Response.Listener<List<Hall>> responseListener, final Response.ErrorListener errorListener) {
+  public void hallsSubHallsDetailsGet (final Response.Listener<List<SubHall>> responseListener, final Response.ErrorListener errorListener) {
     Object postBody = null;
 
   
 
     // create path and map variables
-    String path = "/halls/details/".replaceAll("\\{format\\}","json");
+    String path = "/halls/sub_halls/details/".replaceAll("\\{format\\}","json");
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -178,7 +177,7 @@ public class HallsApi {
           @Override
           public void onResponse(String localVarResponse) {
             try {
-              responseListener.onResponse((List<Hall>) ApiInvoker.deserialize(localVarResponse,  "array", Hall.class));
+              responseListener.onResponse((List<SubHall>) ApiInvoker.deserialize(localVarResponse,  "array", SubHall.class));
             } catch (ApiException exception) {
                errorListener.onErrorResponse(new VolleyError(exception));
             }
@@ -194,23 +193,23 @@ public class HallsApi {
     }
   }
   /**
-  * Details of a hall
-  * The hall details by a tag. 
-   * @param hallName Hall name.
-   * @return Hall
+  * Details of a sub hall
+  * The sub hall details by a tag. 
+   * @param subHallName Sub hall name.
+   * @return SubHall
   */
-  public Hall hallsDetailsHallNameGet (String hallName) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+  public SubHall hallsSubHallsDetailsSubHallNameGet (String subHallName) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
      Object postBody = null;
   
-      // verify the required parameter 'hallName' is set
-      if (hallName == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'hallName' when calling hallsDetailsHallNameGet",
-      new ApiException(400, "Missing the required parameter 'hallName' when calling hallsDetailsHallNameGet"));
+      // verify the required parameter 'subHallName' is set
+      if (subHallName == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'subHallName' when calling hallsSubHallsDetailsSubHallNameGet",
+      new ApiException(400, "Missing the required parameter 'subHallName' when calling hallsSubHallsDetailsSubHallNameGet"));
       }
   
 
   // create path and map variables
-  String path = "/halls/details/{hall_name}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_name" + "\\}", apiInvoker.escapeString(hallName.toString()));
+  String path = "/halls/sub_halls/details/{sub_hall_name}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "sub_hall_name" + "\\}", apiInvoker.escapeString(subHallName.toString()));
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -242,7 +241,7 @@ public class HallsApi {
       try {
         String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
         if(localVarResponse != null){
-           return (Hall) ApiInvoker.deserialize(localVarResponse, "", Hall.class);
+           return (SubHall) ApiInvoker.deserialize(localVarResponse, "", SubHall.class);
         } else {
            return null;
         }
@@ -264,23 +263,23 @@ public class HallsApi {
   }
 
       /**
-   * Details of a hall
-   * The hall details by a tag. 
-   * @param hallName Hall name.
+   * Details of a sub hall
+   * The sub hall details by a tag. 
+   * @param subHallName Sub hall name.
   */
-  public void hallsDetailsHallNameGet (String hallName, final Response.Listener<Hall> responseListener, final Response.ErrorListener errorListener) {
+  public void hallsSubHallsDetailsSubHallNameGet (String subHallName, final Response.Listener<SubHall> responseListener, final Response.ErrorListener errorListener) {
     Object postBody = null;
 
   
-    // verify the required parameter 'hallName' is set
-    if (hallName == null) {
-       VolleyError error = new VolleyError("Missing the required parameter 'hallName' when calling hallsDetailsHallNameGet",
-         new ApiException(400, "Missing the required parameter 'hallName' when calling hallsDetailsHallNameGet"));
+    // verify the required parameter 'subHallName' is set
+    if (subHallName == null) {
+       VolleyError error = new VolleyError("Missing the required parameter 'subHallName' when calling hallsSubHallsDetailsSubHallNameGet",
+         new ApiException(400, "Missing the required parameter 'subHallName' when calling hallsSubHallsDetailsSubHallNameGet"));
     }
     
 
     // create path and map variables
-    String path = "/halls/details/{hall_name}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_name" + "\\}", apiInvoker.escapeString(hallName.toString()));
+    String path = "/halls/sub_halls/details/{sub_hall_name}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "sub_hall_name" + "\\}", apiInvoker.escapeString(subHallName.toString()));
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -315,144 +314,7 @@ public class HallsApi {
           @Override
           public void onResponse(String localVarResponse) {
             try {
-              responseListener.onResponse((Hall) ApiInvoker.deserialize(localVarResponse,  "", Hall.class));
-            } catch (ApiException exception) {
-               errorListener.onErrorResponse(new VolleyError(exception));
-            }
-          }
-      }, new Response.ErrorListener() {
-          @Override
-          public void onErrorResponse(VolleyError error) {
-            errorListener.onErrorResponse(error);
-          }
-      });
-    } catch (ApiException ex) {
-      errorListener.onErrorResponse(new VolleyError(ex));
-    }
-  }
-  /**
-  * Get the contetns associated with a sub hall tag
-  * Given a hall tag get the contents associated in that sub hall 
-   * @param subHallTag Sub Hall tag.
-   * @return List<ContentHall>
-  */
-  public List<ContentHall> hallsSubHallsContentsSubHallTagGet (String subHallTag) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
-     Object postBody = null;
-  
-      // verify the required parameter 'subHallTag' is set
-      if (subHallTag == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'subHallTag' when calling hallsSubHallsContentsSubHallTagGet",
-      new ApiException(400, "Missing the required parameter 'subHallTag' when calling hallsSubHallsContentsSubHallTagGet"));
-      }
-  
-
-  // create path and map variables
-  String path = "/halls/sub_halls/contents/{sub_hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "sub_hall_tag" + "\\}", apiInvoker.escapeString(subHallTag.toString()));
-
-  // query params
-  List<Pair> queryParams = new ArrayList<Pair>();
-      // header params
-      Map<String, String> headerParams = new HashMap<String, String>();
-      // form params
-      Map<String, String> formParams = new HashMap<String, String>();
-
-
-
-      String[] contentTypes = {
-  
-      };
-      String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-
-      if (contentType.startsWith("multipart/form-data")) {
-      // file uploading
-      MultipartEntityBuilder localVarBuilder = MultipartEntityBuilder.create();
-  
-
-      HttpEntity httpEntity = localVarBuilder.build();
-      postBody = httpEntity;
-      } else {
-      // normal form params
-        }
-
-      String[] authNames = new String[] {  };
-
-      try {
-        String localVarResponse = apiInvoker.invokeAPI (basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames);
-        if(localVarResponse != null){
-           return (List<ContentHall>) ApiInvoker.deserialize(localVarResponse, "array", ContentHall.class);
-        } else {
-           return null;
-        }
-      } catch (ApiException ex) {
-         throw ex;
-      } catch (InterruptedException ex) {
-         throw ex;
-      } catch (ExecutionException ex) {
-         if(ex.getCause() instanceof VolleyError) {
-	    VolleyError volleyError = (VolleyError)ex.getCause();
-	    if (volleyError.networkResponse != null) {
-	       throw new ApiException(volleyError.networkResponse.statusCode, volleyError.getMessage());
-	    }
-         }
-         throw ex;
-      } catch (TimeoutException ex) {
-         throw ex;
-      }
-  }
-
-      /**
-   * Get the contetns associated with a sub hall tag
-   * Given a hall tag get the contents associated in that sub hall 
-   * @param subHallTag Sub Hall tag.
-  */
-  public void hallsSubHallsContentsSubHallTagGet (String subHallTag, final Response.Listener<List<ContentHall>> responseListener, final Response.ErrorListener errorListener) {
-    Object postBody = null;
-
-  
-    // verify the required parameter 'subHallTag' is set
-    if (subHallTag == null) {
-       VolleyError error = new VolleyError("Missing the required parameter 'subHallTag' when calling hallsSubHallsContentsSubHallTagGet",
-         new ApiException(400, "Missing the required parameter 'subHallTag' when calling hallsSubHallsContentsSubHallTagGet"));
-    }
-    
-
-    // create path and map variables
-    String path = "/halls/sub_halls/contents/{sub_hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "sub_hall_tag" + "\\}", apiInvoker.escapeString(subHallTag.toString()));
-
-    // query params
-    List<Pair> queryParams = new ArrayList<Pair>();
-    // header params
-    Map<String, String> headerParams = new HashMap<String, String>();
-    // form params
-    Map<String, String> formParams = new HashMap<String, String>();
-
-
-
-    String[] contentTypes = {
-      
-    };
-    String contentType = contentTypes.length > 0 ? contentTypes[0] : "application/json";
-
-    if (contentType.startsWith("multipart/form-data")) {
-      // file uploading
-      MultipartEntityBuilder localVarBuilder = MultipartEntityBuilder.create();
-      
-
-      HttpEntity httpEntity = localVarBuilder.build();
-      postBody = httpEntity;
-    } else {
-      // normal form params
-          }
-
-      String[] authNames = new String[] {  };
-
-    try {
-      apiInvoker.invokeAPI(basePath, path, "GET", queryParams, postBody, headerParams, formParams, contentType, authNames,
-        new Response.Listener<String>() {
-          @Override
-          public void onResponse(String localVarResponse) {
-            try {
-              responseListener.onResponse((List<ContentHall>) ApiInvoker.deserialize(localVarResponse,  "array", ContentHall.class));
+              responseListener.onResponse((SubHall) ApiInvoker.deserialize(localVarResponse,  "", SubHall.class));
             } catch (ApiException exception) {
                errorListener.onErrorResponse(new VolleyError(exception));
             }

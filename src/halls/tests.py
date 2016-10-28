@@ -7,80 +7,6 @@ from halls.models import Hall, SubHall, ContentSubHall, SubHallTag
 
 class ObjectsTestCase(TestCase):
     def setUp(self):
-        """
-        Assumimos entao que:
-        O Hall 1 tem os seguintes sub-halls:
-        - 1 (Início)
-            tags:
-            - 1
-        - 2
-            tags:
-            - 2
-        - 3
-            tags:
-            - 3
-        - 4
-            tags:
-            - 4
-        O Hall 2 tem os seguintes sub-halls:
-        - 5
-            tags:
-            - 5
-        - 6
-            tags:
-            - 7
-        - 7
-            tags:
-            - 7
-        - 8
-            tags:
-            - 8
-        O Hall 3 tem os seguintes sub-halls:
-        - 9
-            tags:
-            - 9
-        - 10
-            tags:
-            - 10
-        - 11
-            tags:
-            - 11
-        - 12
-            tags:
-            - 12
-        O Hall 4 tem os seguintes sub-halls:
-        - 13
-            tags:
-            - 13
-        O Hall 5 tem os seguintes sub-halls:
-        - 14
-            tags:
-            - 14
-        O Hall 6 tem os seguintes sub-halls:
-        - 15
-            tags:
-            - 15
-        O Hall 7 tem os seguintes sub-halls:
-        - 16
-            tags:
-            - 16
-        O Hall 8 tem os seguintes sub-halls:
-        - 17
-            tags:
-            - 17
-        O Hall 9 tem os seguintes sub-halls:
-        - 18
-            tags:
-            - 18
-        O Hall 10 tem os seguintes sub-halls:
-        - 19
-            tags:
-            - 19
-        O Hall 11 tem os seguintes sub-halls:
-        - 20
-            tags:
-            - 20
-        """
         # hall 1
         self.hall1 = Hall.objects.create(name="1")
         self.sub_hall1 = SubHall.objects.create(name="1", parent_hall=self.hall1)
@@ -199,7 +125,7 @@ class ObjectsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["id"], str(self.sub_hall1.id))
 
-        url = "/api/v1/halls/sub_halls/contents/" + self.sub_hall1.name + "/"
+        url = "/api/v1/halls/sub_halls/contents/1/"
         response = client.get(path=url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.data), 4)

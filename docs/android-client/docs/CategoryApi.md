@@ -6,8 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**categoryDetailsCategoryIdGet**](CategoryApi.md#categoryDetailsCategoryIdGet) | **GET** /category/details/{category_id}/ | Details of a category
 [**categoryDetailsGet**](CategoryApi.md#categoryDetailsGet) | **GET** /category/details/ | List all the categories in the system
-[**categoryHallHallTagGet**](CategoryApi.md#categoryHallHallTagGet) | **GET** /category/hall/{hall_tag}/ | Get categories associated with a hall
-[**categorySearchHallTagCategoryIdGet**](CategoryApi.md#categorySearchHallTagCategoryIdGet) | **GET** /category/search/{hall_tag}/{category_id}/ | Get the path between the hall where the user is and the category that the user wants to go
+[**categoryHallSubHallTagGet**](CategoryApi.md#categoryHallSubHallTagGet) | **GET** /category/hall/{sub_hall_tag}/ | Get categories associated with a hall
+[**categorySearchSubHallTagCategoryIdGet**](CategoryApi.md#categorySearchSubHallTagCategoryIdGet) | **GET** /category/search/{sub_hall_tag}/{category_id}/ | Get the path between the hall where the user is and the category that the user wants to go
 
 
 <a name="categoryDetailsCategoryIdGet"></a>
@@ -59,7 +59,7 @@ No authorization required
 
 List all the categories in the system
 
-This endpoint will display all the categories in the system. Is very important to take care of the \&quot;id\&quot; because that id will be used to  request a path to that category. 
+This endpoint will display all the categories in the system. Is very important to take care of the \&quot;id\&quot; because that id will be used to request a path to that category. 
 
 ### Example
 ```java
@@ -92,13 +92,13 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="categoryHallHallTagGet"></a>
-# **categoryHallHallTagGet**
-> List&lt;Category&gt; categoryHallHallTagGet(hallTag)
+<a name="categoryHallSubHallTagGet"></a>
+# **categoryHallSubHallTagGet**
+> List&lt;Category&gt; categoryHallSubHallTagGet(subHallTag)
 
 Get categories associated with a hall
 
-Given a hall tag get the categories associated in that hall 
+Given a hall tag get the categories associated in that sub hall 
 
 ### Example
 ```java
@@ -106,12 +106,12 @@ Given a hall tag get the categories associated in that hall
 //import io.swagger.client.api.CategoryApi;
 
 CategoryApi apiInstance = new CategoryApi();
-String hallTag = "hallTag_example"; // String | Hall tag.
+String subHallTag = "subHallTag_example"; // String | Sub hall tag.
 try {
-    List<Category> result = apiInstance.categoryHallHallTagGet(hallTag);
+    List<Category> result = apiInstance.categoryHallSubHallTagGet(subHallTag);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling CategoryApi#categoryHallHallTagGet");
+    System.err.println("Exception when calling CategoryApi#categoryHallSubHallTagGet");
     e.printStackTrace();
 }
 ```
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hallTag** | **String**| Hall tag. |
+ **subHallTag** | **String**| Sub hall tag. |
 
 ### Return type
 
@@ -135,9 +135,9 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="categorySearchHallTagCategoryIdGet"></a>
-# **categorySearchHallTagCategoryIdGet**
-> List&lt;Hall&gt; categorySearchHallTagCategoryIdGet(hallTag, categoryId)
+<a name="categorySearchSubHallTagCategoryIdGet"></a>
+# **categorySearchSubHallTagCategoryIdGet**
+> List&lt;Hall&gt; categorySearchSubHallTagCategoryIdGet(subHallTag, categoryId)
 
 Get the path between the hall where the user is and the category that the user wants to go
 
@@ -149,13 +149,13 @@ Get the path between the hall where the user is and the category that the user w
 //import io.swagger.client.api.CategoryApi;
 
 CategoryApi apiInstance = new CategoryApi();
-String hallTag = "hallTag_example"; // String | Hall tag.
+String subHallTag = "subHallTag_example"; // String | Sub hall tag. This correspondes to 1, 2, or 3 for example.
 UUID categoryId = new UUID(); // UUID | Category ID.
 try {
-    List<Hall> result = apiInstance.categorySearchHallTagCategoryIdGet(hallTag, categoryId);
+    List<Hall> result = apiInstance.categorySearchSubHallTagCategoryIdGet(subHallTag, categoryId);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling CategoryApi#categorySearchHallTagCategoryIdGet");
+    System.err.println("Exception when calling CategoryApi#categorySearchSubHallTagCategoryIdGet");
     e.printStackTrace();
 }
 ```
@@ -164,7 +164,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hallTag** | **String**| Hall tag. |
+ **subHallTag** | **String**| Sub hall tag. This correspondes to 1, 2, or 3 for example. |
  **categoryId** | **UUID**| Category ID. |
 
 ### Return type

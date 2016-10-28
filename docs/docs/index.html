@@ -759,9 +759,33 @@ margin-bottom: 20px;
       "type" : "string",
       "description" : "Unique identifier representing a specific category, identifier is generated with an uuid,"
     },
-    "tag" : {
+    "name" : {
       "type" : "string",
-      "description" : "Unique identifier associated with the tag of the hall."
+      "description" : "Unique identifier associated with the name of the hall."
+    },
+    "created_at" : {
+      "type" : "string",
+      "description" : "Time of creation of the category."
+    },
+    "updated_at" : {
+      "type" : "string",
+      "description" : "Time of update of the category."
+    }
+  }
+};
+  defs.SubHall = {
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string",
+      "description" : "Unique identifier representing a specific sub hall, identifier is generated with an uuid."
+    },
+    "name" : {
+      "type" : "string",
+      "description" : "Unique identifier associated with the name of the sub hall."
+    },
+    "parent_hall" : {
+      "$ref" : "#/definitions/Hall"
     },
     "created_at" : {
       "type" : "string",
@@ -799,21 +823,28 @@ margin-bottom: 20px;
                                     <li data-group="Category" data-name="categoryDetailsGet" class="">
                                         <a href="#api-Category-categoryDetailsGet">categoryDetailsGet</a>
                                     </li>
-                                    <li data-group="Category" data-name="categoryHallHallTagGet" class="">
-                                        <a href="#api-Category-categoryHallHallTagGet">categoryHallHallTagGet</a>
+                                    <li data-group="Category" data-name="categoryHallSubHallTagGet" class="">
+                                        <a href="#api-Category-categoryHallSubHallTagGet">categoryHallSubHallTagGet</a>
                                     </li>
-                                    <li data-group="Category" data-name="categorySearchHallTagCategoryIdGet" class="">
-                                        <a href="#api-Category-categorySearchHallTagCategoryIdGet">categorySearchHallTagCategoryIdGet</a>
+                                    <li data-group="Category" data-name="categorySearchSubHallTagCategoryIdGet" class="">
+                                        <a href="#api-Category-categorySearchSubHallTagCategoryIdGet">categorySearchSubHallTagCategoryIdGet</a>
                                     </li>
                                 <li class="nav-header" data-group="Halls"><a href="#api-Halls">API Methods - Halls</a></li>
-                                    <li data-group="Halls" data-name="hallsContentsHallTagGet" class="">
-                                        <a href="#api-Halls-hallsContentsHallTagGet">hallsContentsHallTagGet</a>
-                                    </li>
                                     <li data-group="Halls" data-name="hallsDetailsGet" class="">
                                         <a href="#api-Halls-hallsDetailsGet">hallsDetailsGet</a>
                                     </li>
-                                    <li data-group="Halls" data-name="hallsDetailsHallTagGet" class="">
-                                        <a href="#api-Halls-hallsDetailsHallTagGet">hallsDetailsHallTagGet</a>
+                                    <li data-group="Halls" data-name="hallsDetailsHallNameGet" class="">
+                                        <a href="#api-Halls-hallsDetailsHallNameGet">hallsDetailsHallNameGet</a>
+                                    </li>
+                                    <li data-group="Halls" data-name="hallsSubHallsContentsSubHallTagGet" class="">
+                                        <a href="#api-Halls-hallsSubHallsContentsSubHallTagGet">hallsSubHallsContentsSubHallTagGet</a>
+                                    </li>
+                                <li class="nav-header" data-group="SubHalls"><a href="#api-SubHalls">API Methods - SubHalls</a></li>
+                                    <li data-group="SubHalls" data-name="hallsSubHallsDetailsGet" class="">
+                                        <a href="#api-SubHalls-hallsSubHallsDetailsGet">hallsSubHallsDetailsGet</a>
+                                    </li>
+                                    <li data-group="SubHalls" data-name="hallsSubHallsDetailsSubHallNameGet" class="">
+                                        <a href="#api-SubHalls-hallsSubHallsDetailsSubHallNameGet">hallsSubHallsDetailsSubHallNameGet</a>
                                     </li>
 
 
@@ -1318,7 +1349,7 @@ try {
                                             <div class="clearfix"></div>
 
                                             <p></p>
-                                            <p>This endpoint will display all the categories in the system. Is very important to take care of the \&quot;id\&quot; because that id will be used to  request a path to that category. </p>
+                                            <p>This endpoint will display all the categories in the system. Is very important to take care of the \&quot;id\&quot; because that id will be used to request a path to that category. </p>
                                             <p></p>
                                             <br />
 
@@ -1712,11 +1743,11 @@ try {
 
 
 
-                                    <div id="api-Category-categoryHallHallTagGet">
+                                    <div id="api-Category-categoryHallSubHallTagGet">
 
-                                        <article id="api-Category-categoryHallHallTagGet-0" data-group="User" data-name="categoryHallHallTagGet" data-version="0">
+                                        <article id="api-Category-categoryHallSubHallTagGet-0" data-group="User" data-name="categoryHallSubHallTagGet" data-version="0">
                                             <div class="pull-left">
-                                                <h1>categoryHallHallTagGet</h1>
+                                                <h1>categoryHallSubHallTagGet</h1>
                                             </div>
                                             <div class="pull-right">
 
@@ -1724,11 +1755,11 @@ try {
                                             <div class="clearfix"></div>
 
                                             <p></p>
-                                            <p>Given a hall tag get the categories associated in that hall </p>
+                                            <p>Given a hall tag get the categories associated in that sub hall </p>
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/category/hall/{hall_tag}/</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/category/hall/{sub_hall_tag}/</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -1736,44 +1767,44 @@ try {
 
                                             <ul class="nav nav-tabs nav-tabs-examples">
                                                 <li class="active">
-                                                    <a href="#examples-Category-categoryHallHallTagGet-0-curl">Curl</a>
+                                                    <a href="#examples-Category-categoryHallSubHallTagGet-0-curl">Curl</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Category-categoryHallHallTagGet-0-java">Java</a>
+              <a href="#examples-Category-categoryHallSubHallTagGet-0-java">Java</a>
             </li>
             <li class="">
-              <a href="#examples-Category-categoryHallHallTagGet-0-android">Android</a>
+              <a href="#examples-Category-categoryHallSubHallTagGet-0-android">Android</a>
             </li>
             <!--<li class="">
-              <a href="#examples-Category-categoryHallHallTagGet-0-groovy">Groovy</a>
+              <a href="#examples-Category-categoryHallSubHallTagGet-0-groovy">Groovy</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Category-categoryHallHallTagGet-0-objc">Obj-C</a>
+                                                    <a href="#examples-Category-categoryHallSubHallTagGet-0-objc">Obj-C</a>
                                                 </li>
                                                 <li class="">
-                                                    <a href="#examples-Category-categoryHallHallTagGet-0-javascript">JavaScript</a>
+                                                    <a href="#examples-Category-categoryHallSubHallTagGet-0-javascript">JavaScript</a>
                                                 </li>
                                                 <!--<li class="">
-              <a href="#examples-Category-categoryHallHallTagGet-0-angular">Angular</a>
+              <a href="#examples-Category-categoryHallSubHallTagGet-0-angular">Angular</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Category-categoryHallHallTagGet-0-csharp">C#</a>
+                                                    <a href="#examples-Category-categoryHallSubHallTagGet-0-csharp">C#</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Category-categoryHallHallTagGet-0-php">PHP</a>
+              <a href="#examples-Category-categoryHallSubHallTagGet-0-php">PHP</a>
             </li>
                                             </ul>
 
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="examples-Category-categoryHallHallTagGet-0-curl">
+                                                <div class="tab-pane active" id="examples-Category-categoryHallSubHallTagGet-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/category/hall/{hall_tag}/"
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/category/hall/{sub_hall_tag}/"
 
 
 </code></pre>
                                                 </div>
 
-                                                <div class="tab-pane" id="examples-Category-categoryHallHallTagGet-0-java">
+                                                <div class="tab-pane" id="examples-Category-categoryHallSubHallTagGet-0-java">
                                                   <pre class="prettyprint"><code class="language-java">
 import io.swagger.client.*;
 import io.swagger.client.auth.*;
@@ -1788,12 +1819,12 @@ public class CategoryApiExample {
     public static void main(String[] args) {
         
         CategoryApi apiInstance = new CategoryApi();
-        String hallTag = hallTag_example; // String | Hall tag.
+        String subHallTag = subHallTag_example; // String | Sub hall tag.
         try {
-            array[Category] result = apiInstance.categoryHallHallTagGet(hallTag);
+            array[Category] result = apiInstance.categoryHallSubHallTagGet(subHallTag);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling CategoryApi#categoryHallHallTagGet");
+            System.err.println("Exception when calling CategoryApi#categoryHallSubHallTagGet");
             e.printStackTrace();
         }
     }
@@ -1803,7 +1834,7 @@ public class CategoryApiExample {
           </div>
 
 
-                                                <div class="tab-pane" id="examples-Category-categoryHallHallTagGet-0-android">
+                                                <div class="tab-pane" id="examples-Category-categoryHallSubHallTagGet-0-android">
                                                   <pre class="prettyprint"><code class="language-java">
 import .CategoryApi;
 
@@ -1811,12 +1842,12 @@ public class CategoryApiExample {
 
     public static void main(String[] args) {
         CategoryApi apiInstance = new CategoryApi();
-        String hallTag = hallTag_example; // String | Hall tag.
+        String subHallTag = subHallTag_example; // String | Sub hall tag.
         try {
-            array[Category] result = apiInstance.categoryHallHallTagGet(hallTag);
+            array[Category] result = apiInstance.categoryHallSubHallTagGet(subHallTag);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling CategoryApi#categoryHallHallTagGet");
+            System.err.println("Exception when calling CategoryApi#categoryHallSubHallTagGet");
             e.printStackTrace();
         }
     }
@@ -1826,20 +1857,20 @@ public class CategoryApiExample {
           </div>
 
           <!--
-          <div class="tab-pane" id="examples-Category-categoryHallHallTagGet-0-groovy">
+          <div class="tab-pane" id="examples-Category-categoryHallSubHallTagGet-0-groovy">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div> -->
 
 
-                                                <div class="tab-pane" id="examples-Category-categoryHallHallTagGet-0-objc">
+                                                <div class="tab-pane" id="examples-Category-categoryHallSubHallTagGet-0-objc">
                                                     <pre class="prettyprint"><code class="language-cpp">
 
-String *hallTag = hallTag_example; // Hall tag.
+String *subHallTag = subHallTag_example; // Sub hall tag.
 
 CategoryApi *apiInstance = [[CategoryApi alloc] init];
 
 // Get categories associated with a hall
-[apiInstance categoryHallHallTagGetWith:hallTag
+[apiInstance categoryHallSubHallTagGetWith:subHallTag
               completionHandler: ^(array[Category] output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -1851,13 +1882,13 @@ CategoryApi *apiInstance = [[CategoryApi alloc] init];
 
                                                     </code></pre>
                                                 </div>
-                                                <div class="tab-pane" id="examples-Category-categoryHallHallTagGet-0-javascript">
+                                                <div class="tab-pane" id="examples-Category-categoryHallSubHallTagGet-0-javascript">
                                                     <pre class="prettyprint"><code class="language-js">
 var  = require('');
 
 var api = new .CategoryApi()
 
-var hallTag = hallTag_example; // {String} Hall tag.
+var subHallTag = subHallTag_example; // {String} Sub hall tag.
 
 
 var callback = function(error, data, response) {
@@ -1867,16 +1898,16 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.categoryHallHallTagGet(hallTag, callback);
+api.categoryHallSubHallTagGet(subHallTag, callback);
 
                                                     </code></pre>
                                                 </div>
 
-                                                <!--<div class="tab-pane" id="examples-Category-categoryHallHallTagGet-0-angular">
+                                                <!--<div class="tab-pane" id="examples-Category-categoryHallSubHallTagGet-0-angular">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div>-->
 
-                                                <div class="tab-pane" id="examples-Category-categoryHallHallTagGet-0-csharp">
+                                                <div class="tab-pane" id="examples-Category-categoryHallSubHallTagGet-0-csharp">
                                                     <pre class="prettyprint"><code class="language-cs">
 using System;
 using System.Diagnostics;
@@ -1886,23 +1917,23 @@ using ;
 
 namespace Example
 {
-    public class categoryHallHallTagGetExample
+    public class categoryHallSubHallTagGetExample
     {
         public void main()
         {
             
             var apiInstance = new CategoryApi();
-            var hallTag = hallTag_example;  // String | Hall tag.
+            var subHallTag = subHallTag_example;  // String | Sub hall tag.
 
             try
             {
                 // Get categories associated with a hall
-                array[Category] result = apiInstance.categoryHallHallTagGet(hallTag);
+                array[Category] result = apiInstance.categoryHallSubHallTagGet(subHallTag);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling CategoryApi.categoryHallHallTagGet: " + e.Message );
+                Debug.Print("Exception when calling CategoryApi.categoryHallSubHallTagGet: " + e.Message );
             }
         }
     }
@@ -1912,19 +1943,19 @@ namespace Example
                                                 </div>
 
 
-                                                <div class="tab-pane" id="examples-Category-categoryHallHallTagGet-0-php">
+                                                <div class="tab-pane" id="examples-Category-categoryHallSubHallTagGet-0-php">
                                                   <pre class="prettyprint"><code class="language-php">
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new io.swagger.client\Api\CategoryApi();
-$hallTag = hallTag_example; // String | Hall tag.
+$subHallTag = subHallTag_example; // String | Sub hall tag.
 
 try {
-    $result = $api_instance->categoryHallHallTagGet($hallTag);
+    $result = $api_instance->categoryHallSubHallTagGet($subHallTag);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling CategoryApi->categoryHallHallTagGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling CategoryApi->categoryHallSubHallTagGet: ', $e->getMessage(), PHP_EOL;
 }
 
                                                   </code></pre>
@@ -1947,16 +1978,16 @@ try {
                                                         <th>Description</th>
                                                     </tr>
                                                     <!---->
-                                                        <tr><td style="width:150px;">hallTag*</td>
+                                                        <tr><td style="width:150px;">subHallTag*</td>
 <td>
 
 
 <script>
 												$(document).ready(function() {
 													var schemaWrapper = {
-  "name" : "hall_tag",
+  "name" : "sub_hall_tag",
   "in" : "path",
-  "description" : "Hall tag.",
+  "description" : "Sub hall tag.",
   "required" : true,
   "type" : "string"
 };
@@ -1966,7 +1997,7 @@ try {
 
 
 													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_categoryHallHallTagGet_hallTag');
+													var result = $('#d2e199_categoryHallSubHallTagGet_subHallTag');
 													result.empty();
 													result.append(view.render());
 
@@ -1976,7 +2007,7 @@ try {
 
 												});
 												</script>
-												<div id="d2e199_categoryHallHallTagGet_hallTag"></div>
+												<div id="d2e199_categoryHallSubHallTagGet_subHallTag"></div>
 </td>
 </tr>
 
@@ -1993,7 +2024,7 @@ try {
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Category-categoryHallHallTagGet-schema">Schema</a>
+                                                        <a href="#examples-Category-categoryHallSubHallTagGet-schema">Schema</a>
                                                     </li>
 
 
@@ -2009,12 +2040,12 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Category-categoryHallHallTagGet-schema">
+                                                    <div class="tab-pane active" id="examples-Category-categoryHallSubHallTagGet-schema">
 
 
 
 
-                                                        <div id='examples-Category-categoryHallHallTagGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Category-categoryHallSubHallTagGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
@@ -2041,8 +2072,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Category-categoryHallHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Category-categoryHallHallTagGet-schema-200');
+                                                                        $('#examples-Category-categoryHallSubHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Category-categoryHallSubHallTagGet-schema-200');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -2053,7 +2084,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Category-categoryHallHallTagGet-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Category-categoryHallSubHallTagGet-schema-data' type='hidden' value=''></input>
 
 
 
@@ -2075,7 +2106,7 @@ try {
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Category-categoryHallHallTagGet-schema">Schema</a>
+                                                        <a href="#examples-Category-categoryHallSubHallTagGet-schema">Schema</a>
                                                     </li>
 
 
@@ -2091,12 +2122,12 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Category-categoryHallHallTagGet-schema">
+                                                    <div class="tab-pane active" id="examples-Category-categoryHallSubHallTagGet-schema">
 
 
 
 
-                                                        <div id='examples-Category-categoryHallHallTagGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Category-categoryHallSubHallTagGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
@@ -2120,8 +2151,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Category-categoryHallHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Category-categoryHallHallTagGet-schema-0');
+                                                                        $('#examples-Category-categoryHallSubHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Category-categoryHallSubHallTagGet-schema-0');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -2132,7 +2163,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Category-categoryHallHallTagGet-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Category-categoryHallSubHallTagGet-schema-data' type='hidden' value=''></input>
 
 
 
@@ -2167,11 +2198,11 @@ try {
 
 
 
-                                    <div id="api-Category-categorySearchHallTagCategoryIdGet">
+                                    <div id="api-Category-categorySearchSubHallTagCategoryIdGet">
 
-                                        <article id="api-Category-categorySearchHallTagCategoryIdGet-0" data-group="User" data-name="categorySearchHallTagCategoryIdGet" data-version="0">
+                                        <article id="api-Category-categorySearchSubHallTagCategoryIdGet-0" data-group="User" data-name="categorySearchSubHallTagCategoryIdGet" data-version="0">
                                             <div class="pull-left">
-                                                <h1>categorySearchHallTagCategoryIdGet</h1>
+                                                <h1>categorySearchSubHallTagCategoryIdGet</h1>
                                             </div>
                                             <div class="pull-right">
 
@@ -2183,7 +2214,7 @@ try {
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/category/search/{hall_tag}/{category_id}/</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/category/search/{sub_hall_tag}/{category_id}/</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -2191,44 +2222,44 @@ try {
 
                                             <ul class="nav nav-tabs nav-tabs-examples">
                                                 <li class="active">
-                                                    <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-curl">Curl</a>
+                                                    <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-curl">Curl</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-java">Java</a>
+              <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-java">Java</a>
             </li>
             <li class="">
-              <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-android">Android</a>
+              <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-android">Android</a>
             </li>
             <!--<li class="">
-              <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-groovy">Groovy</a>
+              <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-groovy">Groovy</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-objc">Obj-C</a>
+                                                    <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-objc">Obj-C</a>
                                                 </li>
                                                 <li class="">
-                                                    <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-javascript">JavaScript</a>
+                                                    <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-javascript">JavaScript</a>
                                                 </li>
                                                 <!--<li class="">
-              <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-angular">Angular</a>
+              <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-angular">Angular</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-csharp">C#</a>
+                                                    <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-csharp">C#</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Category-categorySearchHallTagCategoryIdGet-0-php">PHP</a>
+              <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-0-php">PHP</a>
             </li>
                                             </ul>
 
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="examples-Category-categorySearchHallTagCategoryIdGet-0-curl">
+                                                <div class="tab-pane active" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/category/search/{hall_tag}/{category_id}/"
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/category/search/{sub_hall_tag}/{category_id}/"
 
 
 </code></pre>
                                                 </div>
 
-                                                <div class="tab-pane" id="examples-Category-categorySearchHallTagCategoryIdGet-0-java">
+                                                <div class="tab-pane" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-java">
                                                   <pre class="prettyprint"><code class="language-java">
 import io.swagger.client.*;
 import io.swagger.client.auth.*;
@@ -2243,13 +2274,13 @@ public class CategoryApiExample {
     public static void main(String[] args) {
         
         CategoryApi apiInstance = new CategoryApi();
-        String hallTag = hallTag_example; // String | Hall tag.
+        String subHallTag = subHallTag_example; // String | Sub hall tag. This correspondes to 1, 2, or 3 for example.
         UUID categoryId = categoryId_example; // UUID | Category ID.
         try {
-            array[Hall] result = apiInstance.categorySearchHallTagCategoryIdGet(hallTag, categoryId);
+            array[Hall] result = apiInstance.categorySearchSubHallTagCategoryIdGet(subHallTag, categoryId);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling CategoryApi#categorySearchHallTagCategoryIdGet");
+            System.err.println("Exception when calling CategoryApi#categorySearchSubHallTagCategoryIdGet");
             e.printStackTrace();
         }
     }
@@ -2259,7 +2290,7 @@ public class CategoryApiExample {
           </div>
 
 
-                                                <div class="tab-pane" id="examples-Category-categorySearchHallTagCategoryIdGet-0-android">
+                                                <div class="tab-pane" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-android">
                                                   <pre class="prettyprint"><code class="language-java">
 import .CategoryApi;
 
@@ -2267,13 +2298,13 @@ public class CategoryApiExample {
 
     public static void main(String[] args) {
         CategoryApi apiInstance = new CategoryApi();
-        String hallTag = hallTag_example; // String | Hall tag.
+        String subHallTag = subHallTag_example; // String | Sub hall tag. This correspondes to 1, 2, or 3 for example.
         UUID categoryId = categoryId_example; // UUID | Category ID.
         try {
-            array[Hall] result = apiInstance.categorySearchHallTagCategoryIdGet(hallTag, categoryId);
+            array[Hall] result = apiInstance.categorySearchSubHallTagCategoryIdGet(subHallTag, categoryId);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling CategoryApi#categorySearchHallTagCategoryIdGet");
+            System.err.println("Exception when calling CategoryApi#categorySearchSubHallTagCategoryIdGet");
             e.printStackTrace();
         }
     }
@@ -2283,21 +2314,21 @@ public class CategoryApiExample {
           </div>
 
           <!--
-          <div class="tab-pane" id="examples-Category-categorySearchHallTagCategoryIdGet-0-groovy">
+          <div class="tab-pane" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-groovy">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div> -->
 
 
-                                                <div class="tab-pane" id="examples-Category-categorySearchHallTagCategoryIdGet-0-objc">
+                                                <div class="tab-pane" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-objc">
                                                     <pre class="prettyprint"><code class="language-cpp">
 
-String *hallTag = hallTag_example; // Hall tag.
+String *subHallTag = subHallTag_example; // Sub hall tag. This correspondes to 1, 2, or 3 for example.
 UUID *categoryId = categoryId_example; // Category ID.
 
 CategoryApi *apiInstance = [[CategoryApi alloc] init];
 
 // Get the path between the hall where the user is and the category that the user wants to go
-[apiInstance categorySearchHallTagCategoryIdGetWith:hallTag
+[apiInstance categorySearchSubHallTagCategoryIdGetWith:subHallTag
     categoryId:categoryId
               completionHandler: ^(array[Hall] output, NSError* error) {
                             if (output) {
@@ -2310,13 +2341,13 @@ CategoryApi *apiInstance = [[CategoryApi alloc] init];
 
                                                     </code></pre>
                                                 </div>
-                                                <div class="tab-pane" id="examples-Category-categorySearchHallTagCategoryIdGet-0-javascript">
+                                                <div class="tab-pane" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-javascript">
                                                     <pre class="prettyprint"><code class="language-js">
 var  = require('');
 
 var api = new .CategoryApi()
 
-var hallTag = hallTag_example; // {String} Hall tag.
+var subHallTag = subHallTag_example; // {String} Sub hall tag. This correspondes to 1, 2, or 3 for example.
 
 var categoryId = categoryId_example; // {UUID} Category ID.
 
@@ -2328,16 +2359,16 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.categorySearchHallTagCategoryIdGet(hallTag, categoryId, callback);
+api.categorySearchSubHallTagCategoryIdGet(subHallTag, categoryId, callback);
 
                                                     </code></pre>
                                                 </div>
 
-                                                <!--<div class="tab-pane" id="examples-Category-categorySearchHallTagCategoryIdGet-0-angular">
+                                                <!--<div class="tab-pane" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-angular">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div>-->
 
-                                                <div class="tab-pane" id="examples-Category-categorySearchHallTagCategoryIdGet-0-csharp">
+                                                <div class="tab-pane" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-csharp">
                                                     <pre class="prettyprint"><code class="language-cs">
 using System;
 using System.Diagnostics;
@@ -2347,24 +2378,24 @@ using ;
 
 namespace Example
 {
-    public class categorySearchHallTagCategoryIdGetExample
+    public class categorySearchSubHallTagCategoryIdGetExample
     {
         public void main()
         {
             
             var apiInstance = new CategoryApi();
-            var hallTag = hallTag_example;  // String | Hall tag.
+            var subHallTag = subHallTag_example;  // String | Sub hall tag. This correspondes to 1, 2, or 3 for example.
             var categoryId = categoryId_example;  // UUID | Category ID.
 
             try
             {
                 // Get the path between the hall where the user is and the category that the user wants to go
-                array[Hall] result = apiInstance.categorySearchHallTagCategoryIdGet(hallTag, categoryId);
+                array[Hall] result = apiInstance.categorySearchSubHallTagCategoryIdGet(subHallTag, categoryId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling CategoryApi.categorySearchHallTagCategoryIdGet: " + e.Message );
+                Debug.Print("Exception when calling CategoryApi.categorySearchSubHallTagCategoryIdGet: " + e.Message );
             }
         }
     }
@@ -2374,20 +2405,20 @@ namespace Example
                                                 </div>
 
 
-                                                <div class="tab-pane" id="examples-Category-categorySearchHallTagCategoryIdGet-0-php">
+                                                <div class="tab-pane" id="examples-Category-categorySearchSubHallTagCategoryIdGet-0-php">
                                                   <pre class="prettyprint"><code class="language-php">
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new io.swagger.client\Api\CategoryApi();
-$hallTag = hallTag_example; // String | Hall tag.
+$subHallTag = subHallTag_example; // String | Sub hall tag. This correspondes to 1, 2, or 3 for example.
 $categoryId = categoryId_example; // UUID | Category ID.
 
 try {
-    $result = $api_instance->categorySearchHallTagCategoryIdGet($hallTag, $categoryId);
+    $result = $api_instance->categorySearchSubHallTagCategoryIdGet($subHallTag, $categoryId);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling CategoryApi->categorySearchHallTagCategoryIdGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling CategoryApi->categorySearchSubHallTagCategoryIdGet: ', $e->getMessage(), PHP_EOL;
 }
 
                                                   </code></pre>
@@ -2410,16 +2441,16 @@ try {
                                                         <th>Description</th>
                                                     </tr>
                                                     <!---->
-                                                        <tr><td style="width:150px;">hallTag*</td>
+                                                        <tr><td style="width:150px;">subHallTag*</td>
 <td>
 
 
 <script>
 												$(document).ready(function() {
 													var schemaWrapper = {
-  "name" : "hall_tag",
+  "name" : "sub_hall_tag",
   "in" : "path",
-  "description" : "Hall tag.",
+  "description" : "Sub hall tag. This correspondes to 1, 2, or 3 for example.",
   "required" : true,
   "type" : "string"
 };
@@ -2429,7 +2460,7 @@ try {
 
 
 													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_categorySearchHallTagCategoryIdGet_hallTag');
+													var result = $('#d2e199_categorySearchSubHallTagCategoryIdGet_subHallTag');
 													result.empty();
 													result.append(view.render());
 
@@ -2439,7 +2470,7 @@ try {
 
 												});
 												</script>
-												<div id="d2e199_categorySearchHallTagCategoryIdGet_hallTag"></div>
+												<div id="d2e199_categorySearchSubHallTagCategoryIdGet_subHallTag"></div>
 </td>
 </tr>
 
@@ -2463,7 +2494,7 @@ try {
 
 
 													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_categorySearchHallTagCategoryIdGet_categoryId');
+													var result = $('#d2e199_categorySearchSubHallTagCategoryIdGet_categoryId');
 													result.empty();
 													result.append(view.render());
 
@@ -2473,7 +2504,7 @@ try {
 
 												});
 												</script>
-												<div id="d2e199_categorySearchHallTagCategoryIdGet_categoryId"></div>
+												<div id="d2e199_categorySearchSubHallTagCategoryIdGet_categoryId"></div>
 </td>
 </tr>
 
@@ -2490,7 +2521,7 @@ try {
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Category-categorySearchHallTagCategoryIdGet-schema">Schema</a>
+                                                        <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-schema">Schema</a>
                                                     </li>
 
 
@@ -2506,12 +2537,12 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Category-categorySearchHallTagCategoryIdGet-schema">
+                                                    <div class="tab-pane active" id="examples-Category-categorySearchSubHallTagCategoryIdGet-schema">
 
 
 
 
-                                                        <div id='examples-Category-categorySearchHallTagCategoryIdGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Category-categorySearchSubHallTagCategoryIdGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
@@ -2538,8 +2569,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Category-categorySearchHallTagCategoryIdGet-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Category-categorySearchHallTagCategoryIdGet-schema-200');
+                                                                        $('#examples-Category-categorySearchSubHallTagCategoryIdGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Category-categorySearchSubHallTagCategoryIdGet-schema-200');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -2550,7 +2581,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Category-categorySearchHallTagCategoryIdGet-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Category-categorySearchSubHallTagCategoryIdGet-schema-data' type='hidden' value=''></input>
 
 
 
@@ -2572,7 +2603,7 @@ try {
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Category-categorySearchHallTagCategoryIdGet-schema">Schema</a>
+                                                        <a href="#examples-Category-categorySearchSubHallTagCategoryIdGet-schema">Schema</a>
                                                     </li>
 
 
@@ -2588,12 +2619,12 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Category-categorySearchHallTagCategoryIdGet-schema">
+                                                    <div class="tab-pane active" id="examples-Category-categorySearchSubHallTagCategoryIdGet-schema">
 
 
 
 
-                                                        <div id='examples-Category-categorySearchHallTagCategoryIdGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Category-categorySearchSubHallTagCategoryIdGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
@@ -2617,8 +2648,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Category-categorySearchHallTagCategoryIdGet-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Category-categorySearchHallTagCategoryIdGet-schema-0');
+                                                                        $('#examples-Category-categorySearchSubHallTagCategoryIdGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Category-categorySearchSubHallTagCategoryIdGet-schema-0');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -2629,7 +2660,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Category-categorySearchHallTagCategoryIdGet-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Category-categorySearchSubHallTagCategoryIdGet-schema-data' type='hidden' value=''></input>
 
 
 
@@ -2668,461 +2699,6 @@ try {
 
 
 
-                                    <div id="api-Halls-hallsContentsHallTagGet">
-
-                                        <article id="api-Halls-hallsContentsHallTagGet-0" data-group="User" data-name="hallsContentsHallTagGet" data-version="0">
-                                            <div class="pull-left">
-                                                <h1>hallsContentsHallTagGet</h1>
-                                            </div>
-                                            <div class="pull-right">
-
-                                            </div>
-                                            <div class="clearfix"></div>
-
-                                            <p></p>
-                                            <p>Given a hall tag get the contents associated in that hall </p>
-                                            <p></p>
-                                            <br />
-
-                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/halls/contents/{hall_tag}/</span></code></pre>
-
-                                            <p>
-                                                <h3>Usage and SDK Samples</h3>
-                                            </p>
-
-                                            <ul class="nav nav-tabs nav-tabs-examples">
-                                                <li class="active">
-                                                    <a href="#examples-Halls-hallsContentsHallTagGet-0-curl">Curl</a>
-                                                </li>
-                                                <li class="">
-              <a href="#examples-Halls-hallsContentsHallTagGet-0-java">Java</a>
-            </li>
-            <li class="">
-              <a href="#examples-Halls-hallsContentsHallTagGet-0-android">Android</a>
-            </li>
-            <!--<li class="">
-              <a href="#examples-Halls-hallsContentsHallTagGet-0-groovy">Groovy</a>
-            </li>-->
-                                                <li class="">
-                                                    <a href="#examples-Halls-hallsContentsHallTagGet-0-objc">Obj-C</a>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#examples-Halls-hallsContentsHallTagGet-0-javascript">JavaScript</a>
-                                                </li>
-                                                <!--<li class="">
-              <a href="#examples-Halls-hallsContentsHallTagGet-0-angular">Angular</a>
-            </li>-->
-                                                <li class="">
-                                                    <a href="#examples-Halls-hallsContentsHallTagGet-0-csharp">C#</a>
-                                                </li>
-                                                <li class="">
-              <a href="#examples-Halls-hallsContentsHallTagGet-0-php">PHP</a>
-            </li>
-                                            </ul>
-
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="examples-Halls-hallsContentsHallTagGet-0-curl">
-                                                    <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/halls/contents/{hall_tag}/"
-
-
-</code></pre>
-                                                </div>
-
-                                                <div class="tab-pane" id="examples-Halls-hallsContentsHallTagGet-0-java">
-                                                  <pre class="prettyprint"><code class="language-java">
-import io.swagger.client.*;
-import io.swagger.client.auth.*;
-import io.swagger.client.model.*;
-import .HallsApi;
-
-import java.io.File;
-import java.util.*;
-
-public class HallsApiExample {
-
-    public static void main(String[] args) {
-        
-        HallsApi apiInstance = new HallsApi();
-        String hallTag = hallTag_example; // String | Hall tag.
-        try {
-            array[ContentHall] result = apiInstance.hallsContentsHallTagGet(hallTag);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HallsApi#hallsContentsHallTagGet");
-            e.printStackTrace();
-        }
-    }
-}
-
-                                                  </code></pre>
-          </div>
-
-
-                                                <div class="tab-pane" id="examples-Halls-hallsContentsHallTagGet-0-android">
-                                                  <pre class="prettyprint"><code class="language-java">
-import .HallsApi;
-
-public class HallsApiExample {
-
-    public static void main(String[] args) {
-        HallsApi apiInstance = new HallsApi();
-        String hallTag = hallTag_example; // String | Hall tag.
-        try {
-            array[ContentHall] result = apiInstance.hallsContentsHallTagGet(hallTag);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling HallsApi#hallsContentsHallTagGet");
-            e.printStackTrace();
-        }
-    }
-}
-
-                                                  </code></pre>
-          </div>
-
-          <!--
-          <div class="tab-pane" id="examples-Halls-hallsContentsHallTagGet-0-groovy">
-            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-          </div> -->
-
-
-                                                <div class="tab-pane" id="examples-Halls-hallsContentsHallTagGet-0-objc">
-                                                    <pre class="prettyprint"><code class="language-cpp">
-
-String *hallTag = hallTag_example; // Hall tag.
-
-HallsApi *apiInstance = [[HallsApi alloc] init];
-
-// Get the contetns associated with a hall tag
-[apiInstance hallsContentsHallTagGetWith:hallTag
-              completionHandler: ^(array[ContentHall] output, NSError* error) {
-                            if (output) {
-                                NSLog(@"%@", output);
-                            }
-                            if (error) {
-                                NSLog(@"Error: %@", error);
-                            }
-                        }];
-
-                                                    </code></pre>
-                                                </div>
-                                                <div class="tab-pane" id="examples-Halls-hallsContentsHallTagGet-0-javascript">
-                                                    <pre class="prettyprint"><code class="language-js">
-var  = require('');
-
-var api = new .HallsApi()
-
-var hallTag = hallTag_example; // {String} Hall tag.
-
-
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.hallsContentsHallTagGet(hallTag, callback);
-
-                                                    </code></pre>
-                                                </div>
-
-                                                <!--<div class="tab-pane" id="examples-Halls-hallsContentsHallTagGet-0-angular">
-            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
-          </div>-->
-
-                                                <div class="tab-pane" id="examples-Halls-hallsContentsHallTagGet-0-csharp">
-                                                    <pre class="prettyprint"><code class="language-cs">
-using System;
-using System.Diagnostics;
-using .Api;
-using .Client;
-using ;
-
-namespace Example
-{
-    public class hallsContentsHallTagGetExample
-    {
-        public void main()
-        {
-            
-            var apiInstance = new HallsApi();
-            var hallTag = hallTag_example;  // String | Hall tag.
-
-            try
-            {
-                // Get the contetns associated with a hall tag
-                array[ContentHall] result = apiInstance.hallsContentsHallTagGet(hallTag);
-                Debug.WriteLine(result);
-            }
-            catch (Exception e)
-            {
-                Debug.Print("Exception when calling HallsApi.hallsContentsHallTagGet: " + e.Message );
-            }
-        }
-    }
-}
-
-                                                    </code></pre>
-                                                </div>
-
-
-                                                <div class="tab-pane" id="examples-Halls-hallsContentsHallTagGet-0-php">
-                                                  <pre class="prettyprint"><code class="language-php">
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-$api_instance = new io.swagger.client\Api\HallsApi();
-$hallTag = hallTag_example; // String | Hall tag.
-
-try {
-    $result = $api_instance->hallsContentsHallTagGet($hallTag);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling HallsApi->hallsContentsHallTagGet: ', $e->getMessage(), PHP_EOL;
-}
-
-                                                  </code></pre>
-          </div>
-
-                                            </div>
-
-
-
-
-
-                                            <h2>Parameters</h2>
-
-
-
-                                                <div class="methodsubtabletitle">Path parameters</div>
-                                                <table id="methodsubtable">
-                                                    <tr>
-                                                        <th width="150px">Name</th>
-                                                        <th>Description</th>
-                                                    </tr>
-                                                    <!---->
-                                                        <tr><td style="width:150px;">hallTag*</td>
-<td>
-
-
-<script>
-												$(document).ready(function() {
-													var schemaWrapper = {
-  "name" : "hall_tag",
-  "in" : "path",
-  "description" : "Hall tag.",
-  "required" : true,
-  "type" : "string"
-};
-													var schema = schemaWrapper;
-
-
-
-
-													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_hallsContentsHallTagGet_hallTag');
-													result.empty();
-													result.append(view.render());
-
-
-
-
-
-												});
-												</script>
-												<div id="d2e199_hallsContentsHallTagGet_hallTag"></div>
-</td>
-</tr>
-
-                                                </table>
-
-
-
-
-
-                                            <h2>Responses</h2>
-
-                                                <h3> Status: 200 - An array of contents </h3>
-
-                                                <ul class="nav nav-tabs nav-tabs-examples" >
-
-                                                    <li class="active">
-                                                        <a href="#examples-Halls-hallsContentsHallTagGet-schema">Schema</a>
-                                                    </li>
-
-
-                                                </ul>
-
-
-
-
-
-
-
-                                                <div class="tab-content" style='margin-bottom: 10px;'>
-
-
-
-                                                    <div class="tab-pane active" id="examples-Halls-hallsContentsHallTagGet-schema">
-
-
-
-
-                                                        <div id='examples-Halls-hallsContentsHallTagGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-
-                                                            <script>
-                                                                $(document).ready(function() {
-                                                                    var schemaWrapper = {
-  "description" : "An array of contents",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/ContentHall"
-    }
-  }
-};
-                                                                    var schema = schemaWrapper.schema;
-                                                                    schemaWrapper.definitions = defs;
-                                                                    //console.log(JSON.stringify(schema))
-                                                                    JsonRefs.resolveRefs(schemaWrapper, {
-                                                                        "depth": 3,
-                                                                        "resolveRemoteRefs": false,
-                                                                        "resolveFileRefs": false
-                                                                    }, function(err, resolved, metadata) {
-
-                                                                        //console.log(JSON.stringify(resolved));
-
-
-
-                                                                        var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Halls-hallsContentsHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Halls-hallsContentsHallTagGet-schema-200');
-                                                                        result.empty();
-                                                                        result.append(view.render());
-                                                                    });
-
-
-
-
-                                                                });
-                                                            </script>
-                                                        </div>
-                                                        <input id='examples-Halls-hallsContentsHallTagGet-schema-data' type='hidden' value=''></input>
-
-
-
-
-
-
-                                                    </div>
-
-
-
-
-                                                </div>
-
-
-
-
-                                                <h3> Status: 0 - Unexpected error </h3>
-
-                                                <ul class="nav nav-tabs nav-tabs-examples" >
-
-                                                    <li class="active">
-                                                        <a href="#examples-Halls-hallsContentsHallTagGet-schema">Schema</a>
-                                                    </li>
-
-
-                                                </ul>
-
-
-
-
-
-
-
-                                                <div class="tab-content" style='margin-bottom: 10px;'>
-
-
-
-                                                    <div class="tab-pane active" id="examples-Halls-hallsContentsHallTagGet-schema">
-
-
-
-
-                                                        <div id='examples-Halls-hallsContentsHallTagGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
-
-                                                            <script>
-                                                                $(document).ready(function() {
-                                                                    var schemaWrapper = {
-  "description" : "Unexpected error",
-  "schema" : {
-    "$ref" : "#/definitions/Error"
-  }
-};
-                                                                    var schema = schemaWrapper.schema;
-                                                                    schemaWrapper.definitions = defs;
-                                                                    //console.log(JSON.stringify(schema))
-                                                                    JsonRefs.resolveRefs(schemaWrapper, {
-                                                                        "depth": 3,
-                                                                        "resolveRemoteRefs": false,
-                                                                        "resolveFileRefs": false
-                                                                    }, function(err, resolved, metadata) {
-
-                                                                        //console.log(JSON.stringify(resolved));
-
-
-
-                                                                        var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Halls-hallsContentsHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Halls-hallsContentsHallTagGet-schema-0');
-                                                                        result.empty();
-                                                                        result.append(view.render());
-                                                                    });
-
-
-
-
-                                                                });
-                                                            </script>
-                                                        </div>
-                                                        <input id='examples-Halls-hallsContentsHallTagGet-schema-data' type='hidden' value=''></input>
-
-
-
-
-
-
-                                                    </div>
-
-
-
-
-                                                </div>
-
-
-
-
-
-
-
-
-
-                                        </article>
-
-                                    </div>
-
-                                    <hr>
-
-
-
-
-
-
-
-
                                     <div id="api-Halls-hallsDetailsGet">
 
                                         <article id="api-Halls-hallsDetailsGet-0" data-group="User" data-name="hallsDetailsGet" data-version="0">
@@ -3135,7 +2711,7 @@ try {
                                             <div class="clearfix"></div>
 
                                             <p></p>
-                                            <p>This endpoint will display all the halls in the system.  </p>
+                                            <p>This endpoint will display all the halls in the system. </p>
                                             <p></p>
                                             <br />
 
@@ -3529,11 +3105,11 @@ try {
 
 
 
-                                    <div id="api-Halls-hallsDetailsHallTagGet">
+                                    <div id="api-Halls-hallsDetailsHallNameGet">
 
-                                        <article id="api-Halls-hallsDetailsHallTagGet-0" data-group="User" data-name="hallsDetailsHallTagGet" data-version="0">
+                                        <article id="api-Halls-hallsDetailsHallNameGet-0" data-group="User" data-name="hallsDetailsHallNameGet" data-version="0">
                                             <div class="pull-left">
-                                                <h1>hallsDetailsHallTagGet</h1>
+                                                <h1>hallsDetailsHallNameGet</h1>
                                             </div>
                                             <div class="pull-right">
 
@@ -3545,7 +3121,7 @@ try {
                                             <p></p>
                                             <br />
 
-                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/halls/details/{hall_tag}/</span></code></pre>
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/halls/details/{hall_name}/</span></code></pre>
 
                                             <p>
                                                 <h3>Usage and SDK Samples</h3>
@@ -3553,44 +3129,44 @@ try {
 
                                             <ul class="nav nav-tabs nav-tabs-examples">
                                                 <li class="active">
-                                                    <a href="#examples-Halls-hallsDetailsHallTagGet-0-curl">Curl</a>
+                                                    <a href="#examples-Halls-hallsDetailsHallNameGet-0-curl">Curl</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Halls-hallsDetailsHallTagGet-0-java">Java</a>
+              <a href="#examples-Halls-hallsDetailsHallNameGet-0-java">Java</a>
             </li>
             <li class="">
-              <a href="#examples-Halls-hallsDetailsHallTagGet-0-android">Android</a>
+              <a href="#examples-Halls-hallsDetailsHallNameGet-0-android">Android</a>
             </li>
             <!--<li class="">
-              <a href="#examples-Halls-hallsDetailsHallTagGet-0-groovy">Groovy</a>
+              <a href="#examples-Halls-hallsDetailsHallNameGet-0-groovy">Groovy</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Halls-hallsDetailsHallTagGet-0-objc">Obj-C</a>
+                                                    <a href="#examples-Halls-hallsDetailsHallNameGet-0-objc">Obj-C</a>
                                                 </li>
                                                 <li class="">
-                                                    <a href="#examples-Halls-hallsDetailsHallTagGet-0-javascript">JavaScript</a>
+                                                    <a href="#examples-Halls-hallsDetailsHallNameGet-0-javascript">JavaScript</a>
                                                 </li>
                                                 <!--<li class="">
-              <a href="#examples-Halls-hallsDetailsHallTagGet-0-angular">Angular</a>
+              <a href="#examples-Halls-hallsDetailsHallNameGet-0-angular">Angular</a>
             </li>-->
                                                 <li class="">
-                                                    <a href="#examples-Halls-hallsDetailsHallTagGet-0-csharp">C#</a>
+                                                    <a href="#examples-Halls-hallsDetailsHallNameGet-0-csharp">C#</a>
                                                 </li>
                                                 <li class="">
-              <a href="#examples-Halls-hallsDetailsHallTagGet-0-php">PHP</a>
+              <a href="#examples-Halls-hallsDetailsHallNameGet-0-php">PHP</a>
             </li>
                                             </ul>
 
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="examples-Halls-hallsDetailsHallTagGet-0-curl">
+                                                <div class="tab-pane active" id="examples-Halls-hallsDetailsHallNameGet-0-curl">
                                                     <pre class="prettyprint"><code class="language-bsh">
-curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/halls/details/{hall_tag}/"
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/halls/details/{hall_name}/"
 
 
 </code></pre>
                                                 </div>
 
-                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallTagGet-0-java">
+                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallNameGet-0-java">
                                                   <pre class="prettyprint"><code class="language-java">
 import io.swagger.client.*;
 import io.swagger.client.auth.*;
@@ -3605,12 +3181,12 @@ public class HallsApiExample {
     public static void main(String[] args) {
         
         HallsApi apiInstance = new HallsApi();
-        String hallTag = hallTag_example; // String | Hall tag.
+        String hallName = hallName_example; // String | Hall name.
         try {
-            Hall result = apiInstance.hallsDetailsHallTagGet(hallTag);
+            Hall result = apiInstance.hallsDetailsHallNameGet(hallName);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling HallsApi#hallsDetailsHallTagGet");
+            System.err.println("Exception when calling HallsApi#hallsDetailsHallNameGet");
             e.printStackTrace();
         }
     }
@@ -3620,7 +3196,7 @@ public class HallsApiExample {
           </div>
 
 
-                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallTagGet-0-android">
+                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallNameGet-0-android">
                                                   <pre class="prettyprint"><code class="language-java">
 import .HallsApi;
 
@@ -3628,12 +3204,12 @@ public class HallsApiExample {
 
     public static void main(String[] args) {
         HallsApi apiInstance = new HallsApi();
-        String hallTag = hallTag_example; // String | Hall tag.
+        String hallName = hallName_example; // String | Hall name.
         try {
-            Hall result = apiInstance.hallsDetailsHallTagGet(hallTag);
+            Hall result = apiInstance.hallsDetailsHallNameGet(hallName);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling HallsApi#hallsDetailsHallTagGet");
+            System.err.println("Exception when calling HallsApi#hallsDetailsHallNameGet");
             e.printStackTrace();
         }
     }
@@ -3643,20 +3219,20 @@ public class HallsApiExample {
           </div>
 
           <!--
-          <div class="tab-pane" id="examples-Halls-hallsDetailsHallTagGet-0-groovy">
+          <div class="tab-pane" id="examples-Halls-hallsDetailsHallNameGet-0-groovy">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div> -->
 
 
-                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallTagGet-0-objc">
+                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallNameGet-0-objc">
                                                     <pre class="prettyprint"><code class="language-cpp">
 
-String *hallTag = hallTag_example; // Hall tag.
+String *hallName = hallName_example; // Hall name.
 
 HallsApi *apiInstance = [[HallsApi alloc] init];
 
 // Details of a hall
-[apiInstance hallsDetailsHallTagGetWith:hallTag
+[apiInstance hallsDetailsHallNameGetWith:hallName
               completionHandler: ^(Hall output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -3668,13 +3244,13 @@ HallsApi *apiInstance = [[HallsApi alloc] init];
 
                                                     </code></pre>
                                                 </div>
-                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallTagGet-0-javascript">
+                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallNameGet-0-javascript">
                                                     <pre class="prettyprint"><code class="language-js">
 var  = require('');
 
 var api = new .HallsApi()
 
-var hallTag = hallTag_example; // {String} Hall tag.
+var hallName = hallName_example; // {String} Hall name.
 
 
 var callback = function(error, data, response) {
@@ -3684,16 +3260,16 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.hallsDetailsHallTagGet(hallTag, callback);
+api.hallsDetailsHallNameGet(hallName, callback);
 
                                                     </code></pre>
                                                 </div>
 
-                                                <!--<div class="tab-pane" id="examples-Halls-hallsDetailsHallTagGet-0-angular">
+                                                <!--<div class="tab-pane" id="examples-Halls-hallsDetailsHallNameGet-0-angular">
             <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
           </div>-->
 
-                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallTagGet-0-csharp">
+                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallNameGet-0-csharp">
                                                     <pre class="prettyprint"><code class="language-cs">
 using System;
 using System.Diagnostics;
@@ -3703,23 +3279,23 @@ using ;
 
 namespace Example
 {
-    public class hallsDetailsHallTagGetExample
+    public class hallsDetailsHallNameGetExample
     {
         public void main()
         {
             
             var apiInstance = new HallsApi();
-            var hallTag = hallTag_example;  // String | Hall tag.
+            var hallName = hallName_example;  // String | Hall name.
 
             try
             {
                 // Details of a hall
-                Hall result = apiInstance.hallsDetailsHallTagGet(hallTag);
+                Hall result = apiInstance.hallsDetailsHallNameGet(hallName);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling HallsApi.hallsDetailsHallTagGet: " + e.Message );
+                Debug.Print("Exception when calling HallsApi.hallsDetailsHallNameGet: " + e.Message );
             }
         }
     }
@@ -3729,19 +3305,19 @@ namespace Example
                                                 </div>
 
 
-                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallTagGet-0-php">
+                                                <div class="tab-pane" id="examples-Halls-hallsDetailsHallNameGet-0-php">
                                                   <pre class="prettyprint"><code class="language-php">
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new io.swagger.client\Api\HallsApi();
-$hallTag = hallTag_example; // String | Hall tag.
+$hallName = hallName_example; // String | Hall name.
 
 try {
-    $result = $api_instance->hallsDetailsHallTagGet($hallTag);
+    $result = $api_instance->hallsDetailsHallNameGet($hallName);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling HallsApi->hallsDetailsHallTagGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling HallsApi->hallsDetailsHallNameGet: ', $e->getMessage(), PHP_EOL;
 }
 
                                                   </code></pre>
@@ -3764,16 +3340,16 @@ try {
                                                         <th>Description</th>
                                                     </tr>
                                                     <!---->
-                                                        <tr><td style="width:150px;">hallTag*</td>
+                                                        <tr><td style="width:150px;">hallName*</td>
 <td>
 
 
 <script>
 												$(document).ready(function() {
 													var schemaWrapper = {
-  "name" : "hall_tag",
+  "name" : "hall_name",
   "in" : "path",
-  "description" : "Hall tag.",
+  "description" : "Hall name.",
   "required" : true,
   "type" : "string"
 };
@@ -3783,7 +3359,7 @@ try {
 
 
 													var view = new JSONSchemaView(schema,0);
-													var result = $('#d2e199_hallsDetailsHallTagGet_hallTag');
+													var result = $('#d2e199_hallsDetailsHallNameGet_hallName');
 													result.empty();
 													result.append(view.render());
 
@@ -3793,7 +3369,7 @@ try {
 
 												});
 												</script>
-												<div id="d2e199_hallsDetailsHallTagGet_hallTag"></div>
+												<div id="d2e199_hallsDetailsHallNameGet_hallName"></div>
 </td>
 </tr>
 
@@ -3810,7 +3386,7 @@ try {
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Halls-hallsDetailsHallTagGet-schema">Schema</a>
+                                                        <a href="#examples-Halls-hallsDetailsHallNameGet-schema">Schema</a>
                                                     </li>
 
 
@@ -3826,12 +3402,12 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Halls-hallsDetailsHallTagGet-schema">
+                                                    <div class="tab-pane active" id="examples-Halls-hallsDetailsHallNameGet-schema">
 
 
 
 
-                                                        <div id='examples-Halls-hallsDetailsHallTagGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Halls-hallsDetailsHallNameGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
@@ -3855,8 +3431,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Halls-hallsDetailsHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Halls-hallsDetailsHallTagGet-schema-200');
+                                                                        $('#examples-Halls-hallsDetailsHallNameGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Halls-hallsDetailsHallNameGet-schema-200');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -3867,7 +3443,7 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Halls-hallsDetailsHallTagGet-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Halls-hallsDetailsHallNameGet-schema-data' type='hidden' value=''></input>
 
 
 
@@ -3889,7 +3465,7 @@ try {
                                                 <ul class="nav nav-tabs nav-tabs-examples" >
 
                                                     <li class="active">
-                                                        <a href="#examples-Halls-hallsDetailsHallTagGet-schema">Schema</a>
+                                                        <a href="#examples-Halls-hallsDetailsHallNameGet-schema">Schema</a>
                                                     </li>
 
 
@@ -3905,12 +3481,12 @@ try {
 
 
 
-                                                    <div class="tab-pane active" id="examples-Halls-hallsDetailsHallTagGet-schema">
+                                                    <div class="tab-pane active" id="examples-Halls-hallsDetailsHallNameGet-schema">
 
 
 
 
-                                                        <div id='examples-Halls-hallsDetailsHallTagGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                                        <div id='examples-Halls-hallsDetailsHallNameGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
 
                                                             <script>
                                                                 $(document).ready(function() {
@@ -3934,8 +3510,8 @@ try {
 
 
                                                                         var view = new JSONSchemaView(resolved.schema, 3);
-                                                                        $('#examples-Halls-hallsDetailsHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
-                                                                        var result = $('#examples-Halls-hallsDetailsHallTagGet-schema-0');
+                                                                        $('#examples-Halls-hallsDetailsHallNameGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Halls-hallsDetailsHallNameGet-schema-0');
                                                                         result.empty();
                                                                         result.append(view.render());
                                                                     });
@@ -3946,7 +3522,1324 @@ try {
                                                                 });
                                                             </script>
                                                         </div>
-                                                        <input id='examples-Halls-hallsDetailsHallTagGet-schema-data' type='hidden' value=''></input>
+                                                        <input id='examples-Halls-hallsDetailsHallNameGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
+                                    <div id="api-Halls-hallsSubHallsContentsSubHallTagGet">
+
+                                        <article id="api-Halls-hallsSubHallsContentsSubHallTagGet-0" data-group="User" data-name="hallsSubHallsContentsSubHallTagGet" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>hallsSubHallsContentsSubHallTagGet</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>Given a hall tag get the contents associated in that sub hall </p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/halls/sub_halls/contents/{sub_hall_tag}/</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/halls/sub_halls/contents/{sub_hall_tag}/"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .HallsApi;
+
+import java.io.File;
+import java.util.*;
+
+public class HallsApiExample {
+
+    public static void main(String[] args) {
+        
+        HallsApi apiInstance = new HallsApi();
+        String subHallTag = subHallTag_example; // String | Sub Hall tag.
+        try {
+            array[ContentHall] result = apiInstance.hallsSubHallsContentsSubHallTagGet(subHallTag);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling HallsApi#hallsSubHallsContentsSubHallTagGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .HallsApi;
+
+public class HallsApiExample {
+
+    public static void main(String[] args) {
+        HallsApi apiInstance = new HallsApi();
+        String subHallTag = subHallTag_example; // String | Sub Hall tag.
+        try {
+            array[ContentHall] result = apiInstance.hallsSubHallsContentsSubHallTagGet(subHallTag);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling HallsApi#hallsSubHallsContentsSubHallTagGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+String *subHallTag = subHallTag_example; // Sub Hall tag.
+
+HallsApi *apiInstance = [[HallsApi alloc] init];
+
+// Get the contetns associated with a sub hall tag
+[apiInstance hallsSubHallsContentsSubHallTagGetWith:subHallTag
+              completionHandler: ^(array[ContentHall] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .HallsApi()
+
+var subHallTag = subHallTag_example; // {String} Sub Hall tag.
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.hallsSubHallsContentsSubHallTagGet(subHallTag, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class hallsSubHallsContentsSubHallTagGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new HallsApi();
+            var subHallTag = subHallTag_example;  // String | Sub Hall tag.
+
+            try
+            {
+                // Get the contetns associated with a sub hall tag
+                array[ContentHall] result = apiInstance.hallsSubHallsContentsSubHallTagGet(subHallTag);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling HallsApi.hallsSubHallsContentsSubHallTagGet: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\HallsApi();
+$subHallTag = subHallTag_example; // String | Sub Hall tag.
+
+try {
+    $result = $api_instance->hallsSubHallsContentsSubHallTagGet($subHallTag);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling HallsApi->hallsSubHallsContentsSubHallTagGet: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+                                                <div class="methodsubtabletitle">Path parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">subHallTag*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "sub_hall_tag",
+  "in" : "path",
+  "description" : "Sub Hall tag.",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_hallsSubHallsContentsSubHallTagGet_subHallTag');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_hallsSubHallsContentsSubHallTagGet_subHallTag"></div>
+</td>
+</tr>
+
+                                                </table>
+
+
+
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - An array of contents </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-schema">
+
+
+
+
+                                                        <div id='examples-Halls-hallsSubHallsContentsSubHallTagGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "An array of contents",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/ContentHall"
+    }
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Halls-hallsSubHallsContentsSubHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Halls-hallsSubHallsContentsSubHallTagGet-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Halls-hallsSubHallsContentsSubHallTagGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+                                                <h3> Status: 0 - Unexpected error </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-Halls-hallsSubHallsContentsSubHallTagGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-Halls-hallsSubHallsContentsSubHallTagGet-schema">
+
+
+
+
+                                                        <div id='examples-Halls-hallsSubHallsContentsSubHallTagGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-Halls-hallsSubHallsContentsSubHallTagGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-Halls-hallsSubHallsContentsSubHallTagGet-schema-0');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-Halls-hallsSubHallsContentsSubHallTagGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+                            </section>
+
+                            <section id="api-SubHalls">
+                                <h1>SubHalls</h1>
+
+
+
+
+
+
+
+                                    <div id="api-SubHalls-hallsSubHallsDetailsGet">
+
+                                        <article id="api-SubHalls-hallsSubHallsDetailsGet-0" data-group="User" data-name="hallsSubHallsDetailsGet" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>hallsSubHallsDetailsGet</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>This endpoint will display all the sub halls in the system. </p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/halls/sub_halls/details/</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsGet-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-SubHalls-hallsSubHallsDetailsGet-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/halls/sub_halls/details/"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsGet-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .SubHallsApi;
+
+import java.io.File;
+import java.util.*;
+
+public class SubHallsApiExample {
+
+    public static void main(String[] args) {
+        
+        SubHallsApi apiInstance = new SubHallsApi();
+        try {
+            array[SubHall] result = apiInstance.hallsSubHallsDetailsGet();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SubHallsApi#hallsSubHallsDetailsGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsGet-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .SubHallsApi;
+
+public class SubHallsApiExample {
+
+    public static void main(String[] args) {
+        SubHallsApi apiInstance = new SubHallsApi();
+        try {
+            array[SubHall] result = apiInstance.hallsSubHallsDetailsGet();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SubHallsApi#hallsSubHallsDetailsGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsGet-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsGet-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+
+SubHallsApi *apiInstance = [[SubHallsApi alloc] init];
+
+// List all the sub halls in the system
+[apiInstance hallsSubHallsDetailsGetWithCompletionHandler: 
+              ^(array[SubHall] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsGet-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .SubHallsApi()
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.hallsSubHallsDetailsGet(callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsGet-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsGet-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class hallsSubHallsDetailsGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new SubHallsApi();
+
+            try
+            {
+                // List all the sub halls in the system
+                array[SubHall] result = apiInstance.hallsSubHallsDetailsGet();
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling SubHallsApi.hallsSubHallsDetailsGet: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsGet-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\SubHallsApi();
+
+try {
+    $result = $api_instance->hallsSubHallsDetailsGet();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SubHallsApi->hallsSubHallsDetailsGet: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+
+
+
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - An array of sub halls </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-SubHalls-hallsSubHallsDetailsGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-SubHalls-hallsSubHallsDetailsGet-schema">
+
+
+
+
+                                                        <div id='examples-SubHalls-hallsSubHallsDetailsGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "An array of sub halls",
+  "schema" : {
+    "type" : "array",
+    "items" : {
+      "$ref" : "#/definitions/SubHall"
+    }
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-SubHalls-hallsSubHallsDetailsGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-SubHalls-hallsSubHallsDetailsGet-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-SubHalls-hallsSubHallsDetailsGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+                                                <h3> Status: 0 - Unexpected error </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-SubHalls-hallsSubHallsDetailsGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-SubHalls-hallsSubHallsDetailsGet-schema">
+
+
+
+
+                                                        <div id='examples-SubHalls-hallsSubHallsDetailsGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-SubHalls-hallsSubHallsDetailsGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-SubHalls-hallsSubHallsDetailsGet-schema-0');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-SubHalls-hallsSubHallsDetailsGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                        </article>
+
+                                    </div>
+
+                                    <hr>
+
+
+
+
+
+
+
+
+                                    <div id="api-SubHalls-hallsSubHallsDetailsSubHallNameGet">
+
+                                        <article id="api-SubHalls-hallsSubHallsDetailsSubHallNameGet-0" data-group="User" data-name="hallsSubHallsDetailsSubHallNameGet" data-version="0">
+                                            <div class="pull-left">
+                                                <h1>hallsSubHallsDetailsSubHallNameGet</h1>
+                                            </div>
+                                            <div class="pull-right">
+
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <p></p>
+                                            <p>The sub hall details by a tag. </p>
+                                            <p></p>
+                                            <br />
+
+                                            <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/halls/sub_halls/details/{sub_hall_name}/</span></code></pre>
+
+                                            <p>
+                                                <h3>Usage and SDK Samples</h3>
+                                            </p>
+
+                                            <ul class="nav nav-tabs nav-tabs-examples">
+                                                <li class="active">
+                                                    <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-curl">Curl</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-java">Java</a>
+            </li>
+            <li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-android">Android</a>
+            </li>
+            <!--<li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-groovy">Groovy</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-objc">Obj-C</a>
+                                                </li>
+                                                <li class="">
+                                                    <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-javascript">JavaScript</a>
+                                                </li>
+                                                <!--<li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-angular">Angular</a>
+            </li>-->
+                                                <li class="">
+                                                    <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-csharp">C#</a>
+                                                </li>
+                                                <li class="">
+              <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-php">PHP</a>
+            </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-curl">
+                                                    <pre class="prettyprint"><code class="language-bsh">
+curl -X <span style="text-transform: uppercase;">get</span> -H "apiKey: [[apiKey]]" -H "apiSecret: [[apiSecret]]" "http://rfid.rafaelferreira.pt/api/v1/halls/sub_halls/details/{sub_hall_name}/"
+
+
+</code></pre>
+                                                </div>
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-java">
+                                                  <pre class="prettyprint"><code class="language-java">
+import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import .SubHallsApi;
+
+import java.io.File;
+import java.util.*;
+
+public class SubHallsApiExample {
+
+    public static void main(String[] args) {
+        
+        SubHallsApi apiInstance = new SubHallsApi();
+        String subHallName = subHallName_example; // String | Sub hall name.
+        try {
+            SubHall result = apiInstance.hallsSubHallsDetailsSubHallNameGet(subHallName);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SubHallsApi#hallsSubHallsDetailsSubHallNameGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-android">
+                                                  <pre class="prettyprint"><code class="language-java">
+import .SubHallsApi;
+
+public class SubHallsApiExample {
+
+    public static void main(String[] args) {
+        SubHallsApi apiInstance = new SubHallsApi();
+        String subHallName = subHallName_example; // String | Sub hall name.
+        try {
+            SubHall result = apiInstance.hallsSubHallsDetailsSubHallNameGet(subHallName);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling SubHallsApi#hallsSubHallsDetailsSubHallNameGet");
+            e.printStackTrace();
+        }
+    }
+}
+
+                                                  </code></pre>
+          </div>
+
+          <!--
+          <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-groovy">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div> -->
+
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-objc">
+                                                    <pre class="prettyprint"><code class="language-cpp">
+
+String *subHallName = subHallName_example; // Sub hall name.
+
+SubHallsApi *apiInstance = [[SubHallsApi alloc] init];
+
+// Details of a sub hall
+[apiInstance hallsSubHallsDetailsSubHallNameGetWith:subHallName
+              completionHandler: ^(SubHall output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+
+                                                    </code></pre>
+                                                </div>
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-javascript">
+                                                    <pre class="prettyprint"><code class="language-js">
+var  = require('');
+
+var api = new .SubHallsApi()
+
+var subHallName = subHallName_example; // {String} Sub hall name.
+
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.hallsSubHallsDetailsSubHallNameGet(subHallName, callback);
+
+                                                    </code></pre>
+                                                </div>
+
+                                                <!--<div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-angular">
+            <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+          </div>-->
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-csharp">
+                                                    <pre class="prettyprint"><code class="language-cs">
+using System;
+using System.Diagnostics;
+using .Api;
+using .Client;
+using ;
+
+namespace Example
+{
+    public class hallsSubHallsDetailsSubHallNameGetExample
+    {
+        public void main()
+        {
+            
+            var apiInstance = new SubHallsApi();
+            var subHallName = subHallName_example;  // String | Sub hall name.
+
+            try
+            {
+                // Details of a sub hall
+                SubHall result = apiInstance.hallsSubHallsDetailsSubHallNameGet(subHallName);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling SubHallsApi.hallsSubHallsDetailsSubHallNameGet: " + e.Message );
+            }
+        }
+    }
+}
+
+                                                    </code></pre>
+                                                </div>
+
+
+                                                <div class="tab-pane" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-0-php">
+                                                  <pre class="prettyprint"><code class="language-php">
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new io.swagger.client\Api\SubHallsApi();
+$subHallName = subHallName_example; // String | Sub hall name.
+
+try {
+    $result = $api_instance->hallsSubHallsDetailsSubHallNameGet($subHallName);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SubHallsApi->hallsSubHallsDetailsSubHallNameGet: ', $e->getMessage(), PHP_EOL;
+}
+
+                                                  </code></pre>
+          </div>
+
+                                            </div>
+
+
+
+
+
+                                            <h2>Parameters</h2>
+
+
+
+                                                <div class="methodsubtabletitle">Path parameters</div>
+                                                <table id="methodsubtable">
+                                                    <tr>
+                                                        <th width="150px">Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                    <!---->
+                                                        <tr><td style="width:150px;">subHallName*</td>
+<td>
+
+
+<script>
+												$(document).ready(function() {
+													var schemaWrapper = {
+  "name" : "sub_hall_name",
+  "in" : "path",
+  "description" : "Sub hall name.",
+  "required" : true,
+  "type" : "string"
+};
+													var schema = schemaWrapper;
+
+
+
+
+													var view = new JSONSchemaView(schema,0);
+													var result = $('#d2e199_hallsSubHallsDetailsSubHallNameGet_subHallName');
+													result.empty();
+													result.append(view.render());
+
+
+
+
+
+												});
+												</script>
+												<div id="d2e199_hallsSubHallsDetailsSubHallNameGet_subHallName"></div>
+</td>
+</tr>
+
+                                                </table>
+
+
+
+
+
+                                            <h2>Responses</h2>
+
+                                                <h3> Status: 200 - An object of type Sub Hall </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema">
+
+
+
+
+                                                        <div id='examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "An object of type Sub Hall",
+  "schema" : {
+    "$ref" : "#/definitions/SubHall"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema-200');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema-data' type='hidden' value=''></input>
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+
+                                                <h3> Status: 0 - Unexpected error </h3>
+
+                                                <ul class="nav nav-tabs nav-tabs-examples" >
+
+                                                    <li class="active">
+                                                        <a href="#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema">Schema</a>
+                                                    </li>
+
+
+                                                </ul>
+
+
+
+
+
+
+
+                                                <div class="tab-content" style='margin-bottom: 10px;'>
+
+
+
+                                                    <div class="tab-pane active" id="examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema">
+
+
+
+
+                                                        <div id='examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema-0' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+
+                                                            <script>
+                                                                $(document).ready(function() {
+                                                                    var schemaWrapper = {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+};
+                                                                    var schema = schemaWrapper.schema;
+                                                                    schemaWrapper.definitions = defs;
+                                                                    //console.log(JSON.stringify(schema))
+                                                                    JsonRefs.resolveRefs(schemaWrapper, {
+                                                                        "depth": 3,
+                                                                        "resolveRemoteRefs": false,
+                                                                        "resolveFileRefs": false
+                                                                    }, function(err, resolved, metadata) {
+
+                                                                        //console.log(JSON.stringify(resolved));
+
+
+
+                                                                        var view = new JSONSchemaView(resolved.schema, 3);
+                                                                        $('#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema-data').val(JSON.stringify(resolved.schema));
+                                                                        var result = $('#examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema-0');
+                                                                        result.empty();
+                                                                        result.append(view.render());
+                                                                    });
+
+
+
+
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <input id='examples-SubHalls-hallsSubHallsDetailsSubHallNameGet-schema-data' type='hidden' value=''></input>
 
 
 
@@ -4000,7 +4893,7 @@ try {
             </div>
             <div id="generator">
                 <div class="content">
-                    Generated 2016-10-11T14:45:13.242Z
+                    Generated 2016-10-28T23:05:51.029Z
                 </div>
             </div>
         </div>

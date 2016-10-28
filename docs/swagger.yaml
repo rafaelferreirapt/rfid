@@ -56,15 +56,15 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /category/hall/{hall_tag}/:
+  /category/hall/{sub_hall_tag}/:
     get:
       summary: Get categories associated with a hall
       description: |
-        Given a hall tag get the categories associated in that hall
+        Given a hall tag get the categories associated in that sub hall
       parameters:
-        - name: hall_tag
+        - name: sub_hall_tag
           in: path
-          description: Hall tag.
+          description: Sub hall tag.
           required: true
           type: string
       tags:
@@ -80,14 +80,14 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /category/search/{hall_tag}/{category_id}/:
+  /category/search/{sub_hall_tag}/{category_id}/:
     get:
       summary: Get the path between the hall where the user is and the category that the user wants to go
       description: |
       parameters:
-        - name: hall_tag
+        - name: sub_hall_tag
           in: path
-          description: Hall tag.
+          description: Sub hall tag. This correspondes to 1, 2, or 3 for example.
           required: true
           type: string
         - name: category_id
@@ -127,15 +127,15 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /halls/details/{hall_tag}/:
+  /halls/details/{hall_name}/:
     get:
       summary: Details of a hall
       description: |
         The hall details by a tag.
       parameters:
-        - name: hall_tag
+        - name: hall_name
           in: path
-          description: Hall tag.
+          description: Hall name.
           required: true
           type: string
       tags:
@@ -149,15 +149,55 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /halls/contents/{hall_tag}/:
+  /halls/sub_halls/details/:
     get:
-      summary: Get the contetns associated with a hall tag
+      summary: List all the sub halls in the system
       description: |
-        Given a hall tag get the contents associated in that hall
+        This endpoint will display all the sub halls in the system.
+      tags:
+        - SubHalls
+      responses:
+        200:
+          description: An array of sub halls
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SubHall'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /halls/sub_halls/details/{sub_hall_name}/:
+    get:
+      summary: Details of a sub hall
+      description: |
+        The sub hall details by a tag.
       parameters:
-        - name: hall_tag
+        - name: sub_hall_name
           in: path
-          description: Hall tag.
+          description: Sub hall name.
+          required: true
+          type: string
+      tags:
+        - SubHalls
+      responses:
+        200:
+          description: An object of type Sub Hall
+          schema:
+            $ref: '#/definitions/SubHall'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /halls/sub_halls/contents/{sub_hall_tag}/:
+    get:
+      summary: Get the contetns associated with a sub hall tag
+      description: |
+        Given a hall tag get the contents associated in that sub hall
+      parameters:
+        - name: sub_hall_tag
+          in: path
+          description: Sub Hall tag.
           required: true
           type: string
       tags:
@@ -198,9 +238,26 @@ definitions:
       id:
         type: string
         description: Unique identifier representing a specific category, identifier is generated with an uuid,
-      tag:
+      name:
         type: string
-        description: Unique identifier associated with the tag of the hall.
+        description: Unique identifier associated with the name of the hall.
+      created_at:
+        type: string
+        description: Time of creation of the category.
+      updated_at:
+        type: string
+        description: Time of update of the category.
+  SubHall:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier representing a specific sub hall, identifier is generated with an uuid.
+      name:
+        type: string
+        description: Unique identifier associated with the name of the sub hall.
+      parent_hall:
+        $ref: '#/definitions/Hall'
       created_at:
         type: string
         description: Time of creation of the category.
