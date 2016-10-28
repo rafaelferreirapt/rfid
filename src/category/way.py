@@ -1,5 +1,5 @@
 from tree_search import *
-from halls.models import Hall, SubHallConnection
+from halls.models import SubHall, SubHallConnection
 
 
 class ParseModel:
@@ -9,19 +9,19 @@ class ParseModel:
         self.coordinates = {}
 
     def parse(self):
-        halls = Hall.objects.all()
+        halls = SubHall.objects.all()
 
         for hall in halls:
-            hall_connections = SubHallConnection.objects.filter(hallA=hall)
+            hall_connections = SubHallConnection.objects.filter(sub_hallA=hall)
 
             for con in hall_connections:
                 if con.connected:
-                    self.connections.append((hall.tag, con.hallB.tag))
+                    self.connections.append((hall.name, con.sub_hallB.name))
 
-                if hall.tag not in self.coordinates:
-                    self.coordinates[hall.tag] = {}
+                if hall.name not in self.coordinates:
+                    self.coordinates[hall.name] = {}
 
-                self.coordinates[hall.tag][con.hallB.tag] = {"distance": con.distance}
+                self.coordinates[hall.name][con.sub_hallB.name] = {"distance": con.distance}
 
 
 class Way:

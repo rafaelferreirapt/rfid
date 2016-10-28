@@ -2,7 +2,7 @@
 from rest_framework import views, viewsets, mixins, status
 from halls.models import Category, SubHallTag
 from category.serializers import CategorySerializer
-from halls.serializers import HallSerializer
+from halls.serializers import SubHallSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from halls.models import SubHall
@@ -40,11 +40,11 @@ class SearchCategoryDetails(views.APIView):
         category = get_object_or_404(Category.objects.all(), id=category_id)
         sub_hall_to = category.sub_hall
         w = Way()
-        response = w.search_path(from_point=current_tag, to=sub_hall_to)
+        response = w.search_path(from_point=current_tag, to=sub_hall_to.name)
         halls = []
 
         for row in response[0]:
-            halls += [SubHall.objects.get(id=row)]
+            halls += [SubHall.objects.get(name=row)]
 
-        serializer = HallSerializer(halls, many=True)
+        serializer = SubHallSerializer(halls, many=True)
         return Response(serializer.data)
