@@ -42,7 +42,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -372,7 +371,6 @@ public class ApiInvoker {
      Request request = createRequest(host, path, method, queryParams, body, headerParams, formParams, contentType, authNames, future, future);
      if(request != null) {
         mRequestQueue.add(request);
-
         return future.get(connectionTimeout, TimeUnit.SECONDS);
      } else return "no data";
   }
@@ -383,123 +381,124 @@ public class ApiInvoker {
   }
 
   public Request<String> createRequest(String host, String path, String method, List<Pair> queryParams, Object body, Map<String, String> headerParams, Map<String, String> formParams, String contentType, String[] authNames, Response.Listener<String> stringRequest, Response.ErrorListener errorListener) throws ApiException {
-    try {
-        StringBuilder b = new StringBuilder();
-        b.append("?");
+    StringBuilder b = new StringBuilder();
+    b.append("?");
 
-        updateParamsForAuth(authNames, queryParams, headerParams);
+    updateParamsForAuth(authNames, queryParams, headerParams);
 
-        if (queryParams != null) {
-            for (Pair queryParam : queryParams) {
-                if (!queryParam.getName().isEmpty()) {
-                    b.append(escapeString(queryParam.getName()));
-                    b.append("=");
-                    b.append(escapeString(queryParam.getValue()));
-                    b.append("&");
-                }
-            }
+    if (queryParams != null){
+      for (Pair queryParam : queryParams){
+        if (!queryParam.getName().isEmpty()) {
+          b.append(escapeString(queryParam.getName()));
+          b.append("=");
+          b.append(escapeString(queryParam.getValue()));
+          b.append("&");
         }
-
-        String querystring = b.substring(0, b.length() - 1);
-        String url = host + path + querystring;
-
-        HashMap<String, String> headers = new HashMap<String, String>();
-
-        for (String key : headerParams.keySet()) {
-            headers.put(key, headerParams.get(key));
-        }
-
-        for (String key : defaultHeaderMap.keySet()) {
-            if (!headerParams.containsKey(key)) {
-                headers.put(key, defaultHeaderMap.get(key));
-            }
-        }
-        headers.put("Accept", "application/json");
-
-        // URL encoded string from form parameters
-        String formParamStr = null;
-
-        // for form data
-        if ("application/x-www-form-urlencoded".equals(contentType)) {
-            StringBuilder formParamBuilder = new StringBuilder();
-
-            // encode the form params
-            for (String key : formParams.keySet()) {
-                String value = formParams.get(key);
-                if (value != null && !"".equals(value.trim())) {
-                    if (formParamBuilder.length() > 0) {
-                        formParamBuilder.append("&");
-                    }
-                    try {
-                        formParamBuilder.append(URLEncoder.encode(key, "utf8")).append("=").append(URLEncoder.encode(value, "utf8"));
-                    } catch (Exception e) {
-                        // move on to next
-                    }
-                }
-            }
-            formParamStr = formParamBuilder.toString();
-        }
-        Request request = null;
-
-        if ("GET".equals(method)) {
-            request = new GetRequest(url, headers, null, stringRequest, errorListener);
-        } else if ("POST".equals(method)) {
-            request = null;
-            if (formParamStr != null) {
-                request = new PostRequest(url, headers, contentType, new StringEntity(formParamStr, "UTF-8"), stringRequest, errorListener);
-            } else if (body != null) {
-                if (body instanceof HttpEntity) {
-                    request = new PostRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
-                } else {
-                    request = new PostRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
-                }
-            } else {
-                request = new PostRequest(url, headers, null, null, stringRequest, errorListener);
-            }
-        } else if ("PUT".equals(method)) {
-            request = null;
-            if (formParamStr != null) {
-                request = new PutRequest(url, headers, contentType, new StringEntity(formParamStr, "UTF-8"), stringRequest, errorListener);
-            } else if (body != null) {
-                if (body instanceof HttpEntity) {
-                    request = new PutRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
-                } else {
-                    request = new PutRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
-                }
-            } else {
-                request = new PutRequest(url, headers, null, null, stringRequest, errorListener);
-            }
-        } else if ("DELETE".equals(method)) {
-            request = null;
-            if (formParamStr != null) {
-                request = new DeleteRequest(url, headers, contentType, new StringEntity(formParamStr, "UTF-8"), stringRequest, errorListener);
-            } else if (body != null) {
-                if (body instanceof HttpEntity) {
-                    request = new DeleteRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
-                } else {
-                    request = new DeleteRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
-                }
-            } else {
-                request = new DeleteRequest(url, headers, null, null, stringRequest, errorListener);
-            }
-        } else if ("PATCH".equals(method)) {
-            request = null;
-            if (formParamStr != null) {
-                request = new PatchRequest(url, headers, contentType, new StringEntity(formParamStr, "UTF-8"), stringRequest, errorListener);
-            } else if (body != null) {
-                if (body instanceof HttpEntity) {
-                    request = new PatchRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
-                } else {
-                    request = new PatchRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
-                }
-            } else {
-                request = new PatchRequest(url, headers, null, null, stringRequest, errorListener);
-            }
-        }
-        return request;
-    }catch (Exception e){
-        return null;
+      }
     }
+
+    String querystring = b.substring(0, b.length() - 1);
+    String url = host + path + querystring;
+
+    HashMap<String, String> headers = new HashMap<String, String>();
+
+    for(String key : headerParams.keySet()) {
+      headers.put(key, headerParams.get(key));
+    }
+
+    for(String key : defaultHeaderMap.keySet()) {
+      if(!headerParams.containsKey(key)) {
+        headers.put(key, defaultHeaderMap.get(key));
+      }
+    }
+    headers.put("Accept", "application/json");
+
+    // URL encoded string from form parameters
+    String formParamStr = null;
+
+    // for form data
+    if ("application/x-www-form-urlencoded".equals(contentType)) {
+      StringBuilder formParamBuilder = new StringBuilder();
+
+      // encode the form params
+      for (String key : formParams.keySet()) {
+        String value = formParams.get(key);
+        if (value != null && !"".equals(value.trim())) {
+          if (formParamBuilder.length() > 0) {
+            formParamBuilder.append("&");
+          }
+          try {
+            formParamBuilder.append(URLEncoder.encode(key, "utf8")).append("=").append(URLEncoder.encode(value, "utf8"));
+          }
+          catch (Exception e) {
+            // move on to next
+          }
+        }
+      }
+      formParamStr = formParamBuilder.toString();
+    }
+    Request request = null;
+
+    if ("GET".equals(method)) {
+      request = new GetRequest(url, headers, null, stringRequest, errorListener);
+    }
+    else if ("POST".equals(method)) {
+       request = null;
+       if (formParamStr != null) {
+          request = new PostRequest(url, headers, contentType, new StringEntity(formParamStr, "UTF-8"), stringRequest, errorListener);
+       } else if (body != null) {
+          if (body instanceof HttpEntity) {
+          request = new PostRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
+          } else {
+             request = new PostRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
+          }
+       } else {
+         request = new PostRequest(url, headers, null, null, stringRequest, errorListener);
+       }
+    }
+    else if ("PUT".equals(method)) {
+       request = null;
+       if (formParamStr != null) {
+          request = new PutRequest(url, headers, contentType, new StringEntity(formParamStr, "UTF-8"), stringRequest, errorListener);
+       } else if (body != null) {
+          if (body instanceof HttpEntity) {
+             request = new PutRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
+          } else {
+             request = new PutRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
+          }
+       } else {
+          request = new PutRequest(url, headers, null, null, stringRequest, errorListener);
+       }
+    }
+    else if ("DELETE".equals(method)) {
+       request = null;
+          if (formParamStr != null) {
+           request = new DeleteRequest(url, headers, contentType, new StringEntity(formParamStr, "UTF-8"), stringRequest, errorListener);
+          } else if (body != null) {
+          if (body instanceof HttpEntity) {
+             request = new DeleteRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
+          } else {
+             request = new DeleteRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
+          }
+       } else {
+          request = new DeleteRequest(url, headers, null, null, stringRequest, errorListener);
+       }
+    }
+    else if ("PATCH".equals(method)) {
+       request = null;
+          if (formParamStr != null) {
+             request = new PatchRequest(url, headers, contentType, new StringEntity(formParamStr, "UTF-8"), stringRequest, errorListener);
+          } else if (body != null) {
+             if (body instanceof HttpEntity) {
+                request = new PatchRequest(url, headers, null, (HttpEntity) body, stringRequest, errorListener);
+             } else {
+                request = new PatchRequest(url, headers, contentType, new StringEntity(serialize(body), "UTF-8"), stringRequest, errorListener);
+             }
+          } else {
+             request = new PatchRequest(url, headers, null, null, stringRequest, errorListener);
+          }
+       }
+    return request;
   }
 
   private void initConnectionRequest(Cache cache, Network network) {

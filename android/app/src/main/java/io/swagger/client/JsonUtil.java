@@ -30,7 +30,6 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 import io.swagger.client.model.*;
-import io.swagger.client.model.Error;
 
 public class JsonUtil {
   public static GsonBuilder gsonBuilder;
@@ -76,6 +75,10 @@ public class JsonUtil {
       return new TypeToken<List<Hall>>(){}.getType();
     }
     
+    if ("SubHall".equalsIgnoreCase(className)) {
+      return new TypeToken<List<SubHall>>(){}.getType();
+    }
+    
     return new TypeToken<List<Object>>(){}.getType();
   }
 
@@ -96,6 +99,10 @@ public class JsonUtil {
     
     if ("Hall".equalsIgnoreCase(className)) {
       return new TypeToken<Hall>(){}.getType();
+    }
+    
+    if ("SubHall".equalsIgnoreCase(className)) {
+      return new TypeToken<SubHall>(){}.getType();
     }
     
     return new TypeToken<Object>(){}.getType();

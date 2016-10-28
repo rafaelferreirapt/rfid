@@ -24,27 +24,30 @@
 
 package io.swagger.client.model;
 
+import io.swagger.client.model.Hall;
 
 import io.swagger.annotations.*;
 import com.google.gson.annotations.SerializedName;
 
 
 @ApiModel(description = "")
-public class Hall  {
+public class SubHall  {
   
   @SerializedName("id")
   private String id = null;
   @SerializedName("name")
   private String name = null;
+  @SerializedName("parent_hall")
+  private Hall parentHall = null;
   @SerializedName("created_at")
   private String createdAt = null;
   @SerializedName("updated_at")
   private String updatedAt = null;
 
   /**
-   * Unique identifier representing a specific category, identifier is generated with an uuid,
+   * Unique identifier representing a specific sub hall, identifier is generated with an uuid.
    **/
-  @ApiModelProperty(value = "Unique identifier representing a specific category, identifier is generated with an uuid,")
+  @ApiModelProperty(value = "Unique identifier representing a specific sub hall, identifier is generated with an uuid.")
   public String getId() {
     return id;
   }
@@ -53,14 +56,24 @@ public class Hall  {
   }
 
   /**
-   * Unique identifier associated with the name of the hall.
+   * Unique identifier associated with the name of the sub hall.
    **/
-  @ApiModelProperty(value = "Unique identifier associated with the name of the hall.")
+  @ApiModelProperty(value = "Unique identifier associated with the name of the sub hall.")
   public String getName() {
     return name;
   }
   public void setName(String name) {
     this.name = name;
+  }
+
+  /**
+   **/
+  @ApiModelProperty(value = "")
+  public Hall getParentHall() {
+    return parentHall;
+  }
+  public void setParentHall(Hall parentHall) {
+    this.parentHall = parentHall;
   }
 
   /**
@@ -94,11 +107,12 @@ public class Hall  {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Hall hall = (Hall) o;
-    return (id == null ? hall.id == null : id.equals(hall.id)) &&
-        (name == null ? hall.name == null : name.equals(hall.name)) &&
-        (createdAt == null ? hall.createdAt == null : createdAt.equals(hall.createdAt)) &&
-        (updatedAt == null ? hall.updatedAt == null : updatedAt.equals(hall.updatedAt));
+    SubHall subHall = (SubHall) o;
+    return (id == null ? subHall.id == null : id.equals(subHall.id)) &&
+        (name == null ? subHall.name == null : name.equals(subHall.name)) &&
+        (parentHall == null ? subHall.parentHall == null : parentHall.equals(subHall.parentHall)) &&
+        (createdAt == null ? subHall.createdAt == null : createdAt.equals(subHall.createdAt)) &&
+        (updatedAt == null ? subHall.updatedAt == null : updatedAt.equals(subHall.updatedAt));
   }
 
   @Override
@@ -106,6 +120,7 @@ public class Hall  {
     int result = 17;
     result = 31 * result + (id == null ? 0: id.hashCode());
     result = 31 * result + (name == null ? 0: name.hashCode());
+    result = 31 * result + (parentHall == null ? 0: parentHall.hashCode());
     result = 31 * result + (createdAt == null ? 0: createdAt.hashCode());
     result = 31 * result + (updatedAt == null ? 0: updatedAt.hashCode());
     return result;
@@ -114,10 +129,11 @@ public class Hall  {
   @Override
   public String toString()  {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Hall {\n");
+    sb.append("class SubHall {\n");
     
     sb.append("  id: ").append(id).append("\n");
     sb.append("  name: ").append(name).append("\n");
+    sb.append("  parentHall: ").append(parentHall).append("\n");
     sb.append("  createdAt: ").append(createdAt).append("\n");
     sb.append("  updatedAt: ").append(updatedAt).append("\n");
     sb.append("}\n");

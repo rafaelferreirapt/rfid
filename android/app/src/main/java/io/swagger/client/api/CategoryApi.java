@@ -24,8 +24,21 @@
 
 package io.swagger.client.api;
 
+import io.swagger.client.ApiInvoker;
+import io.swagger.client.ApiException;
+import io.swagger.client.Pair;
+
+import io.swagger.client.model.*;
+
+import java.util.*;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+
+import io.swagger.client.model.Category;
+import io.swagger.client.model.Error;
+import java.util.UUID;
+import io.swagger.client.model.Hall;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -34,25 +47,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-import io.swagger.client.ApiException;
-import io.swagger.client.ApiInvoker;
-import io.swagger.client.Pair;
-import io.swagger.client.model.Category;
-import io.swagger.client.model.Hall;
-
 public class CategoryApi {
   String basePath = "http://rfid.rafaelferreira.pt/api/v1";
-
-    public CategoryApi(){
-        ApiInvoker.initializeInstance();
-        apiInvoker = ApiInvoker.getInstance();
-    }
-
-  ApiInvoker apiInvoker;
+  ApiInvoker apiInvoker = ApiInvoker.getInstance();
 
   public void addHeader(String key, String value) {
     getInvoker().addDefaultHeader(key, value);
@@ -209,7 +209,7 @@ public class CategoryApi {
   }
   /**
   * List all the categories in the system
-  * This endpoint will display all the categories in the system. Is very important to take care of the \&quot;id\&quot; because that id will be used to  request a path to that category. 
+  * This endpoint will display all the categories in the system. Is very important to take care of the \&quot;id\&quot; because that id will be used to request a path to that category. 
    * @return List<Category>
   */
   public List<Category> categoryDetailsGet () throws TimeoutException, ExecutionException, InterruptedException, ApiException {
@@ -272,7 +272,7 @@ public class CategoryApi {
 
       /**
    * List all the categories in the system
-   * This endpoint will display all the categories in the system. Is very important to take care of the \&quot;id\&quot; because that id will be used to  request a path to that category. 
+   * This endpoint will display all the categories in the system. Is very important to take care of the \&quot;id\&quot; because that id will be used to request a path to that category. 
 
   */
   public void categoryDetailsGet (final Response.Listener<List<Category>> responseListener, final Response.ErrorListener errorListener) {
@@ -333,22 +333,22 @@ public class CategoryApi {
   }
   /**
   * Get categories associated with a hall
-  * Given a hall tag get the categories associated in that hall 
-   * @param hallTag Hall tag.
+  * Given a hall tag get the categories associated in that sub hall 
+   * @param subHallTag Sub hall tag.
    * @return List<Category>
   */
-  public List<Category> categoryHallHallTagGet (String hallTag) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+  public List<Category> categoryHallSubHallTagGet (String subHallTag) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
      Object postBody = null;
   
-      // verify the required parameter 'hallTag' is set
-      if (hallTag == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'hallTag' when calling categoryHallHallTagGet",
-      new ApiException(400, "Missing the required parameter 'hallTag' when calling categoryHallHallTagGet"));
+      // verify the required parameter 'subHallTag' is set
+      if (subHallTag == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'subHallTag' when calling categoryHallSubHallTagGet",
+      new ApiException(400, "Missing the required parameter 'subHallTag' when calling categoryHallSubHallTagGet"));
       }
   
 
   // create path and map variables
-  String path = "/category/hall/{hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
+  String path = "/category/hall/{sub_hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "sub_hall_tag" + "\\}", apiInvoker.escapeString(subHallTag.toString()));
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -403,22 +403,22 @@ public class CategoryApi {
 
       /**
    * Get categories associated with a hall
-   * Given a hall tag get the categories associated in that hall 
-   * @param hallTag Hall tag.
+   * Given a hall tag get the categories associated in that sub hall 
+   * @param subHallTag Sub hall tag.
   */
-  public void categoryHallHallTagGet (String hallTag, final Response.Listener<List<Category>> responseListener, final Response.ErrorListener errorListener) {
+  public void categoryHallSubHallTagGet (String subHallTag, final Response.Listener<List<Category>> responseListener, final Response.ErrorListener errorListener) {
     Object postBody = null;
 
   
-    // verify the required parameter 'hallTag' is set
-    if (hallTag == null) {
-       VolleyError error = new VolleyError("Missing the required parameter 'hallTag' when calling categoryHallHallTagGet",
-         new ApiException(400, "Missing the required parameter 'hallTag' when calling categoryHallHallTagGet"));
+    // verify the required parameter 'subHallTag' is set
+    if (subHallTag == null) {
+       VolleyError error = new VolleyError("Missing the required parameter 'subHallTag' when calling categoryHallSubHallTagGet",
+         new ApiException(400, "Missing the required parameter 'subHallTag' when calling categoryHallSubHallTagGet"));
     }
     
 
     // create path and map variables
-    String path = "/category/hall/{hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString()));
+    String path = "/category/hall/{sub_hall_tag}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "sub_hall_tag" + "\\}", apiInvoker.escapeString(subHallTag.toString()));
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
@@ -471,28 +471,28 @@ public class CategoryApi {
   /**
   * Get the path between the hall where the user is and the category that the user wants to go
   * 
-   * @param hallTag Hall tag.
+   * @param subHallTag Sub hall tag. This correspondes to 1, 2, or 3 for example.
    * @param categoryId Category ID.
    * @return List<Hall>
   */
-  public List<Hall> categorySearchHallTagCategoryIdGet (String hallTag, UUID categoryId) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
+  public List<Hall> categorySearchSubHallTagCategoryIdGet (String subHallTag, UUID categoryId) throws TimeoutException, ExecutionException, InterruptedException, ApiException {
      Object postBody = null;
   
-      // verify the required parameter 'hallTag' is set
-      if (hallTag == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'hallTag' when calling categorySearchHallTagCategoryIdGet",
-      new ApiException(400, "Missing the required parameter 'hallTag' when calling categorySearchHallTagCategoryIdGet"));
+      // verify the required parameter 'subHallTag' is set
+      if (subHallTag == null) {
+      VolleyError error = new VolleyError("Missing the required parameter 'subHallTag' when calling categorySearchSubHallTagCategoryIdGet",
+      new ApiException(400, "Missing the required parameter 'subHallTag' when calling categorySearchSubHallTagCategoryIdGet"));
       }
   
       // verify the required parameter 'categoryId' is set
       if (categoryId == null) {
-      VolleyError error = new VolleyError("Missing the required parameter 'categoryId' when calling categorySearchHallTagCategoryIdGet",
-      new ApiException(400, "Missing the required parameter 'categoryId' when calling categorySearchHallTagCategoryIdGet"));
+      VolleyError error = new VolleyError("Missing the required parameter 'categoryId' when calling categorySearchSubHallTagCategoryIdGet",
+      new ApiException(400, "Missing the required parameter 'categoryId' when calling categorySearchSubHallTagCategoryIdGet"));
       }
   
 
   // create path and map variables
-  String path = "/category/search/{hall_tag}/{category_id}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString())).replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
+  String path = "/category/search/{sub_hall_tag}/{category_id}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "sub_hall_tag" + "\\}", apiInvoker.escapeString(subHallTag.toString())).replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
 
   // query params
   List<Pair> queryParams = new ArrayList<Pair>();
@@ -548,27 +548,27 @@ public class CategoryApi {
       /**
    * Get the path between the hall where the user is and the category that the user wants to go
    * 
-   * @param hallTag Hall tag.   * @param categoryId Category ID.
+   * @param subHallTag Sub hall tag. This correspondes to 1, 2, or 3 for example.   * @param categoryId Category ID.
   */
-  public void categorySearchHallTagCategoryIdGet (String hallTag, UUID categoryId, final Response.Listener<List<Hall>> responseListener, final Response.ErrorListener errorListener) {
+  public void categorySearchSubHallTagCategoryIdGet (String subHallTag, UUID categoryId, final Response.Listener<List<Hall>> responseListener, final Response.ErrorListener errorListener) {
     Object postBody = null;
 
   
-    // verify the required parameter 'hallTag' is set
-    if (hallTag == null) {
-       VolleyError error = new VolleyError("Missing the required parameter 'hallTag' when calling categorySearchHallTagCategoryIdGet",
-         new ApiException(400, "Missing the required parameter 'hallTag' when calling categorySearchHallTagCategoryIdGet"));
+    // verify the required parameter 'subHallTag' is set
+    if (subHallTag == null) {
+       VolleyError error = new VolleyError("Missing the required parameter 'subHallTag' when calling categorySearchSubHallTagCategoryIdGet",
+         new ApiException(400, "Missing the required parameter 'subHallTag' when calling categorySearchSubHallTagCategoryIdGet"));
     }
     
     // verify the required parameter 'categoryId' is set
     if (categoryId == null) {
-       VolleyError error = new VolleyError("Missing the required parameter 'categoryId' when calling categorySearchHallTagCategoryIdGet",
-         new ApiException(400, "Missing the required parameter 'categoryId' when calling categorySearchHallTagCategoryIdGet"));
+       VolleyError error = new VolleyError("Missing the required parameter 'categoryId' when calling categorySearchSubHallTagCategoryIdGet",
+         new ApiException(400, "Missing the required parameter 'categoryId' when calling categorySearchSubHallTagCategoryIdGet"));
     }
     
 
     // create path and map variables
-    String path = "/category/search/{hall_tag}/{category_id}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "hall_tag" + "\\}", apiInvoker.escapeString(hallTag.toString())).replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
+    String path = "/category/search/{sub_hall_tag}/{category_id}/".replaceAll("\\{format\\}","json").replaceAll("\\{" + "sub_hall_tag" + "\\}", apiInvoker.escapeString(subHallTag.toString())).replaceAll("\\{" + "category_id" + "\\}", apiInvoker.escapeString(categoryId.toString()));
 
     // query params
     List<Pair> queryParams = new ArrayList<Pair>();
