@@ -14,8 +14,7 @@
     tools:context="com.example.dod_0.rfid.reader">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/subhall2" />
@@ -69,35 +68,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
-    <ImageView
-        app:srcCompat="@android:color/white"
-        android:id="@+id/subhall4"
-        android:layout_width="400dp"
-        android:layout_height="225dp"
-        android:layout_above="@+id/subhall2"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        app:srcCompat="@android:color/white"
-        android:id="@+id/imageView4"
-        android:layout_width="400dp"
-        android:layout_marginEnd="24dp"
-        android:layout_height="225dp"
-        android:layout_above="@+id/subhall2"
-        android:layout_below="@+id/description"
-        android:layout_toStartOf="@+id/imageView5" />
-
-    <VideoView
-        android:id="@+id/videoView5"
-        android:backgroundTint="@android:color/white"
-        android:background="@android:color/white"
-        android:layout_width="700dp"
-        android:layout_height="240dp"
-        android:layout_marginBottom="23dp"
-        android:layout_above="@+id/pathButton"
-        android:layout_alignStart="@+id/checkBox"
-        android:layout_marginStart="47dp" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,6 +85,33 @@
         android:layout_height="25dp"
         android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        app:srcCompat="@android:color/white"
+        android:id="@+id/subhall4"
+        android:layout_width="400dp"
+        android:layout_height="225dp"
+        android:layout_above="@+id/subhall2"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        app:srcCompat="@android:color/white"
+        android:id="@+id/imageView4"
+        android:layout_width="400dp"
+        android:layout_height="225dp"
+        android:layout_above="@+id/subhall2"
+        android:layout_toStartOf="@+id/imageView5" />
+
+    <VideoView
+        android:id="@+id/videoView5"
+        android:backgroundTint="@android:color/white"
+        android:background="@android:color/white"
+        android:layout_height="240dp"
+        android:layout_width="600dp"
+        android:layout_above="@+id/pathButton"
+        android:layout_toEndOf="@+id/checkBox" />
+
+
 
 
 </RelativeLayout>
