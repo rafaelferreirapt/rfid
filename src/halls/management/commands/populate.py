@@ -127,8 +127,8 @@ class Command(BaseCommand):
                                                  description="Concentrados",
                                                  sub_hall=sub_hall4)
 
-        category5 = Category.objects.create(name="Pão",
-                                                 description="Pão",
+        category5 = Category.objects.create(name="Pao",
+                                                 description="Pao",
                                                  sub_hall=sub_hall5)
 
         category6 = Category.objects.create(name="Peixe",
@@ -151,12 +151,12 @@ class Command(BaseCommand):
                                                   description="Higiene",
                                                   sub_hall=sub_hall10)
 
-        category11 = Category.objects.create(name="Eletrodomésticos",
-                                                  description="Eletrodomésticos",
+        category11 = Category.objects.create(name="Eletrodomesticos",
+                                                  description="Eletrodomesticos",
                                                   sub_hall=sub_hall11)
 
-        category12 = Category.objects.create(name="Telemóveis",
-                                                  description="Telemóveis",
+        category12 = Category.objects.create(name="Telemoveis",
+                                                  description="Telemoveis",
                                                   sub_hall=sub_hall12)
 
         # connections
