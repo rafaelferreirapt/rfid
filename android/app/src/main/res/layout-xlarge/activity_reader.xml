@@ -40,18 +40,6 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/textView4" />
 
-    <Button
-        android:text="GO!"
-        android:id="@+id/pathButton"
-        android:layout_width="110dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_height="60dp"
-        android:onClick="setPathButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_alignParentBottom="true"
-        android:textSize="20sp" />
-
     <TextView
         android:text="Em atualização..."
         android:layout_width="match_parent"
@@ -68,15 +56,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/description"
-        android:visibility="invisible"
-        android:layout_above="@+id/subhall4"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="21dp" />
-
     <CheckBox
         android:text="nfcTag"
         android:id="@+id/checkBox"
@@ -86,30 +65,50 @@
         android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/description"
+        android:visibility="invisible"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="GO!"
+        android:id="@+id/pathButton"
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:onClick="setPathButton"
+        style="@style/Widget.AppCompat.Button"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
     <ImageView
         app:srcCompat="@android:color/white"
         android:id="@+id/subhall4"
         android:layout_width="400dp"
         android:layout_height="225dp"
-        android:layout_above="@+id/videoView5" />
-
-    <VideoView
-        android:id="@+id/videoView5"
-        android:backgroundTint="@android:color/white"
-        android:background="@android:color/white"
-        android:layout_height="240dp"
-        android:layout_width="600dp"
-        android:layout_above="@+id/pathButton"
-        android:layout_toEndOf="@+id/checkBox" />
+        android:layout_alignTop="@+id/description"
+        android:layout_alignParentStart="true" />
 
     <ImageView
         app:srcCompat="@android:color/white"
         android:id="@+id/imageView4"
         android:layout_width="400dp"
         android:layout_height="225dp"
-        android:layout_alignBottom="@+id/videoView5"
-        android:layout_toEndOf="@+id/subhall4"
-        android:layout_marginStart="25dp" />
+        android:layout_alignTop="@+id/description"
+        android:layout_toStartOf="@+id/imageView5" />
+
+    <VideoView
+        android:id="@+id/videoView5"
+        android:backgroundTint="@android:color/white"
+        android:background="@android:color/white"
+        android:layout_width="600dp"
+        android:layout_height="270dp"
+        android:layout_below="@+id/subhall2"
+        android:layout_toEndOf="@+id/checkBox" />
 
 
 </RelativeLayout>
