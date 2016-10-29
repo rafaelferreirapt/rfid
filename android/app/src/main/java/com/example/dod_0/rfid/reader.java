@@ -222,7 +222,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         //Show description
         if(position != 0) {
             ((TextView) findViewById(R.id.description)).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.description)).setText("" + DESCRIP + "" + categoriesResult.get(position - 1).getDescription());
+            //((TextView) findViewById(R.id.description)).setText("" + DESCRIP + "" + categoriesResult.get(position - 1).getDescription());
 
             if(contentAllSubHals.get(position-1) == null || contentAllSubHals.get(position-1).isEmpty()) {
                 ((TextView) findViewById(R.id.warningText)).setVisibility(View.VISIBLE);
@@ -252,7 +252,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             }
         }else{
             Log.d("POSITION: ", ""+position);
-            ((TextView) findViewById(R.id.description)).setVisibility(View.GONE);
+            //((TextView) findViewById(R.id.description)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.warningText)).setVisibility(View.GONE);
             ((VideoView) findViewById(R.id.videoView5)).setVisibility(View.GONE);
             ((ImageView) findViewById(R.id.subhall4)).setVisibility(View.GONE);
@@ -270,9 +270,9 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             @Override
             public void run() {
 
-                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute(contentAllSubHals.get(position-1).get(0).getUrl());
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllSubHals.get(position-1).get(1).getUrl());
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllSubHals.get(position-1).get(2).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(0).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(1).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(2).getUrl());
             }
         });
         t_imag.start();
@@ -281,9 +281,9 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             @Override
             public void run() {
 
-                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute(contentAllSubHals.get(position-1).get(0).getUrl());
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllSubHals.get(position-1).get(1).getUrl());
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllSubHals.get(position-1).get(2).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(0).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(1).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(2).getUrl());
             }
         });
         t_imag1.start();
@@ -292,9 +292,9 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             @Override
             public void run() {
 
-                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute(contentAllSubHals.get(position-1).get(0).getUrl());
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllSubHals.get(position-1).get(1).getUrl());
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllSubHals.get(position-1).get(2).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(0).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(1).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute("http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(2).getUrl());
             }
         });
         t_imag2.start();
@@ -310,8 +310,8 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         video.setVisibility(View.VISIBLE);
         video.setZOrderOnTop(true);
         ctlr = new MediaController(this);
-        //String path = "http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(3).getUrl();
-        String path = contentAllSubHals.get(position-1).get(3).getUrl();
+        String path = "http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(3).getUrl();
+        //String path = contentAllSubHals.get(position-1).get(3).getUrl();
         video.setVideoPath(path);
         ctlr.setMediaPlayer(video);
         video.setVisibility(View.VISIBLE);

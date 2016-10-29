@@ -16,16 +16,20 @@
 
 package com.example.dod_0.rfid;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -38,6 +42,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
@@ -52,6 +58,8 @@ public class DeviceScanActivity extends ListActivity {
     private static final long SCAN_PERIOD = 10000;     // Stops scanning after 10 seconds
 
 
+    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
+
     /*
      * Called when the activity is first created.
      * This is where you should do all of your normal static set up: create views, bind data to lists, etc.
@@ -62,6 +70,9 @@ public class DeviceScanActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+
+
 
         //getActionBar().setTitle(R.string.title_devices);
         mHandler = new Handler();
@@ -86,6 +97,9 @@ public class DeviceScanActivity extends ListActivity {
             return;
         }
     }
+
+
+
 
 
     /*

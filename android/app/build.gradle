@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.example.dod_0.rfid"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -42,5 +42,6 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.0-beta1'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+    compile 'pub.devrel:easypermissions:0.2.1'
 
 }
