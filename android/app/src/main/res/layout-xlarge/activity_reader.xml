@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/imageView2" />
+        android:id="@+id/subhall2" />
 
     <TextView
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
 
     <ImageView
         app:srcCompat="@color/RFID_grey"
-        android:id="@+id/imageView3"
+        android:id="@+id/subhall4"
         android:layout_below="@+id/description"
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp"
@@ -82,7 +82,7 @@
     <ImageView
         app:srcCompat="@color/RFID_grey"
         android:id="@+id/imageView4"
-        android:layout_below="@+id/imageView3"
+        android:layout_below="@+id/subhall4"
         android:layout_alignParentStart="true"
         android:layout_height="110dp"
         android:layout_width="195dp" />
@@ -90,7 +90,7 @@
     <ImageView
         app:srcCompat="@color/RFID_grey"
         android:id="@+id/imageView5"
-        android:layout_alignTop="@+id/imageView3"
+        android:layout_alignTop="@+id/subhall4"
         android:layout_alignParentEnd="true"
         android:layout_height="220dp"
         android:layout_width="145dp" />

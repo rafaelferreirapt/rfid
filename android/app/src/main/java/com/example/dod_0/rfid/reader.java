@@ -1,6 +1,5 @@
 package com.example.dod_0.rfid;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,16 +27,16 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import io.swagger.client.api.CategoryApi;
 import io.swagger.client.api.HallsApi;
+import io.swagger.client.api.SubHallsApi;
+
 import io.swagger.client.model.Category;
 import io.swagger.client.ApiException;
 import io.swagger.client.model.ContentHall;
-import io.swagger.client.model.Hall;
 
 
 public class reader extends  AppCompatActivity implements OnItemSelectedListener{
@@ -47,20 +45,27 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
     private VideoView video;
     private MediaController ctlr;
     private boolean flagState = false;
-    private String[] hallArr = {"1A253","1A254","1A255","1A256", "1A257"};
-    private String[] realTags = {"3185769091","3858496131","3331214280","1754763934","1930754691"};
+
+    private String[] tagsId = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+    private String[] tagsIdContent = {"1","2","3","4","5","6","7","8","9","10","11","12"};
+    //private String[] hallArr = {"1A253","1A254","1A255","1A256", "1A257"};
+    //private String[] realTags = {"3185769091","3858496131","3331314280","1754763934","1930754691"};
     //{hall1,hall2,hall3,hall6,hall7}={vermelho,verde,azul,branco,amarelo}
 
     private CategoryApi categoryApi;
     private HallsApi hallsApi;
+    private SubHallsApi subHallsApi;
 
     private List<Category> categoriesResult;
-    private List<ContentHall>  contentHallResult;
-    private List<List<ContentHall>>  contentAllHals = new ArrayList<List<ContentHall>>();
+    //private List<Hall>  contentHallResult;
+    private List<ContentHall> contentSubHallResult;
+
+
+    private List<List<ContentHall>>  contentAllSubHals = new ArrayList<List<ContentHall>>();
     private CheckBox nfcTag;
     private ArrayAdapter<String> adapter;
     private Spinner spinner;
-    private String stateTag = hallArr[0];   //defino que inicio do supermercado é o hall1
+    private String stateTag = tagsId[0];   //defino que inicio do supermercado é o hall1
 
     //to receive BLE info
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME"; //name
@@ -90,11 +95,18 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
         List<String> categories = new ArrayList<String>();
         categories.add(" ... ");
+        categories.add("Arroz");
         categories.add("Massas");
-        categories.add("Águas");
-        categories.add("Vinhos");
+        categories.add("Especiarias");
+        categories.add("Concentrados");
+        categories.add("Pão");
+        categories.add("Peixe");
+        categories.add("Carne");
         categories.add("Congelados");
-        categories.add("Carnes");
+        categories.add("Bebidas");
+        categories.add("Higiene");
+        categories.add("Eletrodomésticos");
+        categories.add("Telemóveis");
 
 
         //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
@@ -106,12 +118,14 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         spinner.setAdapter(adapter);
 
         String abc = "https://stocklogos-pd.s3.amazonaws.com/styles/logo-medium-alt/smartcart_2.png";
-        new DownloadImageTask((ImageView) findViewById(R.id.imageView2)).execute(abc);
+        new DownloadImageTask((ImageView) findViewById(R.id.subhall2)).execute(abc);
 
         //hide video player
         ((VideoView) findViewById(R.id.videoView5)).setVisibility(View.GONE);
+
         //hide warning message
         ((TextView) findViewById(R.id.warningText)).setVisibility(View.GONE);
+
         Thread t_cat = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -119,7 +133,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
                 try {
                     Log.d("[Reader]","CategoryAPI Request");
                     categoriesResult = categoryApi.categoryDetailsGet();
-                    System.out.println(categoriesResult);
+                    //System.out.println(categoriesResult);
                 } catch (ApiException e) {
                     System.err.println("Exception when calling CategoryApi#categoryDetailsGet");
                     e.printStackTrace();
@@ -139,23 +153,25 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         Thread t_cont = new Thread(new Runnable() {
             @Override
             public void run() {
+                //subHallsApi = new SubHallsApi();
                 hallsApi = new HallsApi();
                 Log.d("[Reader]","ContentHallAPI Request");
-                for(int i = 0; i < hallArr.length; i++) {
-                    contentHallResult = null;
+                for(int i = 0; i < tagsIdContent.length; i++) {
+                    contentSubHallResult = null;
                     try {
-                        contentHallResult = hallsApi.hallsContentsHallTagGet(hallArr[i]);
-                        System.out.println(contentHallResult);
-
-                        if(contentHallResult != null) {
-                            contentAllHals.add(i, contentHallResult);
+                        contentSubHallResult = hallsApi.hallsSubHallsContentsSubHallTagGet(tagsIdContent[i]);  //List<ContentHall>
+                        //contentSubHallResult = contentSubHallResult.hallsSubHallsDetailsGet();
+                        System.out.println(contentSubHallResult);
+                        //System.out.println("----->"+contentSubHallResult.get(0));
+                        if(contentSubHallResult != null) {
+                            contentAllSubHals.add(i, contentSubHallResult);
                             System.out.println("------------__>"+i);
                         }
                     } catch (ApiException e) {
-                        System.err.println("Exception when calling CategoryApi#categoryHallHallTagGet");
+                        System.err.println("Exception when calling SubHallsApi#hallsSubHallsDetailsGet");
                         e.printStackTrace();
                     } catch (Exception e) {
-                        System.err.println("Exception when calling CategoryApi#categoryHallHallTagGet");
+                        System.err.println("Exception when calling SubHallsApi#hallsSubHallsDetailsGet");
                         e.printStackTrace();
                     }
 
@@ -166,7 +182,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
 
         findViewById(R.id.pathButton).setVisibility(View.GONE);
         nfcTag = (CheckBox)findViewById(R.id.checkBox);
-        nfcTag.setChecked(false);
+        nfcTag.setChecked(true);
     }
 
     @Override
@@ -184,7 +200,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         String item = parent.getItemAtPosition(position).toString();
 
         // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
         Log.d("POSITION: ", ""+position);
 
         setCategoriesHall(position);
@@ -205,22 +221,22 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             ((TextView) findViewById(R.id.description)).setVisibility(View.VISIBLE);
             ((TextView) findViewById(R.id.description)).setText("" + DESCRIP + "" + categoriesResult.get(position - 1).getDescription());
 
-            if(contentAllHals.get(position-1) == null || contentAllHals.get(position-1).isEmpty()) {
+            if(contentAllSubHals.get(position-1) == null || contentAllSubHals.get(position-1).isEmpty()) {
                 ((TextView) findViewById(R.id.warningText)).setVisibility(View.VISIBLE);
                 ((VideoView) findViewById(R.id.videoView5)).setVisibility(View.GONE);
-                ((ImageView) findViewById(R.id.imageView3)).setVisibility(View.GONE);
+                ((ImageView) findViewById(R.id.subhall4)).setVisibility(View.GONE);
                 ((ImageView) findViewById(R.id.imageView4)).setVisibility(View.GONE);
                 ((ImageView) findViewById(R.id.imageView5)).setVisibility(View.GONE);
-                ((ImageView) findViewById(R.id.imageView2)).setVisibility(View.GONE);
+                ((ImageView) findViewById(R.id.subhall2)).setVisibility(View.GONE);
                 findViewById(R.id.pathButton).setVisibility(View.VISIBLE);
 
             } else {
                 //display images
-                ((ImageView) findViewById(R.id.imageView2)).setVisibility(View.GONE);
+                ((ImageView) findViewById(R.id.subhall2)).setVisibility(View.GONE);
                 ((VideoView) findViewById(R.id.videoView5)).setVisibility(View.GONE);
                 ((TextView) findViewById(R.id.warningText)).setVisibility(View.GONE);
                 ((VideoView) findViewById(R.id.videoView5)).setVisibility(View.GONE);
-                ((ImageView) findViewById(R.id.imageView3)).setVisibility(View.GONE);
+                ((ImageView) findViewById(R.id.subhall4)).setVisibility(View.GONE);
                 ((ImageView) findViewById(R.id.imageView4)).setVisibility(View.GONE);
                 ((ImageView) findViewById(R.id.imageView5)).setVisibility(View.GONE);
                 findViewById(R.id.pathButton).setVisibility(View.VISIBLE);
@@ -236,10 +252,10 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             ((TextView) findViewById(R.id.description)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.warningText)).setVisibility(View.GONE);
             ((VideoView) findViewById(R.id.videoView5)).setVisibility(View.GONE);
-            ((ImageView) findViewById(R.id.imageView3)).setVisibility(View.GONE);
+            ((ImageView) findViewById(R.id.subhall4)).setVisibility(View.GONE);
             ((ImageView) findViewById(R.id.imageView4)).setVisibility(View.GONE);
             ((ImageView) findViewById(R.id.imageView5)).setVisibility(View.GONE);
-            ((ImageView) findViewById(R.id.imageView2)).setVisibility(View.VISIBLE);
+            ((ImageView) findViewById(R.id.subhall2)).setVisibility(View.VISIBLE);
             findViewById(R.id.pathButton).setVisibility(View.GONE);
             Log.d("POSITION: ", ""+position);
         }
@@ -251,9 +267,9 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             @Override
             public void run() {
 
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView3)).execute(contentAllHals.get(position-1).get(0).getUrl());
-                //new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllHals.get(position-1).get(1).getUrl());
-                //new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllHals.get(position-1).get(2).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute(contentAllSubHals.get(position-1).get(0).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllSubHals.get(position-1).get(1).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllSubHals.get(position-1).get(2).getUrl());
             }
         });
         t_imag.start();
@@ -262,9 +278,9 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             @Override
             public void run() {
 
-                //new DownloadImageTask((ImageView) findViewById(R.id.imageView3)).execute(contentAllHals.get(position-1).get(0).getUrl());
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllHals.get(position-1).get(1).getUrl());
-                //new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllHals.get(position-1).get(2).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute(contentAllSubHals.get(position-1).get(0).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllSubHals.get(position-1).get(1).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllSubHals.get(position-1).get(2).getUrl());
             }
         });
         t_imag1.start();
@@ -273,14 +289,14 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             @Override
             public void run() {
 
-                //new DownloadImageTask((ImageView) findViewById(R.id.imageView3)).execute(contentAllHals.get(position-1).get(0).getUrl());
-                //new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllHals.get(position-1).get(1).getUrl());
-                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllHals.get(position-1).get(2).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.subhall4)).execute(contentAllSubHals.get(position-1).get(0).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView4)).execute(contentAllSubHals.get(position-1).get(1).getUrl());
+                new DownloadImageTask((ImageView) findViewById(R.id.imageView5)).execute(contentAllSubHals.get(position-1).get(2).getUrl());
             }
         });
         t_imag2.start();
 
-        ((ImageView) findViewById(R.id.imageView3)).setVisibility(View.VISIBLE);
+        ((ImageView) findViewById(R.id.subhall4)).setVisibility(View.VISIBLE);
         ((ImageView) findViewById(R.id.imageView4)).setVisibility(View.VISIBLE);
         ((ImageView) findViewById(R.id.imageView5)).setVisibility(View.VISIBLE);
     }
@@ -291,7 +307,8 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         video.setVisibility(View.VISIBLE);
         video.setZOrderOnTop(true);
         ctlr = new MediaController(this);
-        String path = "http://rfid.rafaelferreira.pt"+contentAllHals.get(position-1).get(3).getUrl();
+        //String path = "http://rfid.rafaelferreira.pt"+contentAllSubHals.get(position-1).get(3).getUrl();
+        String path = contentAllSubHals.get(position-1).get(3).getUrl();
         video.setVideoPath(path);
         ctlr.setMediaPlayer(video);
         video.setVisibility(View.VISIBLE);
@@ -420,7 +437,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
                 int pos = isTagValid(data); //if tag is valid, return the tag position
                 if(pos != -1) {
                     setCategoriesHall(pos+1);   //set massas
-                    stateTag = hallArr[pos];
+                    stateTag = tagsId[pos];
                 }
             }
         }
@@ -429,8 +446,8 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
 
     //Do the conversion between real tag values and the values in the sever
     private int isTagValid(String tag){
-        for(int i = 0; i < realTags.length; i++){
-            if(realTags[i].equals(tag))
+        for(int i = 0; i < tagsId.length; i++){
+            if(tagsId[i].equals(tag))
                 return i;
         }
         return -1;

@@ -38,12 +38,13 @@ import io.swagger.client.model.Hall;
 public class drawPath extends AppCompatActivity {
     private String sourceTag;
     private UUID destCategory;
-    private String[] hallArr = {"1A253","1A254","1A255","1A256", "1A257"};
-    private List<SurfaceView> floorTags = new ArrayList<>();
-    private List<SurfaceView> floorTags2 = new ArrayList<>();
+    //private String[] hallArr = {"1A253","1A254","1A255","1A256", "1A257"};
+    private List<ImageView> floorTags = new ArrayList<>();
+    //private List<SurfaceView> floorTags2 = new ArrayList<>();
     private List<Hall> result = new ArrayList<>();
-    private HashMap<String, SurfaceView> mapTags = new HashMap<>();
-    private String[] realTags = {"3185769091","3858496131","3331214280","1754763934","1930754691"};
+    private HashMap<String, ImageView> mapTags = new HashMap<>();
+    //private String[] realTags = {"3185769091","3858496131","3331314280","1754763934","1930754691"};
+    private String[] tagsIdFloor = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
 
     //to receive BLE info
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME"; //name
@@ -80,11 +81,13 @@ public class drawPath extends AppCompatActivity {
             @Override
             public void run() {
                 CategoryApi apiInstance = new CategoryApi();
-                String hallTag = hallArr[0]; // String | Hall tag.
+
+                //first path
+                String hallTag = tagsIdFloor[0]; // String | Hall tag.
                 UUID categoryId = destCategory; // UUID | Category ID
                 try {
                     Log.d("DRAW_PATH", "Start drawing the path------------->" + apiInstance);
-                    result = apiInstance.categorySearchHallTagCategoryIdGet(hallTag, categoryId);
+                    result = apiInstance.categorySearchSubHallTagCategoryIdGet(hallTag, categoryId);
                     System.out.println(result);
                 } catch (ApiException e) {
                     System.err.println("Exception when calling CategoryApi#categorySearchHallTagCategoryIdGet");
@@ -103,30 +106,46 @@ public class drawPath extends AppCompatActivity {
                     public void run() {
                         Log.d("DRAW_PATH","Initializing SurfaceViewer");
                         //initialize floorTags
-                        floorTags.add(0,(SurfaceView) findViewById(R.id.surfaceView11));
-                        floorTags.add(1,(SurfaceView) findViewById(R.id.surfaceView21));
-                        floorTags.add(2,(SurfaceView) findViewById(R.id.surfaceView31));
-                        floorTags.add(3,(SurfaceView) findViewById(R.id.surfaceView61));
-                        floorTags.add(4,(SurfaceView) findViewById(R.id.surfaceView71));
+                        floorTags.add(0,(ImageView) findViewById(R.id.subhall1));
+                        floorTags.add(1,(ImageView) findViewById(R.id.subhall2));
+                        floorTags.add(2,(ImageView) findViewById(R.id.subhall3));
+                        floorTags.add(3,(ImageView) findViewById(R.id.subhall4));
+                        floorTags.add(4,(ImageView) findViewById(R.id.subhall5));
+                        floorTags.add(5,(ImageView) findViewById(R.id.subhall6));
+                        floorTags.add(6,(ImageView) findViewById(R.id.subhall7));
+                        floorTags.add(7,(ImageView) findViewById(R.id.subhall8));
+                        floorTags.add(8,(ImageView) findViewById(R.id.subhall9));
+                        floorTags.add(9,(ImageView) findViewById(R.id.subhall10));
+                        floorTags.add(10,(ImageView) findViewById(R.id.subhall11));
+                        floorTags.add(11,(ImageView) findViewById(R.id.subhall12));
+                        floorTags.add(12,(ImageView) findViewById(R.id.subhall13));
+                        floorTags.add(13,(ImageView) findViewById(R.id.subhall14));
+                        floorTags.add(14,(ImageView) findViewById(R.id.subhall15));
+                        floorTags.add(15,(ImageView) findViewById(R.id.subhall16));
+                        floorTags.add(16,(ImageView) findViewById(R.id.subhall17));
+                        floorTags.add(17,(ImageView) findViewById(R.id.subhall18));
+                        floorTags.add(18,(ImageView) findViewById(R.id.subhall19));
+                        floorTags.add(19,(ImageView) findViewById(R.id.subhall20));
+
 
                         //initialize floorTags
-                        floorTags2.add(0,(SurfaceView) findViewById(R.id.surfaceView12));
-                        floorTags2.add(1,(SurfaceView) findViewById(R.id.surfaceView22));
-                        floorTags2.add(2,(SurfaceView) findViewById(R.id.surfaceView32));
-                        floorTags2.add(3,(SurfaceView) findViewById(R.id.surfaceView62));
-                        floorTags2.add(4,(SurfaceView) findViewById(R.id.surfaceView72));
+                        //floorTags2.add(0,(SurfaceView) findViewById(R.id.surfaceView12));
+                        //floorTags2.add(1,(SurfaceView) findViewById(R.id.surfaceView22));
+                        //floorTags2.add(2,(SurfaceView) findViewById(R.id.surfaceView32));
+                        //floorTags2.add(3,(SurfaceView) findViewById(R.id.surfaceView62));
+                        //floorTags2.add(4,(SurfaceView) findViewById(R.id.surfaceView72));
 
-                        for(int i=0; i < hallArr.length; i++) {
-                            mapTags.put(hallArr[i],floorTags.get(i));
+                        for(int i=0; i < tagsIdFloor.length; i++) {
+                            mapTags.put(tagsIdFloor[i],floorTags.get(i));
 
                             floorTags.get(i).setVisibility(View.INVISIBLE); //all invisible
-                            floorTags2.get(i).setVisibility(View.INVISIBLE); //all invisible
+                            //floorTags2.get(i).setVisibility(View.INVISIBLE); //all invisible
                         }
                         Log.d("DRAW_PATH","Initialization done");
 
                         for (int i = 0; i < result.size(); i++) {
-                            Log.d("TAG -->", result.get(i).getTag());
-                            mapTags.get(result.get(i).getTag()).setVisibility(View.VISIBLE);
+                            Log.d("TAG -->", result.get(i).getName());
+                            mapTags.get(result.get(i).getName()).setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -147,7 +166,7 @@ public class drawPath extends AppCompatActivity {
                 String hallTag = actualTag; // String | Hall tag.
                 UUID categoryId = destCategory; // UUID | Category ID
                 try {
-                    result = apiInstance.categorySearchHallTagCategoryIdGet(hallTag, categoryId);
+                    result = apiInstance.categorySearchSubHallTagCategoryIdGet(hallTag, categoryId);
                     System.out.println(result);
                 } catch (ApiException e) {
                     System.err.println("Exception when calling CategoryApi#categorySearchHallTagCategoryIdGet");
@@ -163,17 +182,17 @@ public class drawPath extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        for(int i=0; i < hallArr.length; i++) {
-                            mapTags.put(hallArr[i],floorTags.get(i));
+                        for(int i=0; i < tagsIdFloor.length; i++) {
+                            mapTags.put(tagsIdFloor[i],floorTags.get(i));
 
                             floorTags.get(i).setVisibility(View.INVISIBLE); //all invisible
-                            floorTags2.get(i).setVisibility(View.INVISIBLE); //all invisible
+                            //floorTags2.get(i).setVisibility(View.INVISIBLE); //all invisible
                         }
                         Log.d("DRAW_PATH","Initialization done");
 
                         for (int i = 0; i < result.size(); i++) {
-                            Log.d("TAG -->", result.get(i).getTag());
-                            mapTags.get(result.get(i).getTag()).setVisibility(View.VISIBLE);
+                            Log.d("TAG -->", result.get(i).getName());
+                            mapTags.get(result.get(i).getName()).setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -329,7 +348,7 @@ public class drawPath extends AppCompatActivity {
 
             int pos = isTagValid(data); //if tag is valid, return the tag position
             if(pos != -1) {
-                pathUpdate(hallArr[pos]);
+                pathUpdate(tagsIdFloor[pos]);
             }
         }
     }
@@ -345,8 +364,8 @@ public class drawPath extends AppCompatActivity {
 
     //Do the conversion between real tag values and the values in the sever
     private int isTagValid(String tag){
-        for(int i = 0; i < realTags.length; i++){
-            if(realTags[i].equals(tag))
+        for(int i = 0; i < tagsIdFloor.length; i++){
+            if(tagsIdFloor[i].equals(tag))
                 return i;
         }
         return -1;

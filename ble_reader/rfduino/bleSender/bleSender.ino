@@ -33,8 +33,11 @@ void loop()
   
     for(int i=0; i < 11; i++){
       state = Serial.read();  // read the incoming byte:
-      arr[i]=(state);
-      //Serial.print(state);
+   
+      if(isAscii(state))
+        arr[i] = (state);
+      else
+        arr[i] = '0'; //make sure that all id's have 10 digits
     }
     RFduinoBLE.send(arr,10);
   }

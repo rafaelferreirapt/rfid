@@ -144,7 +144,7 @@ public class NewActivity extends AppCompatActivity {
         if (data != null) {
             //mDataField.setText(data);
             Log.d("DATA RECEIVED: ",data);
-            Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
         }
 
     }

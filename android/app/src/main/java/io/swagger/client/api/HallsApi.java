@@ -51,8 +51,14 @@ import java.util.concurrent.TimeoutException;
 
 public class HallsApi {
   String basePath = "http://rfid.rafaelferreira.pt/api/v1";
-  ApiInvoker apiInvoker = ApiInvoker.getInstance();
+  //ApiInvoker apiInvoker = ApiInvoker.getInstance();
 
+    public HallsApi(){
+        ApiInvoker.initializeInstance();
+        apiInvoker = ApiInvoker.getInstance();
+    }
+
+    ApiInvoker apiInvoker;
   public void addHeader(String key, String value) {
     getInvoker().addDefaultHeader(key, value);
   }

@@ -42,4 +42,5 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.0-beta1'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+
 }
