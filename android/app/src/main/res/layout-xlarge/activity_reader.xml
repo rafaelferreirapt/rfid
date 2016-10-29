@@ -91,7 +91,7 @@
         android:id="@+id/subhall4"
         android:layout_width="400dp"
         android:layout_height="225dp"
-        android:layout_above="@+id/subhall2" />
+        android:layout_above="@+id/videoView5" />
 
     <VideoView
         android:id="@+id/videoView5"
@@ -107,7 +107,7 @@
         android:id="@+id/imageView4"
         android:layout_width="400dp"
         android:layout_height="225dp"
-        android:layout_alignBottom="@+id/subhall2"
+        android:layout_alignBottom="@+id/videoView5"
         android:layout_toEndOf="@+id/subhall4"
         android:layout_marginStart="25dp" />
 
