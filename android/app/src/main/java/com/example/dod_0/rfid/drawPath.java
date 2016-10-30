@@ -46,6 +46,7 @@ public class drawPath extends AppCompatActivity {
     private HashMap<String, ImageView> mapTags = new HashMap<>();
     //private String[] realTags = {"3185769091","3858496131","3331314280","1754763934","1930754691"};
     private String[] tagsIdFloor = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
+    private String stateTag;
 
     //to receive BLE info
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME"; //name
@@ -67,6 +68,7 @@ public class drawPath extends AppCompatActivity {
             sourceTag = extras.getString("sourceTAG");
             destCategory = UUID.fromString(extras.getString("destCat"));
         }
+        stateTag = sourceTag;
         Log.d("[DRAW_PATH]","--> "+sourceTag+ " -->"+destCategory);
 
         //Ble related
@@ -85,7 +87,7 @@ public class drawPath extends AppCompatActivity {
                 CategoryApi apiInstance = new CategoryApi();
 
                 //first path
-                String hallTag = tagsIdFloor[0]; // String | Hall tag.
+                String hallTag = sourceTag;//tagsIdFloor[0]; // String | Hall tag.
                 UUID categoryId = destCategory; // UUID | Category ID
                 try {
                     Log.d("DRAW_PATH", "Start drawing the path------------->" + apiInstance);
@@ -346,11 +348,13 @@ public class drawPath extends AppCompatActivity {
         if (data != null) {
             //mDataField.setText(data);
             Log.d("DATA RECEIVED: ", data);
-            Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+            String tag = ""+Integer.parseInt(data);
+            Toast.makeText(getApplicationContext(), tag, Toast.LENGTH_SHORT).show();
 
             int pos = isTagValid(data); //if tag is valid, return the tag position
-            if(pos != -1) {
+            if(pos != -1 && tag.equals(stateTag)) {
                 pathUpdate(tagsIdFloor[pos]);
+                stateTag = tag;
             }
         }
     }

@@ -208,6 +208,8 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
 
         setCategoriesHall(position);
 
+        if(position != 0)
+            stateTag = tagsId[position-1];
 
     }
     public void onNothingSelected(AdapterView parent) {
@@ -434,11 +436,14 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
 
             if(nfcTag.isChecked()) {
                 //nfcTag.setChecked(false);
-                Log.d("CHECKBOX","is activated");
-                Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+                String tag = ""+Integer.parseInt(data);
+                Log.d("CHECKBOX","is activated"+data);
+                Toast.makeText(getApplicationContext(), tag+" "+stateTag, Toast.LENGTH_SHORT).show();
 
-                int pos = isTagValid(data); //if tag is valid, return the tag position
-                if(pos != -1) {
+                int pos = isTagValid(tag); //if tag is valid, return the tag position
+                Toast.makeText(getApplicationContext(), tag+" "+stateTag+" "+pos, Toast.LENGTH_SHORT).show();
+                if((pos != -1) && (tag.equals(stateTag))) {
+                    Toast.makeText(getApplicationContext(), "!!!!!!!!!!!!!!!!!!!!!!!!!!!", Toast.LENGTH_SHORT).show();
                     setCategoriesHall(pos+1);   //set massas
                     stateTag = tagsId[pos];
                 }
