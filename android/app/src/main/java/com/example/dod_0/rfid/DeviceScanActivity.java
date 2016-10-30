@@ -57,8 +57,6 @@ public class DeviceScanActivity extends ListActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     private static final long SCAN_PERIOD = 10000;     // Stops scanning after 10 seconds
 
-    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
-
     /*
      * Called when the activity is first created.
      * This is where you should do all of your normal static set up: create views, bind data to lists, etc.

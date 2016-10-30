@@ -11,17 +11,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PixelFormat;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Surface;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -142,7 +138,8 @@ public class drawPath extends AppCompatActivity {
                         for(int i=0; i < tagsIdFloor.length; i++) {
                             mapTags.put(tagsIdFloor[i],floorTags.get(i));
 
-                            floorTags.get(i).setVisibility(View.INVISIBLE); //all invisible
+                            //floorTags.get(i).setVisibility(View.INVISIBLE); //all invisible
+                            //floorTags.get(i).setVisibility(View.INVISIBLE); //all invisible
                             //floorTags2.get(i).setVisibility(View.INVISIBLE); //all invisible
                         }
                         Log.d("DRAW_PATH","Initialization done");
@@ -352,7 +349,7 @@ public class drawPath extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), tag, Toast.LENGTH_SHORT).show();
 
             int pos = isTagValid(data); //if tag is valid, return the tag position
-            if(pos != -1 && tag.equals(stateTag)) {
+            if(pos != -1 && !tag.equals(stateTag)) {
                 pathUpdate(tagsIdFloor[pos]);
                 stateTag = tag;
             }

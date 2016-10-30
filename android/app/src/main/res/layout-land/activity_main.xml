@@ -9,37 +9,49 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@android:color/holo_blue_dark"
+    android:background="@android:color/white"
     tools:context="com.example.dod_0.rfid.MainActivity">
+
+    <ImageButton
+        app:srcCompat="@android:drawable/stat_sys_data_bluetooth"
+        android:id="@+id/buttonBluetooth"
+        android:elevation="0dp"
+        style="@android:style/Widget.ImageButton"
+        android:onClick="bluetoothButtonMethod"
+        android:layout_width="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_height="35dp" />
 
     <Button
         android:text="Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="57dp"
+        android:layout_marginBottom="36dp"
         android:onClick="NEXT"
-        android:id="@+id/button2" />
+        android:background="@color/grey"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:text=" Let's Start"
+        android:layout_height="50dp"
+        android:layout_width="200dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/imageView" />
 
     <ImageView
         android:layout_height="100dp"
         app:srcCompat="@drawable/ua_logo"
         android:id="@+id/imageView"
-        android:layout_marginBottom="55dp"
         android:layout_width="200dp"
-        android:layout_above="@+id/textView"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_height="100dp"
-        android:id="@+id/textView"
-        android:textColor="@android:color/black"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:layout_width="200dp"
-        android:layout_marginBottom="25dp"
-        android:layout_marginStart="27dp"
-        android:text=" Let's Start"
-        android:layout_above="@+id/button2"
-        android:layout_alignStart="@+id/imageView" />
 </RelativeLayout>

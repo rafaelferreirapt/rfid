@@ -120,7 +120,8 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        String abc = "https://stocklogos-pd.s3.amazonaws.com/styles/logo-medium-alt/smartcart_2.png";
+        //String abc = "https://stocklogos-pd.s3.amazonaws.com/styles/logo-medium-alt/smartcart_2.png";
+        String abc = "https://cdn4.iconfinder.com/data/icons/e-commerce-and-shopping-3/500/hand-pointer-cart-tablet-512.png";
         new DownloadImageTask((ImageView) findViewById(R.id.subhall2)).execute(abc);
 
         //hide video player
@@ -208,8 +209,8 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
 
         setCategoriesHall(position);
 
-        if(position != 0)
-            stateTag = tagsId[position-1];
+        //if(position != 0)
+        //    stateTag = tagsId[position-1];
 
     }
     public void onNothingSelected(AdapterView parent) {
@@ -223,7 +224,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         spinner.setSelection(position);
         //Show description
         if(position != 0) {
-            ((TextView) findViewById(R.id.description)).setVisibility(View.VISIBLE);
+            //((TextView) findViewById(R.id.description)).setVisibility(View.VISIBLE);
             //((TextView) findViewById(R.id.description)).setText("" + DESCRIP + "" + categoriesResult.get(position - 1).getDescription());
 
             if(contentAllSubHals.get(position-1) == null || contentAllSubHals.get(position-1).isEmpty()) {
@@ -441,9 +442,9 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
                 Toast.makeText(getApplicationContext(), tag+" "+stateTag, Toast.LENGTH_SHORT).show();
 
                 int pos = isTagValid(tag); //if tag is valid, return the tag position
-                Toast.makeText(getApplicationContext(), tag+" "+stateTag+" "+pos, Toast.LENGTH_SHORT).show();
-                if((pos != -1) && (tag.equals(stateTag))) {
-                    Toast.makeText(getApplicationContext(), "!!!!!!!!!!!!!!!!!!!!!!!!!!!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), tag+" "+stateTag+" "+pos, Toast.LENGTH_SHORT).show();
+                if((pos != -1) && (!tag.equals(stateTag))) {
+                    //Toast.makeText(getApplicationContext(), "!!!!!!!!!!!!!!!!!!!!!!!!!!!", Toast.LENGTH_SHORT).show();
                     setCategoriesHall(pos+1);   //set massas
                     stateTag = tagsId[pos];
                 }
