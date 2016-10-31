@@ -270,7 +270,7 @@ public class DeviceScanActivity extends ListActivity {
         public void addDevice(BluetoothDevice device) {
             if (!mLeDevices.contains(device)) {
                 mLeDevices.add(device); //add new device to the arraylist
-                Log.d("DEVICE found: ",device.getName());
+                //Log.d("DEVICE found: ",device.getName());
             }
         }
 

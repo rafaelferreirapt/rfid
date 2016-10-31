@@ -122,6 +122,7 @@ public class DeviceControlActivity extends Activity {
         unregisterReceiver(mGattUpdateReceiver);
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -306,7 +307,7 @@ public class DeviceControlActivity extends Activity {
         if (data != null) {
             mDataField.setText(data);
             Log.d("DATA RECEIVED: ",data);
-            //Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), data, Toast.LENGTH_SHORT).show();
         }
 
     }

@@ -66,7 +66,8 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
     private CheckBox nfcTag;
     private ArrayAdapter<String> adapter;
     private Spinner spinner;
-    private String stateTag = tagsId[0];   //defino que inicio do supermercado é o hall1
+    public static String stateTag = "";   //defino que inicio do supermercado é o hall1
+
 
     //to receive BLE info
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME"; //name
@@ -79,9 +80,10 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("DEVICECONTROLREADER","onCreate");
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-
+        Log.d("DEVICECONTROLREADER","FIRSTRUN");
         final Intent intent = getIntent();
         mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
         mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
@@ -135,7 +137,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
             public void run() {
                 categoryApi = new CategoryApi();
                 try {
-                    Log.d("[Reader]","CategoryAPI Request");
+                    Log.d("[Reader]", "CategoryAPI Request");
                     categoriesResult = categoryApi.categoryDetailsGet();
                     //System.out.println(categoriesResult);
                 } catch (ApiException e) {
@@ -153,23 +155,22 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         t_cat.start();
 
 
-
         Thread t_cont = new Thread(new Runnable() {
             @Override
             public void run() {
                 //subHallsApi = new SubHallsApi();
                 hallsApi = new HallsApi();
-                Log.d("[Reader]","ContentHallAPI Request");
-                for(int i = 0; i < tagsIdContent.length; i++) {
+                Log.d("[Reader]", "ContentHallAPI Request");
+                for (int i = 0; i < tagsIdContent.length; i++) {
                     contentSubHallResult = null;
                     try {
                         contentSubHallResult = hallsApi.hallsSubHallsContentsSubHallTagGet(tagsIdContent[i]);  //List<ContentHall>
                         //contentSubHallResult = contentSubHallResult.hallsSubHallsDetailsGet();
                         System.out.println(contentSubHallResult);
                         //System.out.println("----->"+contentSubHallResult.get(0));
-                        if(contentSubHallResult != null) {
+                        if (contentSubHallResult != null) {
                             contentAllSubHals.add(i, contentSubHallResult);
-                            System.out.println("------------__>"+i);
+                            System.out.println("------------__>" + i);
                         }
                     } catch (ApiException e) {
                         System.err.println("Exception when calling SubHallsApi#hallsSubHallsDetailsGet");
@@ -185,13 +186,22 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         t_cont.start();
 
         findViewById(R.id.pathButton).setVisibility(View.GONE);
-        nfcTag = (CheckBox)findViewById(R.id.checkBox);
+        nfcTag = (CheckBox) findViewById(R.id.checkBox);
         nfcTag.setChecked(true);
+
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d("DEVICECONTROLREADER","onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(mGattUpdateReceiver);
+        super.onStop();
     }
 
     @Override
@@ -360,7 +370,7 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
         /*
          * Register a BroadcastReceiver to be run in the main activity thread.
          */
-        Log.d("DEVICECONTROL","onResume");
+        Log.d("DEVICECONTROLREADER","onResume");
         registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress);
@@ -455,8 +465,8 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
 
     //Do the conversion between real tag values and the values in the sever
     private int isTagValid(String tag){
-        for(int i = 0; i < tagsId.length; i++){
-            if(tagsId[i].equals(tag))
+        for(int i = 0; i < tagsIdContent.length; i++){
+            if(tagsIdContent[i].equals(tag))
                 return i;
         }
         return -1;
@@ -478,7 +488,13 @@ public class reader extends  AppCompatActivity implements OnItemSelectedListener
     public void setPathButton(View abc){
         final Intent intent = new Intent(this, drawPath.class );
 
+        //onPause();
         Log.d("BUTTON","sourceTAG"+stateTag+" position:"+spinner.getSelectedItemPosition());
+        Log.d("[STATETAG]","--------->"+stateTag);
+        if(stateTag.isEmpty())
+            stateTag = "1";
+
+        //Log.d("[STATETAG]","-->"+stateTag);
         intent.putExtra("sourceTAG", stateTag);
         intent.putExtra("destCat", categoriesResult.get(spinner.getSelectedItemPosition()-1).getId());
         startActivity(intent);

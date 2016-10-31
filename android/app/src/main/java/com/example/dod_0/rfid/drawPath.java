@@ -19,6 +19,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.example.dod_0.rfid.reader;
+
 
 
 import java.io.InputStream;
@@ -153,6 +155,15 @@ public class drawPath extends AppCompatActivity {
             }
         });
         tt.start();
+
+        //reader.stateTag = "5";
+        //Log.d("LASTSTATE","-->setting last state"+stateTag);
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(mGattUpdateReceiver);
+        super.onStop();
     }
 
     /*
@@ -191,6 +202,7 @@ public class drawPath extends AppCompatActivity {
                         }
                         Log.d("DRAW_PATH","Initialization done");
 
+                        System.out.println("--->"+result);
                         for (int i = 0; i < result.size(); i++) {
                             Log.d("TAG -->", result.get(i).getName());
                             mapTags.get(result.get(i).getName()).setVisibility(View.VISIBLE);
@@ -348,10 +360,17 @@ public class drawPath extends AppCompatActivity {
             String tag = ""+Integer.parseInt(data);
             Toast.makeText(getApplicationContext(), tag, Toast.LENGTH_SHORT).show();
 
-            int pos = isTagValid(data); //if tag is valid, return the tag position
+            //((reader) this.getApplication()).setSomeVariable("foo");
+            //reader.a= "a";
+
+            int pos = isTagValid(tag); //if tag is valid, return the tag position
             if(pos != -1 && !tag.equals(stateTag)) {
                 pathUpdate(tagsIdFloor[pos]);
                 stateTag = tag;
+
+                //set lastState
+                reader.stateTag = "5";
+                Log.d("LASTSTATE","-->setting last state"+stateTag);
             }
         }
     }
@@ -378,8 +397,10 @@ public class drawPath extends AppCompatActivity {
      * buttons
      */
     public void goBackButton(View abc){
-        final Intent intent = new Intent(this, reader.class );
-        startActivity(intent);
+        finish();   //return to the last activity without calling onCreate/onStart/onResume
+        //final Intent intent = new Intent(this, reader.class );
+        //startActivity(intent);
+        //setContentView(R.layout.activity_reader);
     }
 
 
