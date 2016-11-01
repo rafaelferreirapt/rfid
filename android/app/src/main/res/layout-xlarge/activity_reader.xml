@@ -19,25 +19,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/subhall2" />
 
-    <TextView
-        android:text="Categorias:"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textStyle="normal|bold"
-        android:layout_width="150dp" />
+    <CheckBox
+        android:text="nfcTag"
+        android:id="@+id/checkBox"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
         android:layout_width="250dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/textView4"
         android:layout_toEndOf="@+id/textView4" />
 
     <TextView
@@ -45,24 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/warningText"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        app:srcCompat="@android:color/white"
-        android:id="@+id/imageView5"
-        android:layout_height="700dp"
-        android:layout_width="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
-    <CheckBox
-        android:text="nfcTag"
-        android:id="@+id/checkBox"
-        android:layout_width="100dp"
-        android:layout_marginTop="22dp"
-        android:layout_height="25dp"
-        android:layout_below="@+id/textView4"
+        android:layout_marginBottom="31dp"
+        android:layout_above="@+id/subhall2"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -70,45 +48,76 @@
         android:layout_height="wrap_content"
         android:id="@+id/description"
         android:visibility="invisible"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/checkBox"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:text="GO!"
-        android:id="@+id/pathButton"
-        android:layout_width="110dp"
-        android:layout_height="60dp"
-        android:onClick="setPathButton"
-        style="@style/Widget.AppCompat.Button"
-        android:textSize="20sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        app:srcCompat="@android:color/white"
-        android:id="@+id/subhall4"
-        android:layout_width="400dp"
-        android:layout_height="225dp"
-        android:layout_alignTop="@+id/description"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/imageView5"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="23dp"
+        android:layout_marginTop="13dp" />
 
     <ImageView
         app:srcCompat="@android:color/white"
         android:id="@+id/imageView4"
         android:layout_width="400dp"
         android:layout_height="225dp"
-        android:layout_alignTop="@+id/description"
-        android:layout_toStartOf="@+id/imageView5" />
+        android:layout_above="@+id/videoView5"
+        android:layout_toEndOf="@+id/subhall4"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="19dp" />
+
+    <ImageView
+        app:srcCompat="@android:color/white"
+        android:id="@+id/subhall4"
+        android:layout_width="400dp"
+        android:layout_height="225dp"
+        android:layout_alignTop="@+id/imageView4"
+        android:layout_alignEnd="@+id/spinner" />
+
+    <ImageView
+        app:srcCompat="@android:color/white"
+        android:id="@+id/imageView5"
+        android:layout_width="300dp"
+        android:layout_height="500dp"
+        android:layout_alignTop="@+id/imageView4"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp" />
 
     <VideoView
         android:id="@+id/videoView5"
         android:backgroundTint="@android:color/white"
         android:background="@android:color/white"
         android:layout_width="600dp"
-        android:layout_height="270dp"
-        android:layout_below="@+id/subhall2"
-        android:layout_toEndOf="@+id/checkBox" />
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/checkBox"
+        android:layout_marginBottom="21dp"
+        android:layout_height="340dp" />
+
+    <TextView
+        android:text="Categorias:"
+        android:id="@+id/textView4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/black"
+        android:textSize="27sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="GO!"
+        android:id="@+id/pathButton"
+        android:onClick="setPathButton"
+        style="@style/Widget.AppCompat.Button"
+        android:textSize="20sp"
+        android:layout_width="120dp"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-smallcaps"
+        android:layout_height="60dp"
+        android:layout_marginEnd="66dp"
+        android:layout_alignTop="@+id/spinner"
+        android:layout_alignEnd="@+id/description" />
 
 
 </RelativeLayout>

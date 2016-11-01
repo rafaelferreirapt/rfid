@@ -369,7 +369,7 @@ public class drawPath extends AppCompatActivity {
                 stateTag = tag;
 
                 //set lastState
-                reader.stateTag = "5";
+                reader.stateTag = stateTag;
                 Log.d("LASTSTATE","-->setting last state"+stateTag);
             }
         }

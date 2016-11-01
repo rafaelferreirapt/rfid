@@ -31,15 +31,17 @@ void loop()
   Serial.flush();
   if (Serial.available() > 0) {
   
-    for(int i=0; i < 11; i++){
+    for(int i=0; i < 4; i++){
       state = Serial.read();  // read the incoming byte:
-   
-      if(isAscii(state))
+      //Serial.println(state);
+      if(isAscii(state)){
         arr[i] = (state);
-      else
+      }else{
         arr[i] = '0'; //make sure that all id's have 10 digits
+      //Serial.print(0x00);
+      }
     }
-    RFduinoBLE.send(arr,10);
+    RFduinoBLE.send(arr,4);
   }
 
   //RFduino_ULPDelay(atraso);

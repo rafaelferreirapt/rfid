@@ -37,17 +37,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:srcCompat="@drawable/icon1"
-        android:layout_marginStart="138dp"
-        android:layout_marginBottom="31dp"
-        android:id="@+id/subhall1"
-        android:layout_alignBottom="@+id/map"
-        android:layout_alignParentStart="true"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/icon1"
         android:id="@+id/subhall2"
         android:layout_alignTop="@+id/subhall1"
         android:layout_toStartOf="@+id/goBackButton"
@@ -78,19 +67,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:srcCompat="@drawable/icon1"
-        android:layout_marginStart="65dp"
-        android:layout_marginBottom="45dp"
-        android:id="@+id/subhall113"
-        android:layout_above="@+id/subhall1"
-        android:layout_toEndOf="@+id/subhall1"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/icon1"
         android:id="@+id/subhall14"
-        android:layout_alignTop="@+id/subhall113"
+        android:layout_alignTop="@+id/subhall13"
         android:layout_alignStart="@+id/subhall2"
         android:visibility="invisible" />
 
@@ -118,8 +96,8 @@
         app:srcCompat="@drawable/icon1"
         android:layout_marginBottom="48dp"
         android:id="@+id/subhall5"
-        android:layout_above="@+id/subhall113"
-        android:layout_alignStart="@+id/subhall113"
+        android:layout_above="@+id/subhall13"
+        android:layout_alignStart="@+id/subhall13"
         android:visibility="invisible" />
 
     <ImageView
@@ -223,5 +201,26 @@
         android:layout_alignTop="@+id/subhall11"
         android:layout_alignStart="@+id/subhall20"
         android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/icon1"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/subhall1"
+        android:visibility="invisible"
+        android:layout_marginEnd="144dp"
+        android:layout_alignBottom="@+id/map"
+        android:layout_toStartOf="@+id/subhall2" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/icon1"
+        android:layout_marginBottom="45dp"
+        android:id="@+id/subhall13"
+        android:visibility="invisible"
+        android:layout_above="@+id/subhall1"
+        android:layout_alignStart="@+id/subhall1" />
 
 </RelativeLayout>

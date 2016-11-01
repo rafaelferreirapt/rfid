@@ -24,28 +24,6 @@
         android:layout_marginTop="11dp" />
 
     <ImageView
-        app:srcCompat="@drawable/icon1"
-        android:layout_marginStart="37dp"
-        android:layout_marginBottom="14dp"
-        android:id="@+id/subhall1"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignBottom="@+id/map"
-        android:layout_alignStart="@+id/map"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:srcCompat="@drawable/icon1"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="33dp"
-        android:id="@+id/subhall13"
-        android:layout_above="@+id/subhall1"
-        android:layout_toEndOf="@+id/subhall1"
-        android:visibility="invisible" />
-
-    <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
         app:srcCompat="@drawable/icon1"
@@ -223,5 +201,26 @@
         android:layout_marginEnd="26dp"
         android:layout_alignTop="@+id/subhall2"
         android:layout_toStartOf="@+id/subhall4" />
+
+    <ImageView
+        app:srcCompat="@drawable/icon1"
+        android:layout_marginStart="91dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/subhall1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:visibility="invisible"
+        android:layout_alignBottom="@+id/map"
+        android:layout_alignStart="@+id/map" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:srcCompat="@drawable/icon1"
+        android:layout_marginBottom="31dp"
+        android:id="@+id/subhall13"
+        android:visibility="invisible"
+        android:layout_above="@+id/subhall1"
+        android:layout_alignStart="@+id/subhall1" />
 
 </RelativeLayout>
